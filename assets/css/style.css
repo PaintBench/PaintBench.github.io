@@ -71,7 +71,7 @@ nav {
 .nav-links .btn-nav:hover { background: #333; }
 
 /* ── Hero ────────────────────────────────────────────────────── */
-#hero { border-top: none; padding: 72px 0 0; background: var(--bg); }
+#hero { border-top: none; padding: 52px 0 0; background: var(--bg); }
 
 .hero-eyebrow {
   display: inline-block;
@@ -92,7 +92,7 @@ nav {
 }
 .hero-sub em { font-style: normal; color: var(--ink); font-weight: 600; }
 
-.btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 64px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: .875rem; font-weight: 600;
@@ -117,7 +117,7 @@ nav {
   aspect-ratio: 16/7;
   display: flex; align-items: center; justify-content: center;
 }
-.hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .hero-image-placeholder {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
