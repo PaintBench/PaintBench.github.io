@@ -273,12 +273,12 @@ function buildGallery() {
       </div>
       <div class="g-card-images">
         <div class="g-img-slot">
-          <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" loading="lazy" />
+          <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" />
           <span class="g-img-label">Input</span>
         </div>
         <div class="g-arrow">→</div>
         <div class="g-img-slot">
-          <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" loading="lazy" />
+          <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" />
           <span class="g-img-label">Answer</span>
         </div>
       </div>
@@ -304,9 +304,9 @@ function buildTgbCarousel() {
     card.innerHTML = `
       <div class="tgb-v-card-type">${ex.chart}</div>
       <div class="tgb-v-card-imgs">
-        <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" loading="lazy" />
+        <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" />
         <span class="tgb-arrow">→</span>
-        <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" loading="lazy" />
+        <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" />
       </div>
       <p class="tgb-v-card-instruction">${ex.instruction}</p>
     `;

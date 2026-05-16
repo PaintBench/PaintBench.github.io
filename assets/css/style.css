@@ -117,19 +117,20 @@ code {
 .cta-ghost { background: transparent; color: var(--ink-2); border-color: var(--border-2); }
 .cta-ghost:hover { border-color: var(--ink-2); color: var(--ink); text-decoration: none; }
 
-/* arXiv wordmark inside button */
-.arxiv-mark {
-  font-size: .78em;
-  font-weight: 800;
-  letter-spacing: -.01em;
-  border-right: 1px solid rgba(255,255,255,.35);
-  padding-right: 9px;
-  margin-right: 1px;
-  line-height: 1;
+/* Logo images inside buttons */
+.btn-logo {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
 }
-.arxiv-mark em {
-  font-style: italic;
-  font-weight: 800;
+.btn-logo-arxiv {
+  height: 16px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+.btn-logo-hf {
+  height: 18px;
+  width: auto;
 }
 
 
@@ -213,7 +214,7 @@ code {
   display: flex;
   gap: 18px;
   width: max-content;
-  animation: marquee 48s linear infinite;
+  animation: marquee 80s linear infinite;
   padding: 10px 0 18px;
 }
 .gallery-track:hover { animation-play-state: paused; }
@@ -308,7 +309,7 @@ code {
 .g-arrow { color: var(--border-2); font-size: 1.1rem; margin-top: -16px; }
 
 .g-instruction {
-  font-size: .76rem;
+  font-size: .88rem;
   color: var(--ink-2);
   line-height: 1.5;
   font-style: italic;
