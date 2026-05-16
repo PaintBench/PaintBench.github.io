@@ -119,7 +119,7 @@ const MODELS = [
     tasks: { translation:23.9, rotation:16.6, reflection:10.9, scaling:9.0, shearing:4.4, construction:20.0, removal:45.8, copying:14.1, border:27.4, cropping:26.3, recolor:31.2, flood_fill:37.4, blending:8.1, gradient:13.8, point_operations:26.3, comparison:39.8, ordering:21.5, pattern:15.9, counting:18.8, legend:58.8 },
   },
   {
-    name: "GPT Image Edit 2", abbr: "GPT-IE2", overall: 21.8,
+    name: "GPT Image 2", abbr: "GPT-I2", overall: 21.8,
     cat: { geo: 17.4, str: 28.2, col: 17.3, sym: 24.2 },
     tasks: { translation:27.2, rotation:19.1, reflection:14.7, scaling:13.8, shearing:12.4, construction:20.6, removal:53.0, copying:15.3, border:25.0, cropping:27.2, recolor:34.2, flood_fill:35.3, blending:7.8, gradient:2.2, point_operations:7.2, comparison:32.7, ordering:24.6, pattern:19.2, counting:16.8, legend:27.8 },
   },
@@ -170,13 +170,48 @@ const MODELS = [
   },
 ];
 
-/* ── TGB carousel data ────────────────────────────── */
-const TGB_CHARTS = [
-  { name: "Bar Chart",    img: "assets/img/tgb_bar_chart.png",    tasks: "Add bar · Sort bars · Remove bar · Recolor bar",       best: "NB-2 37.4%, GPT-IE2 34.8%" },
-  { name: "Scatter Plot", img: "assets/img/tgb_scatter_plot.png", tasks: "Best-fit line · Swap axes · Remove outlier · Recolor",  best: "GPT-IE2 6.8%, NB-2 5.5%" },
-  { name: "Line Chart",   img: "assets/img/tgb_line_chart.png",   tasks: "Draw segments · Normalize · Filter series · Shade",     best: "GPT-IE2 16.0%, NB-2 12.5%" },
-  { name: "Heatmap",      img: "assets/img/tgb_heatmap.png",      tasks: "Add cell · Shift · Mask cells · Change colormap",       best: "NB-2 21.9%, GPT-IE2 15.5%" },
-  { name: "Network Graph",img: "assets/img/tgb_network.png",      tasks: "Add node · Swap nodes · Remove node · Recolor node",    best: "NB-2 5.6%, GPT-IE2 4.8%" },
+/* ── TGB carousel data (real examples from benchmark) ── */
+const TGB_EXAMPLES = [
+  {
+    chart: "Bar Chart", key: "bar_chart_sort_bars",
+    instruction: "Sort the bars in descending order, moving the corresponding labels.",
+  },
+  {
+    chart: "Bar Chart", key: "bar_chart_remove_bar",
+    instruction: 'Remove the bar and label for "Cep". Keep everything else in the same place.',
+  },
+  {
+    chart: "Scatter Plot", key: "scatter_plot_swap_axes",
+    instruction: "Swap the x and y coordinates of every point and the line of best fit. Points in the class without the line of best fit should be overlaid on top.",
+  },
+  {
+    chart: "Scatter Plot", key: "scatter_plot_recolor_class",
+    instruction: "Recolor the line of best fit and its corresponding points to #565B73.",
+  },
+  {
+    chart: "Line Chart", key: "line_chart_shade_interval",
+    instruction: 'In the plot, shade the area under the series between "fAGNWv yXkzc" = −177 and "fAGNWv yXkzc" = 54.7 with the color #6E815D.',
+  },
+  {
+    chart: "Line Chart", key: "line_chart_filter_series",
+    instruction: 'Only show the parts of the series where "GsZFXaxR vzvBlOe" is at most 221.',
+  },
+  {
+    chart: "Heatmap", key: "heatmap_shift_heatmap",
+    instruction: "Shift the heatmap 1 cell left. Cells that fall off the edge should be discarded, and cells exposed on the opposite side should become empty.",
+  },
+  {
+    chart: "Heatmap", key: "heatmap_mask_cells",
+    instruction: "Remove every cell with a value greater than −37.3.",
+  },
+  {
+    chart: "Network Graph", key: "network_remove_node",
+    instruction: 'Remove node "PESC" and its incident edges. Leave the key unchanged.',
+  },
+  {
+    chart: "Network Graph", key: "network_recolor_node",
+    instruction: 'Recolor node "PESC" to #752D01. Update the color in both the graph and the key.',
+  },
 ];
 
 /* ── Heatmap task list ────────────────────────────── */
@@ -222,7 +257,7 @@ function catFullLabel(cat) {
 }
 
 /* ════════════════════════════════════════════════════
-   GALLERY (hero carousel + leaderboard context)
+   GALLERY — compact vertical row cards
    ════════════════════════════════════════════════════ */
 function buildGallery() {
   const track = document.getElementById("gallery-track");
@@ -230,61 +265,52 @@ function buildGallery() {
 
   const makeCards = () => GALLERY_ORDER.map(t => {
     const card = document.createElement("div");
-    card.className = `g-card cat-${t.cat}`;
+    card.className = `g-row-card cat-${t.cat}`;
     card.innerHTML = `
-      <div class="g-card-header">
-        <span class="g-task-name">${t.label}</span>
-        <span class="g-cat-badge ${t.cat}">${catLabel(t.cat)}</span>
+      <div class="g-row-imgs">
+        <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" loading="lazy" />
+        <span class="g-row-arrow">→</span>
+        <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" loading="lazy" />
       </div>
-      <div class="g-card-images">
-        <div class="g-img-slot">
-          <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" loading="lazy" />
-          <span class="g-img-label">Input</span>
+      <div class="g-row-text">
+        <div class="g-row-header">
+          <span class="g-row-name">${t.label}</span>
+          <span class="g-cat-badge ${t.cat}">${catLabel(t.cat)}</span>
         </div>
-        <div class="g-arrow">→</div>
-        <div class="g-img-slot">
-          <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" loading="lazy" />
-          <span class="g-img-label">Answer</span>
-        </div>
-        <div class="g-sep">|</div>
-        <div class="g-img-slot">
-          <div class="g-placeholder">
-            <span class="g-placeholder-text">${t.model}<br>output<br>coming soon</span>
-          </div>
-          <span class="g-img-label">Model Output</span>
-        </div>
+        <p class="g-row-instruction">${t.instruction}</p>
       </div>
-      <p class="g-instruction">${t.instruction}</p>
     `;
     return card;
   });
 
+  // Two copies for seamless loop
   [...makeCards(), ...makeCards()].forEach(c => track.appendChild(c));
 }
 
 /* ════════════════════════════════════════════════════
-   TGB CAROUSEL
+   TGB CAROUSEL — vertical, real examples
    ════════════════════════════════════════════════════ */
 function buildTgbCarousel() {
   const track = document.getElementById("tgb-carousel-track");
   if (!track) return;
 
-  const makeCards = () => TGB_CHARTS.map(c => {
+  const makeCards = () => TGB_EXAMPLES.map(ex => {
     const card = document.createElement("div");
-    card.className = "tgb-chart-card";
+    card.className = "tgb-v-card";
     card.innerHTML = `
-      <img src="${c.img}" alt="${c.name} examples" loading="lazy" />
-      <div class="tgb-chart-info">
-        <div class="tgb-chart-name">${c.name}</div>
-        <div class="tgb-chart-tasks">${c.tasks}</div>
-        <div class="tgb-chart-best">Best: ${c.best}</div>
+      <div class="tgb-v-card-type">${ex.chart}</div>
+      <div class="tgb-v-card-imgs">
+        <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" loading="lazy" />
+        <span class="g-row-arrow">→</span>
+        <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" loading="lazy" />
       </div>
+      <p class="tgb-v-card-instruction">${ex.instruction}</p>
     `;
     return card;
   });
 
-  // 4 copies for a smoother loop with only 5 cards
-  [...makeCards(), ...makeCards(), ...makeCards(), ...makeCards()].forEach(c => track.appendChild(c));
+  // Two copies for seamless loop
+  [...makeCards(), ...makeCards()].forEach(c => track.appendChild(c));
 }
 
 /* ════════════════════════════════════════════════════
@@ -293,7 +319,6 @@ function buildTgbCarousel() {
 function buildLeaderboard() {
   const list = document.getElementById("lb-list");
   if (!list) return;
-  const maxScore = Math.max(...MODELS.map(m => m.overall));
 
   MODELS.forEach((m, i) => {
     const rank = i + 1;
@@ -306,7 +331,7 @@ function buildLeaderboard() {
         <span class="lb-name">${m.name}<span class="lb-abbr">${m.abbr}</span></span>
         <div class="lb-score-wrap">
           <div class="lb-bar-bg">
-            <div class="lb-bar-fill" style="width:${(m.overall/maxScore*100).toFixed(1)}%"></div>
+            <div class="lb-bar-fill" style="width:${m.overall.toFixed(1)}%"></div>
           </div>
           <span class="lb-score-num">${m.overall.toFixed(1)}%</span>
         </div>
@@ -317,7 +342,7 @@ function buildLeaderboard() {
             <div class="lb-cat-row">
               <span class="lb-cat-label ${cat}">${catFullLabel(cat)}</span>
               <div class="lb-cat-bar-bg">
-                <div class="lb-cat-bar-fill ${cat}" style="width:${Math.min(m.cat[cat]/60*100,100).toFixed(1)}%"></div>
+                <div class="lb-cat-bar-fill ${cat}" style="width:${m.cat[cat].toFixed(1)}%"></div>
               </div>
               <span class="lb-cat-score">${m.cat[cat].toFixed(1)}%</span>
             </div>

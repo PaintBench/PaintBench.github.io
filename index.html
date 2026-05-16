@@ -15,9 +15,8 @@
 <!-- ════════════════════════ HERO ════════════════════════ -->
 <section id="hero">
 
-  <!-- Text block -->
+  <!-- Centred headline -->
   <div class="hero-text-block">
-    <div class="eyebrow">Visual Editing Benchmark · NYU</div>
     <h1 class="hero-title">PaintBench</h1>
     <p class="hero-tagline">Tasks trivial in any raster editor, still out of reach for frontier AI.</p>
     <p class="hero-body">
@@ -27,7 +26,7 @@
       The best image-editing model scores only <span class="stat-highlight">23.5%</span>.
     </p>
     <div class="hero-ctas">
-      <a href="https://arxiv.org/abs/2506.07220" target="_blank" rel="noopener" class="cta-primary">
+      <a href="https://arxiv.org/abs/2506.07220" target="_blank" rel="noopener" class="cta-arxiv">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Paper
       </a>
@@ -36,7 +35,7 @@
         GitHub
       </a>
       <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank" rel="noopener" class="cta-hf">
-        <svg width="16" height="16" viewBox="0 0 95 88" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M47.2 2C21.5 2 0.7 22.8 0.7 48.5c0 25.6 20.8 46.5 46.5 46.5s46.5-20.8 46.5-46.5C93.7 22.8 72.9 2 47.2 2zm0 6.8c21.9 0 39.7 17.8 39.7 39.7s-17.8 39.7-39.7 39.7S7.5 70.4 7.5 48.5 25.3 8.8 47.2 8.8zm-13 17.7c-4.4 0-8 3.6-8 8 0 3.3 2 6.2 4.9 7.4-.5 1.4-.8 2.9-.8 4.5 0 7.3 5.9 13.2 13.2 13.2h7.4c7.3 0 13.2-5.9 13.2-13.2 0-1.6-.3-3.1-.8-4.5 2.9-1.3 4.9-4.1 4.9-7.4 0-4.4-3.6-8-8-8-2.9 0-5.4 1.5-6.8 3.8-1.3-.5-2.8-.8-4.3-.8-1.5 0-3 .3-4.3.8-1.4-2.3-3.9-3.8-6.6-3.8z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 95 88" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M47.2 2C21.5 2 0.7 22.8 0.7 48.5c0 25.6 20.8 46.5 46.5 46.5s46.5-20.8 46.5-46.5C93.7 22.8 72.9 2 47.2 2zm0 6.8c21.9 0 39.7 17.8 39.7 39.7s-17.8 39.7-39.7 39.7S7.5 70.4 7.5 48.5 25.3 8.8 47.2 8.8zm-13 17.7c-4.4 0-8 3.6-8 8 0 3.3 2 6.2 4.9 7.4-.5 1.4-.8 2.9-.8 4.5 0 7.3 5.9 13.2 13.2 13.2h7.4c7.3 0 13.2-5.9 13.2-13.2 0-1.6-.3-3.1-.8-4.5 2.9-1.3 4.9-4.1 4.9-7.4 0-4.4-3.6-8-8-8-2.9 0-5.4 1.5-6.8 3.8-1.3-.5-2.8-.8-4.3-.8-1.5 0-3 .3-4.3.8-1.4-2.3-3.9-3.8-6.6-3.8z"/></svg>
         Dataset
       </a>
       <a href="#leaderboard" class="cta-ghost">
@@ -46,63 +45,65 @@
     </div>
   </div>
 
-  <!-- Carousel (replaces demo card) -->
-  <div class="hero-carousel-wrap">
-    <div class="gallery-fade gallery-fade-left"></div>
-    <div class="gallery-viewport">
-      <div class="gallery-track" id="gallery-track"><!-- populated by JS --></div>
-    </div>
-    <div class="gallery-fade gallery-fade-right"></div>
-  </div>
+  <!-- Lower section: vertical gallery + stacked pillars -->
+  <div class="hero-lower">
 
-  <!-- Category legend -->
-  <div class="gallery-cat-legend">
-    <span class="gcat geo">Geometric Transformation</span>
-    <span class="gcat str">Structural Manipulation</span>
-    <span class="gcat col">Color Change</span>
-    <span class="gcat sym">Symbolic Reasoning</span>
-    <span class="pause-hint">Hover to pause</span>
-  </div>
+    <!-- Vertical scrolling task gallery -->
+    <div class="hero-gallery-col">
+      <div class="gallery-v-label">20 task types · hover to pause</div>
+      <div class="gallery-v-viewport">
+        <div class="gallery-v-fade gallery-v-fade-top"></div>
+        <div class="gallery-v-track" id="gallery-track"><!-- populated by JS --></div>
+        <div class="gallery-v-fade gallery-v-fade-bot"></div>
+      </div>
+      <div class="gallery-cat-row">
+        <span class="gcat geo">Geometric</span>
+        <span class="gcat str">Structural</span>
+        <span class="gcat col">Color</span>
+        <span class="gcat sym">Symbolic</span>
+      </div>
+    </div>
 
-  <!-- Pillars -->
-  <div class="pillars-row">
-    <div class="pillar pillar-geo">
-      <div class="pillar-icon-wrap geo">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 18 12 2 21 18"/><circle cx="12" cy="13" r="3"/></svg>
+    <!-- Stacked pillars -->
+    <div class="hero-pillars-col">
+      <div class="pillar pillar-geo">
+        <div class="pillar-icon-wrap geo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 18 12 2 21 18"/><circle cx="12" cy="13" r="3"/></svg>
+        </div>
+        <h3>Primitive Operations</h3>
+        <p>20 atomic task types across 4 categories: geometric transformation, structural manipulation, color change, and symbolic reasoning.</p>
       </div>
-      <h3>Primitive Operations</h3>
-      <p>20 atomic task types across 4 categories: geometric transformation, structural manipulation, color change, and symbolic reasoning. The building blocks of every real-world editing workflow.</p>
-    </div>
-    <div class="pillar pillar-featured pillar-accent">
-      <div class="pillar-icon-wrap accent">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div class="pillar pillar-accent">
+        <div class="pillar-icon-wrap accent">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Deterministically Evaluated</h3>
+        <p>Every problem has exactly one correct output. Pure pixel math, like HumanEval for code but for images. No model judges, no subjectivity.</p>
       </div>
-      <h3>Deterministically Evaluated</h3>
-      <p>Every problem has exactly one correct output. Evaluation is pure pixel math, like HumanEval for code but for images. No model judges, no human raters, no subjectivity.</p>
-    </div>
-    <div class="pillar pillar-col">
-      <div class="pillar-icon-wrap col">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <div class="pillar pillar-col">
+        <div class="pillar-icon-wrap col">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3>Dynamically Scalable</h3>
+        <p>Generated from random seeds with tunable parameters. Fresh unseen problems can be generated at any time, preventing benchmark saturation.</p>
       </div>
-      <h3>Dynamically Scalable</h3>
-      <p>Problems are generated from random seeds with tunable parameters. Fresh unseen problems can be generated at any time, preventing benchmark saturation.</p>
     </div>
-  </div>
 
+  </div>
 </section>
 
 <!-- ════════════════════════ LEADERBOARD ════════════════════════ -->
 <section id="leaderboard">
   <div class="section-header">
     <h2>Model Performance</h2>
-    <p class="section-sub">mIoU (%): mean Intersection-over-Union integrated over 11 CIE ΔE₇₆ thresholds. Higher is better. Click a row to expand per-category scores.</p>
+    <p class="section-sub">mIoU (%): mean Intersection-over-Union integrated over 11 CIE ΔE₇₆ thresholds. Bars are out of 100% to show how much headroom remains. Click a row to expand per-category scores.</p>
   </div>
 
   <div class="lb-container">
     <div class="lb-header-row">
       <span class="lb-col-rank">#</span>
       <span class="lb-col-name">Model</span>
-      <span class="lb-col-score">Overall mIoU</span>
+      <span class="lb-col-score">Overall mIoU (out of 100%)</span>
     </div>
     <div class="lb-list" id="lb-list"><!-- populated by JS --></div>
   </div>
@@ -131,42 +132,42 @@
     <div class="tgb-left">
       <div class="eyebrow tgb-eyebrow">Companion Benchmark</div>
       <h2>We also built<br><span class="tgb-name-grad">TinyGrafixBench</span></h2>
-      <p class="tgb-lead">Can the same failures on geometric primitives predict performance on real-world charts? We applied PaintBench's framework to data visualization editing to find out.</p>
-      <p>TinyGrafixBench is a 600-problem benchmark across 5 chart types, 4 editing operations each, procedurally generated and deterministically evaluated. Model rankings are similar to PaintBench, validating our primitive benchmark as a proxy for harder real-world tasks.</p>
+      <p class="tgb-lead">Can failures on geometric primitives predict performance on real-world charts? We applied PaintBench's framework to data visualization editing to find out.</p>
+      <p>TinyGrafixBench is a 600-problem benchmark across 5 chart types, 4 editing operations each, procedurally generated and deterministically evaluated.</p>
 
       <div class="tgb-callout">
-        The top two models on PaintBench are the top two on TinyGrafixBench. The gap between frontier models and the rest persists across all 5 chart types.
+        Model rankings strongly correlate between PaintBench and TinyGrafixBench, validating our primitive benchmark as a proxy for harder real-world tasks.
       </div>
 
       <div class="tgb-rank-compare">
         <div class="tgb-rc-col">
           <div class="tgb-rc-head">PaintBench</div>
           <div class="tgb-rc-row rank1"><span class="rc-rank">1</span><span class="rc-name">Nano Banana 2</span><span class="rc-score">23.5%</span></div>
-          <div class="tgb-rc-row rank2"><span class="rc-rank">2</span><span class="rc-name">GPT Image Edit 2</span><span class="rc-score">21.8%</span></div>
+          <div class="tgb-rc-row rank2"><span class="rc-rank">2</span><span class="rc-name">GPT Image 2</span><span class="rc-score">21.8%</span></div>
           <div class="tgb-rc-row rank3"><span class="rc-rank">3</span><span class="rc-name">Nano Banana 1</span><span class="rc-score">13.9%</span></div>
           <div class="tgb-rc-row others"><span class="rc-rank">4–11</span><span class="rc-name">All others</span><span class="rc-score">≤7.2%</span></div>
         </div>
         <div class="tgb-rc-arrow">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <span>similar rankings</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>similar</span>
         </div>
         <div class="tgb-rc-col">
           <div class="tgb-rc-head">TinyGrafixBench</div>
           <div class="tgb-rc-row rank1"><span class="rc-rank">1</span><span class="rc-name">Nano Banana 2</span><span class="rc-score">16.6%</span></div>
-          <div class="tgb-rc-row rank2"><span class="rc-rank">2</span><span class="rc-name">GPT Image Edit 2</span><span class="rc-score">15.6%</span></div>
+          <div class="tgb-rc-row rank2"><span class="rc-rank">2</span><span class="rc-name">GPT Image 2</span><span class="rc-score">15.6%</span></div>
           <div class="tgb-rc-row rank3"><span class="rc-rank">3</span><span class="rc-name">Nano Banana 1</span><span class="rc-score">5.6%</span></div>
           <div class="tgb-rc-row others"><span class="rc-rank">4–10</span><span class="rc-name">All others</span><span class="rc-score">≤3.4%</span></div>
         </div>
       </div>
     </div>
 
+    <!-- Vertical TGB carousel -->
     <div class="tgb-right">
-      <div class="tgb-carousel-wrap">
-        <div class="gallery-fade gallery-fade-left tgb-fade-l"></div>
-        <div class="tgb-carousel-viewport">
-          <div class="tgb-carousel-track" id="tgb-carousel-track"><!-- populated by JS --></div>
-        </div>
-        <div class="gallery-fade gallery-fade-right tgb-fade-r"></div>
+      <div class="gallery-v-label">Examples from TinyGrafixBench · hover to pause</div>
+      <div class="tgb-v-viewport">
+        <div class="gallery-v-fade gallery-v-fade-top tgb-fade"></div>
+        <div class="tgb-v-track" id="tgb-carousel-track"><!-- populated by JS --></div>
+        <div class="gallery-v-fade gallery-v-fade-bot tgb-fade"></div>
       </div>
     </div>
 
@@ -188,7 +189,7 @@
       </div>
       <p class="affil">New York University</p>
       <div class="cite-links">
-        <a href="https://arxiv.org/abs/2506.07220" class="cite-link" target="_blank" rel="noopener">arXiv ↗</a>
+        <a href="https://arxiv.org/abs/2506.07220" class="cite-link cite-link-arxiv" target="_blank" rel="noopener">arXiv ↗</a>
         <a href="https://github.com/PaintBench" class="cite-link" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://huggingface.co/datasets/PaintBench/PaintBench" class="cite-link cite-link-hf" target="_blank" rel="noopener">HuggingFace Dataset ↗</a>
       </div>
