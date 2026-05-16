@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PaintBench — Figure 1 (Twitter 4:5)</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  /* 4:5 aspect ratio = 1080×1350px for Twitter/Instagram */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Rubik', sans-serif;
+    background: #F4F4F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    width: 1080px;
+    height: 1350px;
+    background: #FFFFFF;
+    border-radius: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: #0D0F1C;
+    padding: 40px 52px 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .header-left h1 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .header-left h1 span { color: #7B72F0; }
+  .header-left p {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255,255,255,.55);
+    max-width: 440px;
+    line-height: 1.5;
+  }
+  .header-stat {
+    text-align: right;
+  }
+  .stat-big {
+    font-size: 72px;
+    font-weight: 900;
+    color: #7B72F0;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .stat-sub {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,.45);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8B8FA8;
+    padding: 24px 52px 12px;
+    flex-shrink: 0;
+  }
+
+  /* ── Examples grid ── */
+  .examples {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0 52px;
+    flex: 1;
+    min-height: 0;
+  }
+  .example-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #EEF0F7;
+    padding: 0 14px 0 0;
+    margin-right: 14px;
+  }
+  .example-col:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+
+  .ex-task {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0D0F1C;
+    margin-bottom: 4px;
+  }
+  .ex-cat {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-bottom: 10px;
+  }
+  .ex-cat.geo { background: #EBF2FF; color: #2B5EA7; }
+  .ex-cat.col { background: #EAFAF0; color: #276747; }
+  .ex-cat.sym { background: #F5EEFF; color: #6B2D8B; }
+  .ex-cat.str { background: #FFF3EB; color: #C05622; }
+
+  .ex-img-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .ex-img-block {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ex-img-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8B8FA8;
+  }
+  .ex-img-block img, .ex-model-placeholder {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+  }
+  .ex-model-placeholder {
+    background: linear-gradient(135deg, #F0F1F8, #E4E6F3);
+    border: 1.5px dashed #CBCFE8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+  .ex-model-placeholder span {
+    font-size: 9px;
+    font-weight: 600;
+    color: #8B8FA8;
+    text-align: center;
+    padding: 4px;
+  }
+  .ex-model-score {
+    font-size: 10px;
+    font-weight: 700;
+    color: #C05622;
+    margin-top: 2px;
+  }
+
+  /* ── Results table ── */
+  .results-section {
+    padding: 0 52px 28px;
+    flex-shrink: 0;
+  }
+  .results-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8B8FA8;
+    margin-bottom: 10px;
+  }
+  table.results {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.results thead tr {
+    border-bottom: 2px solid #0D0F1C;
+  }
+  table.results th {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8B8FA8;
+    padding: 6px 10px;
+    text-align: right;
+  }
+  table.results th:first-child { text-align: left; }
+  table.results td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #F0F1F8;
+    color: #0D0F1C;
+    text-align: right;
+    font-weight: 500;
+  }
+  table.results td:first-child { text-align: left; font-weight: 700; }
+  table.results tr:last-child td { border-bottom: none; }
+  .score-num { font-weight: 700; color: #4F46E5; }
+  .score-low { font-weight: 700; color: #8B8FA8; }
+  .rank-medal { font-size: 15px; margin-right: 4px; }
+
+  /* ── Footer ── */
+  .footer {
+    background: #F7F8FF;
+    border-top: 1px solid #EEF0F7;
+    padding: 16px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .footer-left {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8B8FA8;
+  }
+  .footer-right {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4F46E5;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Paint<span>Bench</span></h1>
+      <p>Tasks trivial in any raster editor — still out of reach for frontier AI. Evaluated by pixel-level comparison with no model judges.</p>
+    </div>
+    <div class="header-stat">
+      <div class="stat-big">23.5%</div>
+      <div class="stat-sub">Best model (mIoU)</div>
+    </div>
+  </div>
+
+  <!-- Example problems -->
+  <div class="section-label">4 Example Problems: Input → Ground Truth → Best Model Output</div>
+
+  <div class="examples">
+    <!-- Translation -->
+    <div class="example-col">
+      <div class="ex-task">Translation</div>
+      <span class="ex-cat geo">Geometric</span>
+      <div class="ex-img-row">
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Input</div>
+          <img src="../assets/img/ex_translation_input.png" alt="Translation input" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Answer</div>
+          <img src="../assets/img/ex_translation_answer.png" alt="Translation answer" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">NB-2 Output</div>
+          <div class="ex-model-placeholder"><span>Coming<br>soon</span></div>
+          <div class="ex-model-score">mIoU: 23.9%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shearing -->
+    <div class="example-col">
+      <div class="ex-task">Shearing</div>
+      <span class="ex-cat geo">Geometric</span>
+      <div class="ex-img-row">
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Input</div>
+          <img src="../assets/img/ex_shearing_input.png" alt="Shearing input" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Answer</div>
+          <img src="../assets/img/ex_shearing_answer.png" alt="Shearing answer" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">GPT-IE2 Output</div>
+          <div class="ex-model-placeholder"><span>Coming<br>soon</span></div>
+          <div class="ex-model-score">mIoU: 12.4%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="example-col">
+      <div class="ex-task">Legend</div>
+      <span class="ex-cat sym">Symbolic</span>
+      <div class="ex-img-row">
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Input</div>
+          <img src="../assets/img/ex_legend_input.png" alt="Legend input" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Answer</div>
+          <img src="../assets/img/ex_legend_answer.png" alt="Legend answer" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">NB-2 Output</div>
+          <div class="ex-model-placeholder"><span>Coming<br>soon</span></div>
+          <div class="ex-model-score">mIoU: 58.8%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradient -->
+    <div class="example-col">
+      <div class="ex-task">Gradient</div>
+      <span class="ex-cat col">Color</span>
+      <div class="ex-img-row">
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Input</div>
+          <img src="../assets/img/ex_gradient_input.png" alt="Gradient input" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">Answer</div>
+          <img src="../assets/img/ex_gradient_answer.png" alt="Gradient answer" />
+        </div>
+        <div class="ex-img-block" style="flex:2">
+          <div class="ex-img-label">NB-2 Output</div>
+          <div class="ex-model-placeholder"><span>Coming<br>soon</span></div>
+          <div class="ex-model-score">mIoU: 13.8%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results table -->
+  <div class="results-section">
+    <div class="results-label">Leaderboard — Mean IoU (mIoU) on 1,050 problems</div>
+    <table class="results">
+      <thead>
+        <tr>
+          <th style="text-align:left">Model</th>
+          <th>mIoU (%)</th>
+          <th>Geo.</th>
+          <th>Structural</th>
+          <th>Color</th>
+          <th>Symbolic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank-medal">🥇</span>Nano Banana 2</td>
+          <td><span class="score-num">23.5</span></td>
+          <td>13.0</td><td>26.7</td><td>23.4</td><td>30.9</td>
+        </tr>
+        <tr>
+          <td><span class="rank-medal">🥈</span>GPT Image Edit 2</td>
+          <td><span class="score-num">21.8</span></td>
+          <td>17.4</td><td>28.2</td><td>17.3</td><td>24.2</td>
+        </tr>
+        <tr>
+          <td><span class="rank-medal">🥉</span>Nano Banana 1</td>
+          <td><span class="score-num">13.9</span></td>
+          <td>9.9</td><td>14.8</td><td>8.8</td><td>22.0</td>
+        </tr>
+        <tr>
+          <td>FLUX.2-dev</td>
+          <td><span class="score-low">5.6</span></td>
+          <td>6.1</td><td>8.7</td><td>2.9</td><td>4.9</td>
+        </tr>
+        <tr>
+          <td>Qwen-Image-Edit</td>
+          <td><span class="score-low">7.2</span></td>
+          <td>4.9</td><td>9.9</td><td>6.2</td><td>8.0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">Xu, Brown, Madhu, Fergus, He, Xie · NYU · 2026</div>
+    <div class="footer-right">paintbench.github.io</div>
+  </div>
+
+</div>
+</body>
+</html>

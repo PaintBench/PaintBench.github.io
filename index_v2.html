@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaintBench — Precise Visual Editing, Evaluated to the Pixel</title>
+  <meta name="description" content="PaintBench: a procedurally generated, deterministically evaluated benchmark for precise visual editing. No model judges. The best image-editing model today scores 23.5% mIoU." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ── Nav ────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-wordmark">PaintBench</span>
+    <div class="nav-links">
+      <a href="#benchmark">Tasks</a>
+      <a href="#results">Results</a>
+      <a href="#failures">Failures</a>
+      <a href="#tinygrafixbench">TinyGrafixBench</a>
+      <a href="#citation">Cite</a>
+      <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank" class="btn-nav">Dataset →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="wrap">
+    <!-- <div class="hero-eyebrow">NeurIPS 2026 &nbsp;·&nbsp; Evaluations &amp; Datasets Track</div> -->
+    <h1 class="hero-title">What a raster editor<br>does in one click —<br>AI still can't.</h1>
+    <p class="hero-sub">
+      <em>PaintBench</em> is a procedurally generated benchmark for precise visual editing —
+      every problem has exactly one correct answer, verified at the pixel level with no model judges.
+      The best image-editing model today scores&nbsp;<em>23.5%</em>. <span class="todo-marker">[TODO: update]</span>
+    </p>
+    <div class="btn-row">
+      <a href="#" class="btn btn-dark">📄 Paper <span style="opacity:.5;font-weight:400">(arXiv soon)</span></a>
+      <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank" class="btn btn-outline">🤗 Dataset</a>
+      <span class="btn btn-ghost">💻 Code &nbsp;(coming soon)</span>
+    </div>
+  </div>
+
+  <div class="wrap-wide">
+    <div class="hero-image-wrap">
+      <img id="hero-img" src="assets/img/hero.png"
+           onerror="this.parentElement.innerHTML='<div class=hero-image-placeholder>hero.png</div>'"
+           alt="PaintBench: 20 primitive editing tasks evaluated at the pixel level" />
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-cell">
+        <div class="stat-val" style="color:var(--geo)">Procedural</div>
+        <div class="stat-label">Generated from seeds — never memorized</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" style="color:var(--str)">Deterministic</div>
+        <div class="stat-label">One correct answer per problem</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" style="color:var(--col)">Zero</div>
+        <div class="stat-label">Model judges — pure pixel math</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" style="color:var(--sym)">23.5% <span class="todo-stat">[TODO]</span></div>
+        <div class="stat-label">Best model mIoU (Nano Banana 2)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §01 How a Problem Works (hidden — content preserved below) ── -->
+<!--
+<section id="example">
+  <div class="wrap">
+    <div class="sec-num">01 / How a Problem Works</div>
+    <h2 class="sec-title">One correct answer.<br>Evaluated at the pixel.</h2>
+    <p class="sec-body">
+      Every PaintBench problem gives a model an input image and a precise instruction.
+      There is exactly one ground-truth output, generated programmatically from a random seed.
+      Evaluation compares each output pixel to the ground truth using
+      CIE&Delta;E<sub>76</sub> perceptual color distance — no human opinion, no language model judge.
+    </p>
+
+    <div class="instruction-block">
+      <div class="label">Instruction</div>
+      Translate the circle right by 13.35% of the image width. Place the transformed shape
+      underneath any possible overlapping shapes. Clip any parts that may extend beyond the
+      image boundary.
+    </div>
+
+    <div class="img-strip">
+      <div class="img-cell">
+        <img src="assets/img/eval_input.png" alt="Input image" />
+        <div class="cap">Input</div>
+      </div>
+      <div class="img-cell">
+        <img src="assets/img/eval_answer.png" alt="Ground truth answer" />
+        <div class="cap">Ground truth</div>
+      </div>
+      <div class="img-cell">
+        <img src="assets/img/eval_normalized_output.png" alt="Model output (Nano Banana 2)" />
+        <div class="cap">Model output <span style="color:var(--muted)">(Nano Banana 2)</span></div>
+      </div>
+      <div class="img-cell">
+        <img id="diff-img" src="assets/img/eval_diff_cie76_0.png" alt="Pixel error map" />
+        <div class="cap">Error map <span style="color:var(--muted)">(drag slider)</span></div>
+      </div>
+    </div>
+
+    <div class="slider-wrap">
+      <span class="slider-label">Tolerance&thinsp;ΔE&thinsp;≤</span>
+      <input type="range" id="de-slider" min="0" max="10" value="0" step="1" />
+      <span class="slider-label" style="text-align:right">strict → lenient</span>
+    </div>
+
+    <div class="slider-stats">
+      <div class="stat-item">
+        <span class="skey">Threshold &nbsp;</span>
+        <span class="sval" id="stat-t">ΔE ≤ 0</span>
+      </div>
+      <div class="stat-item">
+        <span class="skey">Edit accuracy &nbsp;</span>
+        <span class="sval" id="stat-edit">—</span>
+      </div>
+      <div class="stat-item">
+        <span class="skey">mIoU &nbsp;</span>
+        <span class="sval" id="stat-iou">—</span>
+      </div>
+    </div>
+
+    <p style="margin-top:20px; font-size:.82rem; color:var(--muted); max-width:none;">
+      <strong style="color:var(--ink-2)">Green pixels</strong> were correctly edited or preserved within the tolerance.
+      <strong style="color:var(--ink-2)">Red pixels</strong> failed. mIoU averages the IoU score across all 11 tolerance levels.
+    </p>
+  </div>
+</section>
+-->
+
+<!-- ── §02 Benchmark taxonomy ─────────────────────────────────── -->
+<section id="benchmark">
+  <div class="wrap">
+    <div class="sec-num">01 / The Benchmark</div>
+    <h2 class="sec-title">20 primitive tasks.<br>4 categories.<br>Infinitely scalable.</h2>
+    <p class="sec-body">
+      Every problem is generated from a random seed: a new seed produces a fresh scene,
+      fresh instruction, and a unique correct output — making memorization impossible.
+      Tasks span a gradient from pixel-formula operations to spatial transformations requiring
+      exact geometric reasoning. No web-scraped data. No ambiguous outputs.
+    </p>
+
+    <div class="design-pillars">
+      <div class="pillar">
+        <div class="pillar-icon">⟳</div>
+        <div class="pillar-name">Dynamic Generation</div>
+        <div class="pillar-body">Fresh problem sets on demand. Each seed produces a unique (input, instruction, answer) triple — the benchmark cannot be contaminated by training data exposure.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✓</div>
+        <div class="pillar-name">One Correct Answer</div>
+        <div class="pillar-body">Every output is compared pixel-by-pixel to the ground truth via CIE ΔE₇₆ color distance. No human ratings, no LLM judges, no perceptual proxies.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">◈</div>
+        <div class="pillar-name">Atomic Operations</div>
+        <div class="pillar-body">Tasks target the building blocks of visual editing — recoloring, transformation, removal — the same primitives a raster editor handles trivially in a single command.</div>
+      </div>
+    </div>
+
+    <!-- Task switcher: all 20 tasks -->
+    <div class="taxonomy-layout">
+      <div class="cat-list">
+        <div class="cat-group">
+          <button class="cat-btn geo active" data-cat="geo">
+            <div class="cat-btn-name">Geometric Transformation</div>
+          </button>
+          <div class="task-list" id="tasks-geo">
+            <button class="task-btn active" data-task="translation" data-cat="geo">Translation</button>
+            <button class="task-btn" data-task="rotation" data-cat="geo">Rotation</button>
+            <button class="task-btn" data-task="reflection" data-cat="geo">Reflection</button>
+            <button class="task-btn" data-task="scaling" data-cat="geo">Scaling</button>
+            <button class="task-btn" data-task="shearing" data-cat="geo">Shearing</button>
+          </div>
+        </div>
+        <div class="cat-group">
+          <button class="cat-btn str" data-cat="str">
+            <div class="cat-btn-name">Structural Manipulation</div>
+          </button>
+          <div class="task-list" id="tasks-str" style="display:none">
+            <button class="task-btn" data-task="construction" data-cat="str">Construction</button>
+            <button class="task-btn" data-task="removal" data-cat="str">Removal</button>
+            <button class="task-btn" data-task="copying" data-cat="str">Copying</button>
+            <button class="task-btn" data-task="border" data-cat="str">Border</button>
+            <button class="task-btn" data-task="cropping" data-cat="str">Cropping</button>
+          </div>
+        </div>
+        <div class="cat-group">
+          <button class="cat-btn col" data-cat="col">
+            <div class="cat-btn-name">Color Change</div>
+          </button>
+          <div class="task-list" id="tasks-col" style="display:none">
+            <button class="task-btn" data-task="recolor" data-cat="col">Recolor</button>
+            <button class="task-btn" data-task="flood_fill" data-cat="col">Flood Fill</button>
+            <button class="task-btn" data-task="blending" data-cat="col">Blending</button>
+            <button class="task-btn" data-task="gradient" data-cat="col">Gradient</button>
+            <button class="task-btn" data-task="point_operations" data-cat="col">Point Operations</button>
+          </div>
+        </div>
+        <div class="cat-group">
+          <button class="cat-btn sym" data-cat="sym">
+            <div class="cat-btn-name">Symbolic Reasoning</div>
+          </button>
+          <div class="task-list" id="tasks-sym" style="display:none">
+            <button class="task-btn" data-task="comparison" data-cat="sym">Comparison</button>
+            <button class="task-btn" data-task="ordering" data-cat="sym">Ordering</button>
+            <button class="task-btn" data-task="pattern" data-cat="sym">Pattern</button>
+            <button class="task-btn" data-task="counting" data-cat="sym">Counting</button>
+            <button class="task-btn" data-task="legend" data-cat="sym">Legend</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example panel -->
+      <div class="ex-panel-wrap">
+        <div class="ex-labels"><span>Input</span><span>Ground Truth</span></div>
+        <div class="ex-pair">
+          <img id="ex-input"  src="assets/img/ex_translation_input.png"  alt="Input" />
+          <img id="ex-answer" src="assets/img/ex_translation_answer.png" alt="Ground truth" />
+        </div>
+        <div class="ex-instruction" id="ex-instr"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §03 Results heatmap ────────────────────────────────────── -->
+<section id="results">
+  <div class="wrap-wide">
+    <div class="wrap" style="padding:0">
+      <div class="sec-num">02 / Results</div>
+      <h2 class="sec-title">The benchmark<br>is far from solved.</h2>
+      <p class="sec-body">
+        mIoU scores (%) across 11 ΔE tolerance levels, 10 leading models.
+        The top image-editing model achieves <strong>23.5% overall</strong> —
+        well below what any raster editor achieves trivially.
+        Geometric and structural tasks expose a hard capability gap:
+        models fail not because they misunderstand the instruction,
+        but because their spatial rendering engine can't execute it precisely.
+        <br><span class="todo-inline">[TODO: update table with new benchmark numbers after regeneration]</span>
+      </p>
+    </div>
+
+    <div class="heatmap-scroll">
+      <table class="heatmap-table">
+        <thead>
+          <tr>
+            <th rowspan="2" class="th-model" style="vertical-align:bottom">Model</th>
+            <th rowspan="2" class="th-overall">Overall</th>
+            <th colspan="5" class="cat-geo">Geometric Transformation</th>
+            <th colspan="5" class="cat-str">Structural Manipulation</th>
+            <th colspan="5" class="cat-col">Color Change</th>
+            <th colspan="5" class="cat-sym">Symbolic Reasoning</th>
+          </tr>
+          <tr>
+            <th>Translation</th><th>Rotation</th><th>Reflection</th><th>Scaling</th><th>Shearing</th>
+            <th>Construction</th><th>Removal</th><th>Copying</th><th>Border</th><th>Cropping</th>
+            <th>Recolor</th><th>Flood Fill</th><th>Blending</th><th>Gradient</th><th>Point Ops</th>
+            <th>Comparison</th><th>Ordering</th><th>Pattern</th><th>Counting</th><th>Legend</th>
+          </tr>
+        </thead>
+        <tbody id="hm-body"></tbody>
+      </table>
+    </div>
+
+    <div class="heatmap-legend">
+      <span>0%</span>
+      <div class="legend-grad"></div>
+      <span>100%</span>
+      <span style="margin-left:12px; color:var(--muted)">mIoU per task &nbsp;·&nbsp; hover for exact score</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── §04 Failure modes ───────────────────────────────────────── -->
+<section id="failures">
+  <div class="wrap">
+    <div class="sec-num">03 / How Models Fail</div>
+    <h2 class="sec-title">Four canonical<br>failure modes.</h2>
+    <p class="sec-body">
+      Across all evaluated models, failures cluster into four qualitative types —
+      each revealing a different facet of the precision gap between generative plausibility
+      and structural execution. The pixel-level error map tells a story
+      that a language model judge would miss.
+    </p>
+
+    <div class="failure-fig-wrap">
+      <img src="assets/img/failure_modes.png"
+           alt="Four failure modes: no edit (BAGEL / construction), color imprecision (Nano Banana 2 / gradient), structural imprecision (LongCat / translation), catastrophic edit (BAGEL / cropping). Each row shows input, ground truth, model output, and per-threshold accuracy curves."
+           class="failure-fig" />
+      <div class="failure-legend-row">
+        <span class="failure-legend-item no-edit">No Edit</span>
+        <span class="failure-legend-item color-imp">Color Imprecision</span>
+        <span class="failure-legend-item struct-imp">Structural Imprecision</span>
+        <span class="failure-legend-item catastroph">Catastrophic Edit</span>
+      </div>
+      <p class="failure-fig-cap">
+        Each row: input image · ground-truth answer · model output · per-threshold accuracy curves.
+        <em>No edit</em>: model returns the input unchanged (BAGEL, construction).
+        <em>Color imprecision</em>: edit location is correct but colors deviate (Nano Banana 2, gradient).
+        <em>Structural imprecision</em>: shape is approximately right but misaligned (LongCat, translation).
+        <em>Catastrophic edit</em>: output is unrelated to the instruction (BAGEL, cropping).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── §05 TinyGrafixBench ────────────────────────────────────── -->
+<section id="tinygrafixbench">
+  <div class="wrap">
+    <div class="sec-num">04 / Generalization</div>
+    <h2 class="sec-title">TinyGrafixBench:<br>primitive failures<br>compound in the wild.</h2>
+    <p class="sec-body">
+      Data visualizations are built from the same geometric primitives as PaintBench scenes —
+      bars, points, lines, nodes. We hypothesize that a model struggling to manipulate basic shapes
+      in a sterile environment will similarly fail on precise structural edits to scientific figures.
+      TinyGrafixBench applies PaintBench's deterministic evaluation framework to chart editing,
+      across five chart types and 600 problems.
+    </p>
+
+    <div class="tgb-finding">
+      <div class="tgb-finding-icon">→</div>
+      <div class="tgb-finding-text">
+        <strong>Model rankings on TinyGrafixBench closely mirror PaintBench.</strong>
+        Nano Banana 2 leads at 16.6%; GPT Image Edit 2 follows at 15.6%.
+        All other models cluster below 5.6%. Rankings track PaintBench despite the added difficulty
+        of understanding structured chart imagery — validating our primitive benchmark as a proxy for
+        harder real-world editing tasks. <span class="todo-marker">[TODO: update scores]</span>
+      </div>
+    </div>
+
+    <!-- Chart type examples -->
+    <div class="tgb-chart-tabs">
+      <div class="tgb-tab-row">
+        <button class="tgb-tab active" data-chart="bar_chart">Bar Chart</button>
+        <button class="tgb-tab" data-chart="scatter_plot">Scatter Plot</button>
+        <button class="tgb-tab" data-chart="line_chart">Line Chart</button>
+        <button class="tgb-tab" data-chart="heatmap">Heatmap</button>
+        <button class="tgb-tab" data-chart="network">Network</button>
+      </div>
+      <div class="tgb-chart-panel">
+        <img id="tgb-chart-img" src="assets/img/tgb_bar_chart.png"
+             alt="TinyGrafixBench bar chart examples — five problems showing input chart, ground truth, and model outputs"
+             class="tgb-chart-img" />
+        <p class="tgb-chart-cap" id="tgb-chart-cap">
+          <strong>Bar Chart</strong> — tasks: add bar, recolor bar, remove bar, sort bars.
+          Each row shows the input chart, ground-truth answer, and outputs from all ten models.
+        </p>
+      </div>
+    </div>
+
+    <div class="tgb-bar-list">
+      <div class="tgb-bar-header">
+        <span>Model</span><span>TinyGrafixBench mIoU <span class="todo-marker">[TODO: update]</span></span>
+      </div>
+      <div class="tgb-bar-row">
+        <span class="tgb-name">Nano Banana 2</span>
+        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:35%"></div></div>
+        <span class="tgb-val">16.6%</span>
+      </div>
+      <div class="tgb-bar-row">
+        <span class="tgb-name">GPT Image Edit 2</span>
+        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:28%"></div></div>
+        <span class="tgb-val">15.6%</span>
+      </div>
+      <div class="tgb-bar-row">
+        <span class="tgb-name">Nano Banana 1</span>
+        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:20%"></div></div>
+        <span class="tgb-val">5.6%</span>
+      </div>
+      <div class="tgb-bar-row">
+        <span class="tgb-name">All others</span>
+        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:10%; background:var(--muted)"></div></div>
+        <span class="tgb-val">&lt;5%</span>
+      </div>
+    </div>
+    <p style="font-size:.78rem; color:var(--muted); margin-top:8px;">
+      Full per-chart-type breakdown in the paper.
+    </p>
+  </div>
+</section>
+
+<!-- ── Citation ────────────────────────────────────────────────── -->
+<section id="citation">
+  <div class="wrap">
+    <div class="sec-num">Authors</div>
+    <p class="authors">
+      Kai Xu &nbsp;·&nbsp; Ellis Brown &nbsp;·&nbsp; Shrikar Madhu &nbsp;·&nbsp;
+      Rob Fergus &nbsp;·&nbsp; He He &nbsp;·&nbsp; Saining Xie
+    </p>
+    <p class="affil">New York University</p>
+
+    <div class="sec-num">Citation</div>
+    <div class="cite-block">
+      <button class="copy-btn" id="copy-btn">Copy</button>
+<pre id="cite-text">@inproceedings{paintbench2026,
+  title     = {Deterministic Evaluation of Precise Visual Editing},
+  author    = {Xu, Kai and Brown, Ellis and Madhu, Shrikar and
+               Fergus, Rob and He, He and Xie, Saining},
+  booktitle = {Advances in Neural Information Processing Systems
+               (Evaluations and Datasets Track)},
+  year      = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    PaintBench &nbsp;·&nbsp; New York University &nbsp;·&nbsp; NeurIPS 2026
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank">Dataset</a>
+    &nbsp;·&nbsp;
+    <a href="#">Paper</a>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
