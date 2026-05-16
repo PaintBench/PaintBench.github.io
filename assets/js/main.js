@@ -257,7 +257,7 @@ function catFullLabel(cat) {
 }
 
 /* ════════════════════════════════════════════════════
-   GALLERY — compact vertical row cards
+   GALLERY — horizontal, big cards (input → answer)
    ════════════════════════════════════════════════════ */
 function buildGallery() {
   const track = document.getElementById("gallery-track");
@@ -265,20 +265,24 @@ function buildGallery() {
 
   const makeCards = () => GALLERY_ORDER.map(t => {
     const card = document.createElement("div");
-    card.className = `g-row-card cat-${t.cat}`;
+    card.className = `g-card cat-${t.cat}`;
     card.innerHTML = `
-      <div class="g-row-imgs">
-        <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" loading="lazy" />
-        <span class="g-row-arrow">→</span>
-        <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" loading="lazy" />
+      <div class="g-card-header">
+        <span class="g-task-name">${t.label}</span>
+        <span class="g-cat-badge ${t.cat}">${catLabel(t.cat)}</span>
       </div>
-      <div class="g-row-text">
-        <div class="g-row-header">
-          <span class="g-row-name">${t.label}</span>
-          <span class="g-cat-badge ${t.cat}">${catLabel(t.cat)}</span>
+      <div class="g-card-images">
+        <div class="g-img-slot">
+          <img src="assets/img/ex_${t.key}_input.png" alt="${t.label} input" loading="lazy" />
+          <span class="g-img-label">Input</span>
         </div>
-        <p class="g-row-instruction">${t.instruction}</p>
+        <div class="g-arrow">→</div>
+        <div class="g-img-slot">
+          <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" loading="lazy" />
+          <span class="g-img-label">Answer</span>
+        </div>
       </div>
+      <p class="g-instruction">${t.instruction}</p>
     `;
     return card;
   });
@@ -301,7 +305,7 @@ function buildTgbCarousel() {
       <div class="tgb-v-card-type">${ex.chart}</div>
       <div class="tgb-v-card-imgs">
         <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" loading="lazy" />
-        <span class="g-row-arrow">→</span>
+        <span class="tgb-arrow">→</span>
         <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" loading="lazy" />
       </div>
       <p class="tgb-v-card-instruction">${ex.instruction}</p>
