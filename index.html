@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PaintBench — Deterministic Visual Editing Benchmark</title>
-  <meta name="description" content="PaintBench: a procedurally generated benchmark of 1,050 deterministic visual editing problems across 20 task types. Pixel-level evaluation with no model judges." />
+  <title>PaintBench: Deterministic Visual Editing Benchmark</title>
+  <meta name="description" content="PaintBench: a dynamically scalable benchmark spanning 20 primitive visual editing operations. Pixel-level evaluation with no model judges." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
@@ -14,113 +14,88 @@
 
 <!-- ════════════════════════ HERO ════════════════════════ -->
 <section id="hero">
-  <div class="hero-container">
-    <div class="hero-text">
-      <div class="eyebrow">Visual Editing Benchmark · NYU</div>
-      <h1 class="hero-title">Paint<span class="accent">Bench</span></h1>
-      <p class="hero-tagline">Tasks trivial in any raster editor —<br>still out of reach for frontier AI.</p>
-      <p class="hero-body">
-        A benchmark of <strong>1,050 deterministic visual editing problems</strong> across 20 task types. Problems are generated procedurally so they cannot be memorized. Evaluation is pure pixel math — no model judges, no ambiguity.
-      </p>
-      <p class="hero-stat-line">
-        The best image-editing model scores only <span class="stat-highlight">23.5%</span>.
-      </p>
-      <div class="hero-ctas">
-        <a href="https://arxiv.org/abs/2506.07220" target="_blank" rel="noopener" class="cta-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          arXiv Paper
-        </a>
-        <a href="https://github.com/PaintBench" target="_blank" rel="noopener" class="cta-secondary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="#leaderboard" class="cta-ghost">
-          Results
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-      </div>
-    </div>
 
-    <div class="hero-demo">
-      <div class="demo-label">Example problem</div>
-      <div class="demo-card">
-        <div class="demo-images">
-          <div class="demo-img-wrap">
-            <img src="assets/img/ex_recolor_input.png" alt="Input image with colored shapes" />
-            <span class="demo-img-caption">Input</span>
-          </div>
-          <div class="demo-arrow-col">
-            <div class="demo-instruction-box">
-              <span class="instruction-label">Instruction</span>
-              <p>"Recolor the maroon star to <code>#42AEFF</code>."</p>
-            </div>
-            <svg class="flow-arrow" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 10 L68 10" stroke="currentColor" stroke-width="2"/>
-              <path d="M62 4 L76 10 L62 16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="demo-img-wrap answer">
-            <img src="assets/img/ex_recolor_answer.png" alt="Answer image with star recolored to blue" />
-            <span class="demo-img-caption">Ground Truth</span>
-          </div>
-        </div>
-        <p class="demo-footer">One unique correct output. Evaluated by CIE ΔE pixel distance. No judge needed.</p>
-      </div>
+  <!-- Text block -->
+  <div class="hero-text-block">
+    <div class="eyebrow">Visual Editing Benchmark · NYU</div>
+    <h1 class="hero-title">PaintBench</h1>
+    <p class="hero-tagline">Tasks trivial in any raster editor, still out of reach for frontier AI.</p>
+    <p class="hero-body">
+      A dynamically scalable benchmark spanning <strong>20 primitive visual editing operations</strong> found across real-world workflows. Problems are procedurally generated, preventing saturation. Evaluation is pure pixel math, with no model judges.
+    </p>
+    <p class="hero-stat-line">
+      The best image-editing model scores only <span class="stat-highlight">23.5%</span>.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://arxiv.org/abs/2506.07220" target="_blank" rel="noopener" class="cta-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Paper
+      </a>
+      <a href="https://github.com/PaintBench" target="_blank" rel="noopener" class="cta-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank" rel="noopener" class="cta-hf">
+        <svg width="16" height="16" viewBox="0 0 95 88" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M47.2 2C21.5 2 0.7 22.8 0.7 48.5c0 25.6 20.8 46.5 46.5 46.5s46.5-20.8 46.5-46.5C93.7 22.8 72.9 2 47.2 2zm0 6.8c21.9 0 39.7 17.8 39.7 39.7s-17.8 39.7-39.7 39.7S7.5 70.4 7.5 48.5 25.3 8.8 47.2 8.8zm-13 17.7c-4.4 0-8 3.6-8 8 0 3.3 2 6.2 4.9 7.4-.5 1.4-.8 2.9-.8 4.5 0 7.3 5.9 13.2 13.2 13.2h7.4c7.3 0 13.2-5.9 13.2-13.2 0-1.6-.3-3.1-.8-4.5 2.9-1.3 4.9-4.1 4.9-7.4 0-4.4-3.6-8-8-8-2.9 0-5.4 1.5-6.8 3.8-1.3-.5-2.8-.8-4.3-.8-1.5 0-3 .3-4.3.8-1.4-2.3-3.9-3.8-6.6-3.8z"/></svg>
+        Dataset
+      </a>
+      <a href="#leaderboard" class="cta-ghost">
+        Results
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </div>
   </div>
 
-  <!-- ── Pillars ── -->
-  <div class="pillars-row">
-    <div class="pillar">
-      <div class="pillar-icon-wrap geo">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 18 12 2 21 18"/><circle cx="12" cy="13" r="3"/></svg>
-      </div>
-      <h3>Primitive Operations</h3>
-      <p>20 atomic task types across 4 categories: <em>geometric transformation, structural manipulation, color change,</em> and <em>symbolic reasoning</em> — the building blocks of every editing workflow.</p>
-    </div>
-    <div class="pillar pillar-featured">
-      <div class="pillar-icon-wrap accent">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
-      <h3>Deterministically Evaluated</h3>
-      <p>Every problem has exactly one correct output. Evaluation is pixel-level comparison — like running code against test cases, but for images. No model-based judges and their biases.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon-wrap sym">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      </div>
-      <h3>Dynamically Scalable</h3>
-      <p>Generated procedurally from random seeds with tunable parameters (canvas size, object count, background style). Fresh unseen problems can be generated at any time — preventing saturation.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════ GALLERY ════════════════════════ -->
-<section id="gallery">
-  <div class="section-header">
-    <h2>All 20 Task Types</h2>
-    <p class="section-sub">Every task shown with a procedurally generated example — input, instruction, and unique ground-truth answer. <span class="pause-hint">Hover to pause.</span></p>
-  </div>
-  <div class="gallery-outer">
+  <!-- Carousel (replaces demo card) -->
+  <div class="hero-carousel-wrap">
     <div class="gallery-fade gallery-fade-left"></div>
     <div class="gallery-viewport">
       <div class="gallery-track" id="gallery-track"><!-- populated by JS --></div>
     </div>
     <div class="gallery-fade gallery-fade-right"></div>
   </div>
+
+  <!-- Category legend -->
   <div class="gallery-cat-legend">
     <span class="gcat geo">Geometric Transformation</span>
     <span class="gcat str">Structural Manipulation</span>
     <span class="gcat col">Color Change</span>
     <span class="gcat sym">Symbolic Reasoning</span>
+    <span class="pause-hint">Hover to pause</span>
   </div>
+
+  <!-- Pillars -->
+  <div class="pillars-row">
+    <div class="pillar pillar-geo">
+      <div class="pillar-icon-wrap geo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 18 12 2 21 18"/><circle cx="12" cy="13" r="3"/></svg>
+      </div>
+      <h3>Primitive Operations</h3>
+      <p>20 atomic task types across 4 categories: geometric transformation, structural manipulation, color change, and symbolic reasoning. The building blocks of every real-world editing workflow.</p>
+    </div>
+    <div class="pillar pillar-featured pillar-accent">
+      <div class="pillar-icon-wrap accent">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h3>Deterministically Evaluated</h3>
+      <p>Every problem has exactly one correct output. Evaluation is pure pixel math, like HumanEval for code but for images. No model judges, no human raters, no subjectivity.</p>
+    </div>
+    <div class="pillar pillar-col">
+      <div class="pillar-icon-wrap col">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Dynamically Scalable</h3>
+      <p>Problems are generated from random seeds with tunable parameters. Fresh unseen problems can be generated at any time, preventing benchmark saturation.</p>
+    </div>
+  </div>
+
 </section>
 
 <!-- ════════════════════════ LEADERBOARD ════════════════════════ -->
 <section id="leaderboard">
   <div class="section-header">
     <h2>Model Performance</h2>
-    <p class="section-sub">mIoU (%) — mean Intersection-over-Union integrated over 11 CIE&nbsp;ΔE₇₆ thresholds. Higher is better. Click a row to expand per-category scores.</p>
+    <p class="section-sub">mIoU (%): mean Intersection-over-Union integrated over 11 CIE ΔE₇₆ thresholds. Higher is better. Click a row to expand per-category scores.</p>
   </div>
 
   <div class="lb-container">
@@ -152,14 +127,15 @@
 <!-- ════════════════════════ TINYGRAFIXBENCH ════════════════════════ -->
 <section id="tgb">
   <div class="tgb-container">
+
     <div class="tgb-left">
-      <div class="eyebrow">Companion Benchmark</div>
-      <h2>The Gap Generalizes:<br>TinyGrafixBench</h2>
-      <p class="tgb-lead">Data visualizations are built from a grammar of geometric primitives. We tested whether the precision failures revealed by PaintBench compound in a domain with immediate practical relevance.</p>
-      <p>TinyGrafixBench applies the same procedurally generated, deterministically evaluated framework to <strong>5 chart types</strong> — bar charts, scatter plots, line charts, heatmaps, and network graphs — with 4 editing operations per chart type (construction, transformation, removal, recoloring).</p>
+      <div class="eyebrow tgb-eyebrow">Companion Benchmark</div>
+      <h2>We also built<br><span class="tgb-name-grad">TinyGrafixBench</span></h2>
+      <p class="tgb-lead">Can the same failures on geometric primitives predict performance on real-world charts? We applied PaintBench's framework to data visualization editing to find out.</p>
+      <p>TinyGrafixBench is a 600-problem benchmark across 5 chart types, 4 editing operations each, procedurally generated and deterministically evaluated. Model rankings are similar to PaintBench, validating our primitive benchmark as a proxy for harder real-world tasks.</p>
 
       <div class="tgb-callout">
-        <strong>Key finding:</strong> Model rankings closely mirror PaintBench. The top two models on PaintBench remain the top two on TinyGrafixBench, and the wide gap between frontier models and the rest persists across all chart types.
+        The top two models on PaintBench are the top two on TinyGrafixBench. The gap between frontier models and the rest persists across all 5 chart types.
       </div>
 
       <div class="tgb-rank-compare">
@@ -171,8 +147,8 @@
           <div class="tgb-rc-row others"><span class="rc-rank">4–11</span><span class="rc-name">All others</span><span class="rc-score">≤7.2%</span></div>
         </div>
         <div class="tgb-rc-arrow">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <span>Rankings transfer</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>similar rankings</span>
         </div>
         <div class="tgb-rc-col">
           <div class="tgb-rc-head">TinyGrafixBench</div>
@@ -185,20 +161,15 @@
     </div>
 
     <div class="tgb-right">
-      <div class="tgb-tabs" id="tgb-tabs">
-        <button class="tgb-tab active" data-chart="bar">Bar Chart</button>
-        <button class="tgb-tab" data-chart="scatter">Scatter Plot</button>
-        <button class="tgb-tab" data-chart="line">Line Chart</button>
-        <button class="tgb-tab" data-chart="heatmap">Heatmap</button>
-        <button class="tgb-tab" data-chart="network">Network Graph</button>
-      </div>
-      <div class="tgb-img-wrap">
-        <img class="tgb-chart-img" id="tgb-img" src="assets/img/tgb_bar_chart.png" alt="Bar chart task examples" />
-        <p class="tgb-chart-cap" id="tgb-cap">
-          <strong>Bar Chart</strong> — Add bar, sort bars, remove bar, recolor bar. Best: NB-2 (37.4%), GPT-IE2 (34.8%).
-        </p>
+      <div class="tgb-carousel-wrap">
+        <div class="gallery-fade gallery-fade-left tgb-fade-l"></div>
+        <div class="tgb-carousel-viewport">
+          <div class="tgb-carousel-track" id="tgb-carousel-track"><!-- populated by JS --></div>
+        </div>
+        <div class="gallery-fade gallery-fade-right tgb-fade-r"></div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -208,17 +179,18 @@
     <div class="cite-authors">
       <h2>Authors</h2>
       <div class="author-chips">
-        <span>Kai Xu</span>
-        <span>Ellis Brown</span>
-        <span>Shrikar Madhu</span>
-        <span>Rob Fergus</span>
-        <span>He He</span>
-        <span>Saining Xie</span>
+        <a href="https://kaixubuilds.github.io/" target="_blank" rel="noopener">Kai Xu</a>
+        <a href="https://ellisbrown.github.io/" target="_blank" rel="noopener">Ellis Brown</a>
+        <a href="https://shrikar17.github.io/" target="_blank" rel="noopener">Shrikar Madhu</a>
+        <a href="https://cs.nyu.edu/~fergus/pmwiki/pmwiki.php" target="_blank" rel="noopener">Rob Fergus</a>
+        <a href="https://hhexiy.ai/" target="_blank" rel="noopener">He He</a>
+        <a href="https://www.sainingxie.com/" target="_blank" rel="noopener">Saining Xie</a>
       </div>
       <p class="affil">New York University</p>
       <div class="cite-links">
         <a href="https://arxiv.org/abs/2506.07220" class="cite-link" target="_blank" rel="noopener">arXiv ↗</a>
         <a href="https://github.com/PaintBench" class="cite-link" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://huggingface.co/datasets/PaintBench/PaintBench" class="cite-link cite-link-hf" target="_blank" rel="noopener">HuggingFace Dataset ↗</a>
       </div>
     </div>
     <div class="cite-bibtex">
