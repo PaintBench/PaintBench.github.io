@@ -370,6 +370,12 @@ code {
   text-align: center;
   letter-spacing: .02em;
 }
+/* Make input/answer slots the same height as model-output slot (which has an extra model-name line) */
+.g-card-images .g-img-slot:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: calc(0.6rem * 1.65);
+}
 
 
 /* Gallery gets its own bottom padding now that pillars are gone */
@@ -572,7 +578,7 @@ code {
   background: var(--bg);
   border: 1.5px solid var(--border);
   border-radius: 12px;
-  padding: 18px;
+  padding: 18px 18px 24px;
 }
 .tgb-rc-col { flex: 1; min-width: 0; }
 .tgb-rc-head {
