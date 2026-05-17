@@ -165,11 +165,11 @@ code {
 /* Brush bullet list */
 .hero-bullets {
   list-style: none;
-  text-align: left;
   max-width: 800px;
   margin: 0 auto 22px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 11px;
 }
 .hero-bullets li {
