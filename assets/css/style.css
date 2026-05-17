@@ -546,19 +546,19 @@ code {
   -webkit-text-fill-color: transparent;
 }
 .tgb-lead {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--ink-2);
   line-height: 1.65;
   margin-bottom: 14px;
 }
-.tgb-left p { font-size: .88rem; color: var(--ink-2); margin-bottom: 18px; line-height: 1.65; }
+.tgb-left p { font-size: 1rem; color: var(--ink-2); margin-bottom: 18px; line-height: 1.65; }
 
 .tgb-callout {
   background: var(--bg);
   border-left: 4px solid var(--sym);
   border-radius: 0 8px 8px 0;
   padding: 13px 16px;
-  font-size: .86rem;
+  font-size: .95rem;
   font-weight: 500;
   color: var(--ink);
   line-height: 1.6;
@@ -576,7 +576,7 @@ code {
 }
 .tgb-rc-col { flex: 1; min-width: 0; }
 .tgb-rc-head {
-  font-size: .65rem;
+  font-size: .72rem;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -591,15 +591,15 @@ code {
   padding: 5px 6px;
   border-radius: 5px;
   margin-bottom: 3px;
-  font-size: .76rem;
+  font-size: .86rem;
 }
 .tgb-rc-row.rank1 { background: #FFF8E0; }
 .tgb-rc-row.rank2 { background: #F5F4EF; }
 .tgb-rc-row.rank3 { background: var(--bg-alt); }
 .tgb-rc-row.others { color: var(--ink-3); }
-.rc-rank { font-weight: 800; font-size: .7rem; min-width: 20px; color: var(--ink-3); }
-.rc-name { flex: 1; font-weight: 600; color: var(--ink); font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rc-score { font-weight: 700; color: var(--accent); font-size: .76rem; white-space: nowrap; }
+.rc-rank { font-weight: 800; font-size: .78rem; min-width: 20px; color: var(--ink-3); }
+.rc-name { flex: 1; font-weight: 600; color: var(--ink); font-size: .84rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rc-score { font-weight: 700; color: var(--accent); font-size: .86rem; white-space: nowrap; }
 
 .tgb-rc-arrow {
   display: flex;
@@ -611,7 +611,7 @@ code {
   padding: 0 2px;
 }
 .tgb-rc-arrow span {
-  font-size: .58rem;
+  font-size: .68rem;
   font-weight: 600;
   letter-spacing: .05em;
   text-transform: uppercase;
