@@ -149,12 +149,24 @@ code {
   margin: 0 auto 48px;
 }
 
+.hero-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.title-brush {
+  width: clamp(2rem, 4vw, 3.2rem);
+  height: auto;
+  flex-shrink: 0;
+}
+
 .hero-title {
   font-size: clamp(3rem, 7vw, 5.2rem);
   font-weight: 700;
   letter-spacing: -.04em;
   line-height: 1;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   background: var(--rainbow);
   -webkit-background-clip: text;
   background-clip: text;
@@ -214,7 +226,7 @@ code {
   display: flex;
   gap: 18px;
   width: max-content;
-  animation: marquee 80s linear infinite;
+  animation: marquee 105s linear infinite;
   padding: 10px 0 18px;
 }
 .gallery-track:hover { animation-play-state: paused; }
@@ -311,13 +323,16 @@ code {
 .g-instruction {
   font-size: .88rem;
   color: var(--ink-2);
-  line-height: 1.5;
-  font-style: italic;
+  line-height: 1.55;
   border-top: 1px solid var(--border);
   padding-top: 10px;
 }
-.g-instruction::before { content: '"'; }
-.g-instruction::after  { content: '"'; }
+.g-instr-label {
+  font-weight: 700;
+  color: var(--ink);
+  font-style: normal;
+  margin-right: 4px;
+}
 
 
 /* ── Three pillars below gallery ─────────────────── */
@@ -650,7 +665,7 @@ code {
 .tgb-v-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.07); }
 
 .tgb-v-card-type {
-  font-size: .64rem;
+  font-size: .72rem;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -671,7 +686,7 @@ code {
 }
 .tgb-v-card-imgs .tgb-arrow { color: var(--border-2); font-size: .85rem; }
 .tgb-v-card-instruction {
-  font-size: .72rem;
+  font-size: .82rem;
   color: var(--ink-2);
   line-height: 1.45;
   font-style: italic;

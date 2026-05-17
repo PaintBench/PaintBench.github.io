@@ -282,7 +282,7 @@ function buildGallery() {
           <span class="g-img-label">Answer</span>
         </div>
       </div>
-      <p class="g-instruction">${t.instruction}</p>
+      <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>
     `;
     return card;
   });
