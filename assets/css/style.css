@@ -144,9 +144,9 @@ code {
 }
 
 .hero-text-block {
-  text-align: center;
+  text-align: left;
   max-width: 900px;
-  margin: 0 auto 48px;
+  margin: 0 0 48px;
 }
 
 .hero-title {
@@ -166,10 +166,10 @@ code {
 .hero-bullets {
   list-style: none;
   max-width: 800px;
-  margin: 0 auto 22px;
+  margin: 0 0 22px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 11px;
 }
 .hero-bullets li {
@@ -199,8 +199,6 @@ code {
   color: var(--ink-2);
   margin-bottom: 16px;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .hero-stat-line {
   font-size: 1.02rem;
@@ -222,7 +220,7 @@ code {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 
