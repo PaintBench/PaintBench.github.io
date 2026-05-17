@@ -283,10 +283,9 @@ function buildGallery() {
         </div>
         <div class="g-sep">|</div>
         <div class="g-img-slot">
-          <div class="g-placeholder">
-            <span class="g-placeholder-text">${t.model}<br>output</span>
-          </div>
+          <div class="g-placeholder"></div>
           <span class="g-img-label">Model Output</span>
+          <span class="g-model-name">${t.model}</span>
         </div>
       </div>
       <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>

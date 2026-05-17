@@ -267,7 +267,7 @@ code {
   border-top: 3px solid var(--border);
   border-radius: 14px;
   padding: 18px;
-  width: 490px;
+  width: 560px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -365,17 +365,24 @@ code {
   font-style: normal;
   margin-right: 4px;
 }
+.g-model-name {
+  font-size: .6rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-align: center;
+  letter-spacing: .02em;
+}
 
 
 /* Gallery gets its own bottom padding now that pillars are gone */
-.gallery-wrap { margin-bottom: 0; padding-bottom: 96px; }
+.gallery-wrap { margin-bottom: 0; padding-bottom: 40px; }
 
 
 /* ════════════════════════════════════════════════════════════
    LEADERBOARD
    ════════════════════════════════════════════════════════════ */
 #leaderboard {
-  padding: var(--section-py) 24px;
+  padding: 48px 24px var(--section-py);
   max-width: var(--max-w);
   margin: 0 auto;
 }
@@ -521,7 +528,7 @@ code {
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 420px;
   gap: 52px;
   align-items: flex-start;
 }
@@ -622,7 +629,7 @@ code {
 
 .tgb-v-viewport {
   position: relative;
-  height: 560px;
+  height: 660px;
   overflow: hidden;
 }
 .tgb-v-track {
