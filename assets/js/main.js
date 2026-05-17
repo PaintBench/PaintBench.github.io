@@ -281,6 +281,13 @@ function buildGallery() {
           <img src="assets/img/ex_${t.key}_answer.png" alt="${t.label} answer" />
           <span class="g-img-label">Answer</span>
         </div>
+        <div class="g-sep">|</div>
+        <div class="g-img-slot">
+          <div class="g-placeholder">
+            <span class="g-placeholder-text">${t.model}<br>output</span>
+          </div>
+          <span class="g-img-label">Model Output</span>
+        </div>
       </div>
       <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>
     `;
