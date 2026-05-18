@@ -92,15 +92,27 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </a>
     </div>
+    <div class="hero-authors">
+      <a href="https://kaixubuilds.github.io/" target="_blank" rel="noopener">Kai Xu</a>,
+      <a href="https://ellisbrown.github.io/" target="_blank" rel="noopener">Ellis Brown</a>,
+      <a href="https://shrikar17.github.io/" target="_blank" rel="noopener">Shrikar Madhu</a>,
+      <a href="https://cs.nyu.edu/~fergus/pmwiki/pmwiki.php" target="_blank" rel="noopener">Rob Fergus</a>,
+      <a href="https://hhexiy.ai/" target="_blank" rel="noopener">He He</a>,
+      <a href="https://www.sainingxie.com/" target="_blank" rel="noopener">Saining Xie</a>
+      <span class="hero-affil">· New York University</span>
+    </div>
   </div>
 
-  <!-- Horizontal scrolling gallery -->
-  <div class="gallery-wrap">
-    <div class="gallery-fade gallery-fade-left"></div>
-    <div class="gallery-viewport">
-      <div class="gallery-track" id="gallery-track"><!-- populated by JS --></div>
+  <!-- Slideshow gallery -->
+  <div class="gallery-slideshow">
+    <div class="gallery-ss-controls">
+      <select id="gallery-select" class="gallery-select" aria-label="Select task"></select>
+      <div class="gallery-nav">
+        <button id="gallery-prev" class="gallery-nav-btn" aria-label="Previous">&#8249;</button>
+        <button id="gallery-next" class="gallery-nav-btn" aria-label="Next">&#8250;</button>
+      </div>
     </div>
-    <div class="gallery-fade gallery-fade-right"></div>
+    <div class="gallery-ss-viewport" id="gallery-ss-viewport"></div>
   </div>
 
 </section>
@@ -171,13 +183,16 @@
       </div>
     </div>
 
-    <!-- Vertical TGB carousel -->
+    <!-- TGB slideshow -->
     <div class="tgb-right">
-      <div class="tgb-v-viewport">
-        <div class="gallery-v-fade gallery-v-fade-top tgb-fade"></div>
-        <div class="tgb-v-track" id="tgb-carousel-track"><!-- populated by JS --></div>
-        <div class="gallery-v-fade gallery-v-fade-bot tgb-fade"></div>
+      <div class="tgb-ss-controls">
+        <select id="tgb-select" class="gallery-select" aria-label="Select chart task"></select>
+        <div class="gallery-nav">
+          <button id="tgb-prev" class="gallery-nav-btn" aria-label="Previous">&#8249;</button>
+          <button id="tgb-next" class="gallery-nav-btn" aria-label="Next">&#8250;</button>
+        </div>
       </div>
+      <div class="tgb-ss-viewport" id="tgb-ss-viewport"></div>
     </div>
 
   </div>
@@ -203,7 +218,7 @@
         <a href="https://huggingface.co/datasets/PaintBench/PaintBench" class="cite-link cite-link-hf" target="_blank" rel="noopener">HuggingFace ↗</a>
       </div>
     </div>
-    <div class="cite-bibtex">
+    <!-- <div class="cite-bibtex">
       <h3>BibTeX</h3>
       <div class="bibtex-box">
         <pre id="bibtex-text">@article{paintbench2026,
@@ -220,7 +235,7 @@
           <span id="copy-label">Copy</span>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 

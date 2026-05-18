@@ -127,46 +127,26 @@ const MODELS = [
 
 /* ── TGB carousel data (real examples from benchmark) ── */
 const TGB_EXAMPLES = [
-  {
-    chart: "Bar Chart", key: "bar_chart_sort_bars",
-    instruction: "Sort the bars in descending order, moving the corresponding labels.",
-  },
-  {
-    chart: "Bar Chart", key: "bar_chart_remove_bar",
-    instruction: 'Remove the bar and label for "Cep". Keep everything else in the same place.',
-  },
-  {
-    chart: "Scatter Plot", key: "scatter_plot_swap_axes",
-    instruction: "Swap the x and y coordinates of every point and the line of best fit. Points in the class without the line of best fit should be overlaid on top.",
-  },
-  {
-    chart: "Scatter Plot", key: "scatter_plot_recolor_class",
-    instruction: "Recolor the line of best fit and its corresponding points to #565B73.",
-  },
-  {
-    chart: "Line Chart", key: "line_chart_shade_interval",
-    instruction: 'In the plot, shade the area under the series between "fAGNWv yXkzc" = −177 and "fAGNWv yXkzc" = 54.7 with the color #6E815D.',
-  },
-  {
-    chart: "Line Chart", key: "line_chart_filter_series",
-    instruction: 'Only show the parts of the series where "GsZFXaxR vzvBlOe" is at most 221.',
-  },
-  {
-    chart: "Heatmap", key: "heatmap_shift_heatmap",
-    instruction: "Shift the heatmap 1 cell left. Cells that fall off the edge should be discarded, and cells exposed on the opposite side should become empty.",
-  },
-  {
-    chart: "Heatmap", key: "heatmap_mask_cells",
-    instruction: "Remove every cell with a value greater than −37.3.",
-  },
-  {
-    chart: "Network Graph", key: "network_remove_node",
-    instruction: 'Remove node "PESC" and its incident edges. Leave the key unchanged.',
-  },
-  {
-    chart: "Network Graph", key: "network_recolor_node",
-    instruction: 'Recolor node "PESC" to #752D01. Update the color in both the graph and the key.',
-  },
+  { chart:"Bar Chart",     task:"Sort Bars",     key:"bar_chart_sort_bars",
+    instruction:"Sort the bars in descending order, moving the corresponding labels." },
+  { chart:"Bar Chart",     task:"Remove Bar",    key:"bar_chart_remove_bar",
+    instruction:'Remove the bar and label for "Cep". Keep everything else in the same place.' },
+  { chart:"Scatter Plot",  task:"Swap Axes",     key:"scatter_plot_swap_axes",
+    instruction:"Swap the x and y coordinates of every point and the line of best fit. Points in the class without the line of best fit should be overlaid on top." },
+  { chart:"Scatter Plot",  task:"Recolor Class", key:"scatter_plot_recolor_class",
+    instruction:"Recolor the line of best fit and its corresponding points to #565B73." },
+  { chart:"Line Chart",    task:"Shade Interval", key:"line_chart_shade_interval",
+    instruction:'In the plot, shade the area under the series between "fAGNWv yXkzc" = −177 and "fAGNWv yXkzc" = 54.7 with the color #6E815D.' },
+  { chart:"Line Chart",    task:"Filter Series", key:"line_chart_filter_series",
+    instruction:'Only show the parts of the series where "GsZFXaxR vzvBlOe" is at most 221.' },
+  { chart:"Heatmap",       task:"Shift Heatmap", key:"heatmap_shift_heatmap",
+    instruction:"Shift the heatmap 1 cell left. Cells that fall off the edge should be discarded, and cells exposed on the opposite side should become empty." },
+  { chart:"Heatmap",       task:"Mask Cells",    key:"heatmap_mask_cells",
+    instruction:"Remove every cell with a value greater than −37.3." },
+  { chart:"Network Graph", task:"Remove Node",   key:"network_remove_node",
+    instruction:'Remove node "PESC" and its incident edges. Leave the key unchanged.' },
+  { chart:"Network Graph", task:"Recolor Node",  key:"network_recolor_node",
+    instruction:'Recolor node "PESC" to #752D01. Update the color in both the graph and the key.' },
 ];
 
 /* ── Heatmap task list ────────────────────────────── */
@@ -212,14 +192,63 @@ function catFullLabel(cat) {
 }
 
 /* ════════════════════════════════════════════════════
-   GALLERY — horizontal, big cards (input → answer)
+   SHARED SLIDESHOW HELPER
+   ════════════════════════════════════════════════════ */
+function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn, interval = 6000 }) {
+  let idx = 0;
+  let timer;
+
+  const cards = items.map((item, i) => {
+    const el = renderCard(item);
+    if (i === 0) el.classList.add('ss-active');
+    viewport.appendChild(el);
+    return el;
+  });
+
+  function goTo(newIdx) {
+    if (newIdx === idx) return;
+    cards[idx].classList.remove('ss-active');
+    idx = newIdx;
+    cards[idx].classList.add('ss-active');
+    if (selectEl) selectEl.value = newIdx;
+    resetTimer();
+  }
+
+  function next() { goTo((idx + 1) % items.length); }
+  function prev() { goTo((idx - 1 + items.length) % items.length); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, interval);
+  }
+  resetTimer();
+
+  if (selectEl) selectEl.addEventListener('change', () => goTo(+selectEl.value));
+  if (prevBtn)  prevBtn.addEventListener('click',  () => { prev(); });
+  if (nextBtn)  nextBtn.addEventListener('click',  () => { next(); });
+
+  return { goTo, next, prev };
+}
+
+/* ════════════════════════════════════════════════════
+   GALLERY — slideshow, one task at a time
    ════════════════════════════════════════════════════ */
 function buildGallery() {
-  const track = document.getElementById("gallery-track");
-  if (!track) return;
+  const viewport  = document.getElementById('gallery-ss-viewport');
+  const selectEl  = document.getElementById('gallery-select');
+  const prevBtn   = document.getElementById('gallery-prev');
+  const nextBtn   = document.getElementById('gallery-next');
+  if (!viewport) return;
 
-  const makeCards = () => GALLERY_ORDER.map(t => {
-    const card = document.createElement("div");
+  GALLERY_ORDER.forEach((t, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${t.label}  (${catLabel(t.cat)})`;
+    selectEl.appendChild(opt);
+  });
+
+  function renderCard(t) {
+    const card = document.createElement('div');
     card.className = `g-card cat-${t.cat}`;
     card.innerHTML = `
       <div class="g-card-header">
@@ -243,39 +272,50 @@ function buildGallery() {
           <span class="g-model-name">${t.model}</span>
         </div>
       </div>
-      <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>
+      <p class="g-instruction"><span class="g-instr-label">Instruction:</span> ${t.instruction}</p>
     `;
     return card;
-  });
+  }
 
-  // Two copies for seamless loop
-  [...makeCards(), ...makeCards()].forEach(c => track.appendChild(c));
+  makeSlideshow({ viewport, items: GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn });
 }
 
 /* ════════════════════════════════════════════════════
-   TGB CAROUSEL — vertical, real examples
+   TGB SLIDESHOW
    ════════════════════════════════════════════════════ */
-function buildTgbCarousel() {
-  const track = document.getElementById("tgb-carousel-track");
-  if (!track) return;
+function buildTgbSlideshow() {
+  const viewport = document.getElementById('tgb-ss-viewport');
+  const selectEl = document.getElementById('tgb-select');
+  const prevBtn  = document.getElementById('tgb-prev');
+  const nextBtn  = document.getElementById('tgb-next');
+  if (!viewport) return;
 
-  const makeCards = () => TGB_EXAMPLES.map(ex => {
-    const card = document.createElement("div");
-    card.className = "tgb-v-card";
+  TGB_EXAMPLES.forEach((ex, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${ex.chart}  —  ${ex.task}`;
+    selectEl.appendChild(opt);
+  });
+
+  function renderCard(ex) {
+    const card = document.createElement('div');
+    card.className = 'tgb-ss-card';
     card.innerHTML = `
-      <div class="tgb-v-card-type">${ex.chart}</div>
-      <div class="tgb-v-card-imgs">
+      <div class="tgb-ss-header">
+        <span>${ex.chart}</span>
+        <span class="tgb-ss-task"> — ${ex.task}</span>
+      </div>
+      <div class="tgb-ss-imgs">
         <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" />
         <span class="tgb-arrow">→</span>
         <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" />
       </div>
-      <p class="tgb-v-card-instruction">${ex.instruction}</p>
+      <p class="tgb-ss-instruction"><strong>Instruction:</strong> ${ex.instruction}</p>
     `;
     return card;
-  });
+  }
 
-  // Two copies for seamless loop
-  [...makeCards(), ...makeCards()].forEach(c => track.appendChild(c));
+  makeSlideshow({ viewport, items: TGB_EXAMPLES, renderCard, selectEl, prevBtn, nextBtn });
 }
 
 /* ════════════════════════════════════════════════════
@@ -429,9 +469,9 @@ function initCopy() {
 /* ════════════════════════════════════════════════════
    INIT
    ════════════════════════════════════════════════════ */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   buildGallery();
-  buildTgbCarousel();
+  buildTgbSlideshow();
   buildLeaderboard();
   initHeatmapToggle();
   initCopy();
