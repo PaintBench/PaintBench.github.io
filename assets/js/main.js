@@ -111,62 +111,62 @@ const GALLERY_ORDER = [
   },
 ];
 
-/* ── Full model data ──────────────────────────────── */
+/* ── Full model data (mIoU %, averaged across all 8 visual conditions) ── */
 const MODELS = [
   {
-    name: "Nano Banana 2", abbr: "NB-2", overall: 23.5,
-    cat: { geo: 13.0, str: 26.7, col: 23.4, sym: 30.9 },
-    tasks: { translation:23.9, rotation:16.6, reflection:10.9, scaling:9.0, shearing:4.4, construction:20.0, removal:45.8, copying:14.1, border:27.4, cropping:26.3, recolor:31.2, flood_fill:37.4, blending:8.1, gradient:13.8, point_operations:26.3, comparison:39.8, ordering:21.5, pattern:15.9, counting:18.8, legend:58.8 },
+    name: "Nano Banana 2", abbr: "NB-2", overall: 16.4,
+    cat: { geo: 6.1, str: 21.1, col: 15.7, sym: 22.8 },
+    tasks: { translation:12.3, rotation:7.6, reflection:4.4, scaling:3.0, shearing:3.1, construction:15.7, removal:37.8, copying:14.0, border:18.9, cropping:19.1, recolor:23.0, flood_fill:24.8, blending:5.3, gradient:13.0, point_operations:12.3, comparison:16.1, ordering:20.0, pattern:13.4, counting:16.3, legend:48.3 },
   },
   {
-    name: "GPT Image 2", abbr: "GPT-I2", overall: 21.8,
-    cat: { geo: 17.4, str: 28.2, col: 17.3, sym: 24.2 },
-    tasks: { translation:27.2, rotation:19.1, reflection:14.7, scaling:13.8, shearing:12.4, construction:20.6, removal:53.0, copying:15.3, border:25.0, cropping:27.2, recolor:34.2, flood_fill:35.3, blending:7.8, gradient:2.2, point_operations:7.2, comparison:32.7, ordering:24.6, pattern:19.2, counting:16.8, legend:27.8 },
+    name: "GPT Image 2", abbr: "GPT-I2", overall: 16.3,
+    cat: { geo: 11.1, str: 24.3, col: 13.5, sym: 16.3 },
+    tasks: { translation:17.5, rotation:13.2, reflection:9.1, scaling:7.8, shearing:7.8, construction:14.3, removal:49.6, copying:13.9, border:15.2, cropping:28.5, recolor:27.1, flood_fill:27.1, blending:6.4, gradient:1.4, point_operations:5.4, comparison:10.7, ordering:21.0, pattern:13.7, counting:14.9, legend:21.3 },
   },
   {
-    name: "Nano Banana 1", abbr: "NB-1", overall: 13.9,
-    cat: { geo: 9.9, str: 14.8, col: 8.8, sym: 22.0 },
-    tasks: { translation:16.4, rotation:10.2, reflection:10.7, scaling:7.4, shearing:4.7, construction:6.7, removal:33.9, copying:12.2, border:8.6, cropping:12.8, recolor:8.4, flood_fill:14.5, blending:6.7, gradient:4.0, point_operations:10.6, comparison:19.8, ordering:19.8, pattern:10.8, counting:18.8, legend:40.7 },
+    name: "Nano Banana 1", abbr: "NB-1", overall: 10.8,
+    cat: { geo: 6.2, str: 12.6, col: 6.0, sym: 18.5 },
+    tasks: { translation:9.6, rotation:7.1, reflection:5.1, scaling:4.6, shearing:4.4, construction:4.8, removal:31.5, copying:12.8, border:4.6, cropping:9.5, recolor:5.7, flood_fill:11.2, blending:2.6, gradient:2.9, point_operations:7.4, comparison:14.3, ordering:18.2, pattern:8.7, counting:14.8, legend:36.7 },
   },
   {
-    name: "Qwen-Image-Edit", abbr: "Qwen-IE", overall: 7.2,
-    cat: { geo: 4.9, str: 9.9, col: 6.2, sym: 8.0 },
-    tasks: { translation:7.2, rotation:7.4, reflection:3.9, scaling:2.3, shearing:3.6, construction:4.8, removal:29.4, copying:6.8, border:0.5, cropping:7.9, recolor:6.6, flood_fill:18.2, blending:3.8, gradient:0.3, point_operations:2.3, comparison:14.2, ordering:9.7, pattern:9.1, counting:6.2, legend:0.5 },
+    name: "Qwen-Image-Edit", abbr: "Qwen-IE", overall: 6.3,
+    cat: { geo: 3.4, str: 9.0, col: 5.2, sym: 7.7 },
+    tasks: { translation:5.3, rotation:5.5, reflection:3.0, scaling:1.9, shearing:1.4, construction:5.3, removal:25.1, copying:6.0, border:0.6, cropping:7.8, recolor:5.8, flood_fill:16.3, blending:1.2, gradient:0.7, point_operations:2.2, comparison:12.9, ordering:8.0, pattern:8.0, counting:8.4, legend:1.1 },
   },
   {
-    name: "BAGEL-7B-MoT", abbr: "BAGEL", overall: 6.2,
-    cat: { geo: 4.2, str: 10.4, col: 2.1, sym: 7.9 },
-    tasks: { translation:3.5, rotation:6.6, reflection:3.9, scaling:1.9, shearing:5.3, construction:2.0, removal:29.9, copying:6.0, border:0.2, cropping:14.0, recolor:5.2, flood_fill:3.8, blending:0.3, gradient:0.5, point_operations:0.6, comparison:12.0, ordering:5.5, pattern:6.1, counting:3.9, legend:12.1 },
+    name: "BAGEL-7B-MoT", abbr: "BAGEL", overall: 4.8,
+    cat: { geo: 2.4, str: 9.6, col: 2.1, sym: 5.1 },
+    tasks: { translation:3.6, rotation:4.0, reflection:1.8, scaling:1.0, shearing:1.4, construction:1.0, removal:25.7, copying:4.9, border:0.1, cropping:16.5, recolor:6.3, flood_fill:2.3, blending:1.1, gradient:0.2, point_operations:0.7, comparison:4.2, ordering:5.1, pattern:4.4, counting:5.5, legend:6.1 },
   },
   {
-    name: "FLUX.2-dev", abbr: "FLUX.2-D", overall: 5.6,
-    cat: { geo: 6.1, str: 8.7, col: 2.9, sym: 4.9 },
-    tasks: { translation:8.5, rotation:9.0, reflection:5.8, scaling:3.0, shearing:4.3, construction:4.7, removal:20.5, copying:0.7, border:0.5, cropping:16.9, recolor:4.3, flood_fill:5.9, blending:0.8, gradient:1.8, point_operations:1.8, comparison:13.0, ordering:6.0, pattern:3.8, counting:1.3, legend:0.4 },
+    name: "FLUX.2-dev", abbr: "FLUX.2-D", overall: 4.5,
+    cat: { geo: 3.3, str: 7.9, col: 2.6, sym: 4.0 },
+    tasks: { translation:4.5, rotation:5.6, reflection:4.0, scaling:0.8, shearing:1.6, construction:3.4, removal:19.4, copying:1.4, border:0.4, cropping:14.7, recolor:4.6, flood_fill:4.9, blending:0.7, gradient:0.8, point_operations:2.1, comparison:6.2, ordering:6.2, pattern:5.4, counting:1.6, legend:0.7 },
   },
   {
-    name: "FLUX.1-Kontext", abbr: "FLUX.1-Kt", overall: 4.5,
-    cat: { geo: 4.8, str: 6.4, col: 2.7, sym: 4.1 },
-    tasks: { translation:6.1, rotation:5.5, reflection:3.7, scaling:5.1, shearing:3.6, construction:5.8, removal:14.7, copying:0.8, border:0.3, cropping:10.1, recolor:4.5, flood_fill:5.8, blending:0.8, gradient:0.9, point_operations:1.4, comparison:7.8, ordering:4.4, pattern:1.8, counting:2.4, legend:4.3 },
+    name: "FLUX.1-Kontext", abbr: "FLUX.1-Kt", overall: 3.7,
+    cat: { geo: 2.4, str: 7.3, col: 1.6, sym: 3.5 },
+    tasks: { translation:2.7, rotation:3.0, reflection:2.7, scaling:1.8, shearing:1.8, construction:5.3, removal:21.0, copying:0.8, border:0.3, cropping:9.2, recolor:2.0, flood_fill:2.6, blending:1.7, gradient:0.5, point_operations:1.1, comparison:6.0, ordering:3.9, pattern:2.3, counting:1.9, legend:3.6 },
   },
   {
-    name: "FLUX.2-Klein-9B", abbr: "FLUX.2-Kl", overall: 4.1,
-    cat: { geo: 2.2, str: 8.0, col: 1.9, sym: 4.3 },
-    tasks: { translation:4.1, rotation:3.4, reflection:1.6, scaling:0.7, shearing:1.3, construction:4.1, removal:24.2, copying:6.3, border:0.0, cropping:5.4, recolor:2.7, flood_fill:3.7, blending:0.2, gradient:1.9, point_operations:1.1, comparison:17.1, ordering:1.1, pattern:2.0, counting:1.3, legend:0.0 },
+    name: "LongCat-Edit", abbr: "LCat-IE", overall: 3.6,
+    cat: { geo: 2.2, str: 7.0, col: 1.8, sym: 3.5 },
+    tasks: { translation:3.9, rotation:2.9, reflection:2.5, scaling:0.7, shearing:1.2, construction:2.4, removal:18.5, copying:3.2, border:0.1, cropping:10.9, recolor:2.4, flood_fill:4.7, blending:0.9, gradient:0.1, point_operations:0.9, comparison:7.5, ordering:4.5, pattern:0.9, counting:2.2, legend:2.4 },
   },
   {
-    name: "LongCat-Edit", abbr: "LCat-IE", overall: 3.7,
-    cat: { geo: 2.2, str: 7.6, col: 2.1, sym: 2.9 },
-    tasks: { translation:2.8, rotation:2.5, reflection:2.5, scaling:1.7, shearing:1.5, construction:2.1, removal:19.2, copying:6.1, border:0.0, cropping:10.6, recolor:1.6, flood_fill:5.3, blending:1.8, gradient:0.2, point_operations:1.8, comparison:3.5, ordering:4.0, pattern:1.1, counting:4.6, legend:1.5 },
+    name: "FLUX.2-Klein-9B", abbr: "FLUX.2-Kl", overall: 3.4,
+    cat: { geo: 1.4, str: 6.7, col: 2.4, sym: 3.2 },
+    tasks: { translation:3.0, rotation:1.9, reflection:1.1, scaling:0.8, shearing:0.5, construction:3.1, removal:20.3, copying:4.5, border:0.1, cropping:5.4, recolor:4.1, flood_fill:3.8, blending:1.2, gradient:1.1, point_operations:1.7, comparison:8.2, ordering:1.8, pattern:3.2, counting:2.3, legend:0.5 },
   },
   {
-    name: "HunyuanImage-3", abbr: "HYI-3", overall: 0.5,
-    cat: { geo: 0.5, str: 0.9, col: 0.1, sym: 0.5 },
-    tasks: { translation:1.0, rotation:0.4, reflection:0.1, scaling:0.4, shearing:0.6, construction:0.6, removal:1.6, copying:0.1, border:0.2, cropping:1.8, recolor:0.4, flood_fill:0.2, blending:0.0, gradient:0.1, point_operations:0.2, comparison:0.7, ordering:0.3, pattern:0.1, counting:0.4, legend:0.9 },
+    name: "HunyuanImage-3", abbr: "HYI-3", overall: 0.4,
+    cat: { geo: 0.1, str: 1.0, col: 0.2, sym: 0.3 },
+    tasks: { translation:0.1, rotation:0.1, reflection:0.1, scaling:0.2, shearing:0.0, construction:0.6, removal:3.0, copying:0.1, border:0.1, cropping:1.1, recolor:0.3, flood_fill:0.3, blending:0.1, gradient:0.1, point_operations:0.3, comparison:0.4, ordering:0.2, pattern:0.4, counting:0.3, legend:0.1 },
   },
   {
-    name: "InstructPix2Pix", abbr: "IP2P", overall: 0.2,
-    cat: { geo: 0.0, str: 0.5, col: 0.2, sym: 0.2 },
-    tasks: { translation:0.1, rotation:0.0, reflection:0.0, scaling:0.0, shearing:0.0, construction:1.2, removal:0.5, copying:0.0, border:0.1, cropping:0.5, recolor:0.4, flood_fill:0.1, blending:0.0, gradient:0.1, point_operations:0.5, comparison:1.1, ordering:0.0, pattern:0.0, counting:0.0, legend:0.0 },
+    name: "InstructPix2Pix", abbr: "IP2P", overall: 0.3,
+    cat: { geo: 0.0, str: 0.9, col: 0.3, sym: 0.1 },
+    tasks: { translation:0.0, rotation:0.1, reflection:0.0, scaling:0.0, shearing:0.0, construction:1.2, removal:3.2, copying:0.0, border:0.1, cropping:0.1, recolor:0.4, flood_fill:0.2, blending:0.1, gradient:0.0, point_operations:0.6, comparison:0.5, ordering:0.1, pattern:0.0, counting:0.0, legend:0.0 },
   },
 ];
 
