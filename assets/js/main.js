@@ -240,7 +240,7 @@ function buildGallery() {
         <div class="g-img-slot">
           <img src="assets/img/ex_${t.key}_output.png" alt="${t.label} model output" />
           <span class="g-img-label">Model Output</span>
-          <span class="g-model-name">${t.model} &middot; ${t.iou.toFixed(1)}% mIoU</span>
+          <span class="g-model-name">${t.model}</span>
         </div>
       </div>
       <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>
