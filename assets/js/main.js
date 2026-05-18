@@ -125,28 +125,28 @@ const MODELS = [
   },
 ];
 
-/* ── TGB carousel data (real examples from benchmark) ── */
-const TGB_EXAMPLES = [
-  { chart:"Bar Chart",     task:"Sort Bars",     key:"bar_chart_sort_bars",
-    instruction:"Sort the bars in descending order, moving the corresponding labels." },
-  { chart:"Bar Chart",     task:"Remove Bar",    key:"bar_chart_remove_bar",
-    instruction:'Remove the bar and label for "Cep". Keep everything else in the same place.' },
-  { chart:"Scatter Plot",  task:"Swap Axes",     key:"scatter_plot_swap_axes",
-    instruction:"Swap the x and y coordinates of every point and the line of best fit. Points in the class without the line of best fit should be overlaid on top." },
-  { chart:"Scatter Plot",  task:"Recolor Class", key:"scatter_plot_recolor_class",
-    instruction:"Recolor the line of best fit and its corresponding points to #565B73." },
-  { chart:"Line Chart",    task:"Shade Interval", key:"line_chart_shade_interval",
-    instruction:'In the plot, shade the area under the series between "fAGNWv yXkzc" = −177 and "fAGNWv yXkzc" = 54.7 with the color #6E815D.' },
-  { chart:"Line Chart",    task:"Filter Series", key:"line_chart_filter_series",
-    instruction:'Only show the parts of the series where "GsZFXaxR vzvBlOe" is at most 221.' },
-  { chart:"Heatmap",       task:"Shift Heatmap", key:"heatmap_shift_heatmap",
-    instruction:"Shift the heatmap 1 cell left. Cells that fall off the edge should be discarded, and cells exposed on the opposite side should become empty." },
-  { chart:"Heatmap",       task:"Mask Cells",    key:"heatmap_mask_cells",
-    instruction:"Remove every cell with a value greater than −37.3." },
-  { chart:"Network Graph", task:"Remove Node",   key:"network_remove_node",
-    instruction:'Remove node "PESC" and its incident edges. Leave the key unchanged.' },
-  { chart:"Network Graph", task:"Recolor Node",  key:"network_recolor_node",
-    instruction:'Recolor node "PESC" to #752D01. Update the color in both the graph and the key.' },
+/* ── TGB gallery data — all 20 tasks, one real benchmark example each ── */
+const TGB_GALLERY_ORDER = [
+  { key:"bar_chart_add_bar",              chart:"Bar Chart",    task:"Add Bar",               cat:"tgb-bar",     instruction:'Add the bar for "aLid" with value 0.805 and color #E8CA94.',                                                                                                                                                                                    model:"Nano Banana 2" },
+  { key:"bar_chart_recolor_bar",          chart:"Bar Chart",    task:"Recolor Bar",            cat:"tgb-bar",     instruction:'Recolor the bar for "zjYi" to #DE9C7F.',                                                                                                                                                                                                      model:"GPT Image 2" },
+  { key:"bar_chart_remove_bar",           chart:"Bar Chart",    task:"Remove Bar",             cat:"tgb-bar",     instruction:'Remove the bar and label for "NgifvfB". Keep everything else in the same place.',                                                                                                                                                              model:"Nano Banana 1" },
+  { key:"bar_chart_sort_bars",            chart:"Bar Chart",    task:"Sort Bars",              cat:"tgb-bar",     instruction:"Sort the bars in ascending order, moving the corresponding labels.",                                                                                                                                                                           model:"Qwen-Image-Edit" },
+  { key:"heatmap_add_cell",               chart:"Heatmap",      task:"Add Cell",               cat:"tgb-heatmap", instruction:"Fill the empty cell at row 2, column 5 (1-based indexing from top left) with the color corresponding to the value -4.78e+03.",                                                                                                               model:"BAGEL-7B-MoT" },
+  { key:"heatmap_change_colormap",        chart:"Heatmap",      task:"Change Colormap",        cat:"tgb-heatmap", instruction:"Edit the heatmap and key to use a gradient with a low-value color of #DED675 and a high-value color of #59ED27.",                                                                                                                             model:"FLUX.2-dev" },
+  { key:"heatmap_mask_cells",             chart:"Heatmap",      task:"Mask Cells",             cat:"tgb-heatmap", instruction:"Remove every cell with a value greater than 0.059.",                                                                                                                                                                                          model:"FLUX.1-Kontext" },
+  { key:"heatmap_shift_heatmap",          chart:"Heatmap",      task:"Shift Heatmap",          cat:"tgb-heatmap", instruction:"Shift the heatmap 2 cells down. Cells that fall off the edge should be discarded, and cells exposed on the opposite side should become empty.",                                                                                               model:"LongCat-Edit" },
+  { key:"line_chart_draw_segments",       chart:"Line Chart",   task:"Draw Segments",          cat:"tgb-line",    instruction:"Connect the gaps with straight segments in the same width and color as existing segments.",                                                                                                                                                    model:"HunyuanImage-3" },
+  { key:"line_chart_filter_series",       chart:"Line Chart",   task:"Filter Series",          cat:"tgb-line",    instruction:'Only show the parts of the series where "otV" is at least 208.',                                                                                                                                                                              model:"InstructPix2Pix" },
+  { key:"line_chart_normalize_series",    chart:"Line Chart",   task:"Normalize Series",       cat:"tgb-line",    instruction:'Scale and shift the series vertically so its lowest point corresponds to "uqEGxQB oupdmG SWq" = -60.6 and its highest point corresponds to "uqEGxQB oupdmG SWq" = 125. Keep the axes unchanged.',                                           model:"FLUX.2-Klein-9B" },
+  { key:"line_chart_shade_interval",      chart:"Line Chart",   task:"Shade Interval",         cat:"tgb-line",    instruction:'In the plot, shade the area under the series between "LHrDxddZ Xala nAQ" = 1.82e+04 and "LHrDxddZ Xala nAQ" = 4.61e+04 with the color #5972AC.',                                                                                            model:"Nano Banana 2" },
+  { key:"network_add_node",               chart:"Network Graph",task:"Add Node",               cat:"tgb-network", instruction:'Add the node "NexDt" so that all nodes are evenly spaced on a circle. Connect it to "ONZi".',                                                                                                                                                 model:"GPT Image 2" },
+  { key:"network_recolor_node",           chart:"Network Graph",task:"Recolor Node",           cat:"tgb-network", instruction:'Recolor node "oav" to #8F7145. Update the color in both the graph and the key.',                                                                                                                                                              model:"Nano Banana 1" },
+  { key:"network_remove_node",            chart:"Network Graph",task:"Remove Node",            cat:"tgb-network", instruction:'Remove node "Qxl" and its incident edges. Leave the key unchanged.',                                                                                                                                                                          model:"Qwen-Image-Edit" },
+  { key:"network_swap_nodes",             chart:"Network Graph",task:"Swap Nodes",             cat:"tgb-network", instruction:'Swap the positions of nodes "dKMlN" and "NTpp".',                                                                                                                                                                                             model:"BAGEL-7B-MoT" },
+  { key:"scatter_plot_draw_best_fit_line",chart:"Scatter Plot", task:"Draw Best-Fit Line",     cat:"tgb-scatter", instruction:"Draw the line of best fit for the class of points without a line. Use the same color as those points and the same thickness as the existing line. Overlay the line on top of all existing elements.",                                         model:"FLUX.2-dev" },
+  { key:"scatter_plot_recolor_class",     chart:"Scatter Plot", task:"Recolor Class",          cat:"tgb-scatter", instruction:"Recolor the line of best fit and its corresponding points to #90827B.",                                                                                                                                                                       model:"FLUX.1-Kontext" },
+  { key:"scatter_plot_remove_outlier",    chart:"Scatter Plot", task:"Remove Outlier",         cat:"tgb-scatter", instruction:"In the class of points with the line of best fit, remove the point that is vertically furthest from the line. Keep the line in place.",                                                                                                       model:"LongCat-Edit" },
+  { key:"scatter_plot_swap_axes",         chart:"Scatter Plot", task:"Swap Axes",              cat:"tgb-scatter", instruction:"Swap the x and y coordinates of every point and the line of best fit. Points in the class without the line of best fit should be overlaid on top.",                                                                                           model:"HunyuanImage-3" },
 ];
 
 /* ── Heatmap task list ────────────────────────────── */
@@ -197,6 +197,7 @@ function catFullLabel(cat) {
 function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn, interval = 6000 }) {
   let idx = 0;
   let timer;
+  let frozen = false;
 
   const cards = items.map((item, i) => {
     const el = renderCard(item);
@@ -205,17 +206,22 @@ function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn
     return el;
   });
 
-  function goTo(newIdx) {
+  function goTo(newIdx, freeze) {
     if (newIdx === idx) return;
     cards[idx].classList.remove('ss-active');
     idx = newIdx;
     cards[idx].classList.add('ss-active');
     if (selectEl) selectEl.value = newIdx;
-    resetTimer();
+    if (freeze) {
+      frozen = true;
+      clearInterval(timer);
+    } else if (!frozen) {
+      resetTimer();
+    }
   }
 
-  function next() { goTo((idx + 1) % items.length); }
-  function prev() { goTo((idx - 1 + items.length) % items.length); }
+  function next()  { goTo((idx + 1) % items.length, false); }
+  function prev()  { goTo((idx - 1 + items.length) % items.length, false); }
 
   function resetTimer() {
     clearInterval(timer);
@@ -223,9 +229,9 @@ function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn
   }
   resetTimer();
 
-  if (selectEl) selectEl.addEventListener('change', () => goTo(+selectEl.value));
-  if (prevBtn)  prevBtn.addEventListener('click',  () => { prev(); });
-  if (nextBtn)  nextBtn.addEventListener('click',  () => { next(); });
+  if (selectEl) selectEl.addEventListener('change', () => goTo(+selectEl.value, true));
+  if (prevBtn)  prevBtn.addEventListener('click', () => goTo((idx - 1 + items.length) % items.length, true));
+  if (nextBtn)  nextBtn.addEventListener('click', () => goTo((idx + 1) % items.length, true));
 
   return { goTo, next, prev };
 }
@@ -290,32 +296,44 @@ function buildTgbSlideshow() {
   const nextBtn  = document.getElementById('tgb-next');
   if (!viewport) return;
 
-  TGB_EXAMPLES.forEach((ex, i) => {
+  TGB_GALLERY_ORDER.forEach((t, i) => {
     const opt = document.createElement('option');
     opt.value = i;
-    opt.textContent = `${ex.chart}  —  ${ex.task}`;
+    opt.textContent = `${t.chart}  —  ${t.task}`;
     selectEl.appendChild(opt);
   });
 
-  function renderCard(ex) {
+  function renderCard(t) {
     const card = document.createElement('div');
-    card.className = 'tgb-ss-card';
+    card.className = `g-card cat-${t.cat}`;
     card.innerHTML = `
-      <div class="tgb-ss-header">
-        <span>${ex.chart}</span>
-        <span class="tgb-ss-task"> — ${ex.task}</span>
+      <div class="g-card-header">
+        <span class="g-task-name">${t.task}</span>
+        <span class="g-cat-badge ${t.cat}">${t.chart}</span>
       </div>
-      <div class="tgb-ss-imgs">
-        <img src="assets/img/tgb_examples/${ex.key}_input.png" alt="${ex.chart} input" />
-        <span class="tgb-arrow">→</span>
-        <img src="assets/img/tgb_examples/${ex.key}_answer.png" alt="${ex.chart} answer" />
+      <div class="g-card-images">
+        <div class="g-img-slot">
+          <img src="assets/img/tgb_examples/${t.key}_input.png" alt="${t.task} input" />
+          <span class="g-img-label">Input</span>
+        </div>
+        <div class="g-arrow">→</div>
+        <div class="g-img-slot">
+          <img src="assets/img/tgb_examples/${t.key}_answer.png" alt="${t.task} answer" />
+          <span class="g-img-label">Answer</span>
+        </div>
+        <div class="g-sep">|</div>
+        <div class="g-img-slot">
+          <img src="assets/img/tgb_examples/${t.key}_output.png" alt="${t.task} model output" />
+          <span class="g-img-label">Model Output</span>
+          <span class="g-model-name">${t.model}</span>
+        </div>
       </div>
-      <p class="tgb-ss-instruction"><strong>Instruction:</strong> ${ex.instruction}</p>
+      <p class="g-instruction"><span class="g-instr-label">Instruction:</span> ${t.instruction}</p>
     `;
     return card;
   }
 
-  makeSlideshow({ viewport, items: TGB_EXAMPLES, renderCard, selectEl, prevBtn, nextBtn });
+  makeSlideshow({ viewport, items: TGB_GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn });
 }
 
 /* ════════════════════════════════════════════════════
