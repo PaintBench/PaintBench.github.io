@@ -223,7 +223,7 @@ code {
   justify-content: flex-start;
 }
 .hero-authors {
-  font-size: .84rem;
+  font-size: .94rem;
   color: var(--ink-3);
   margin-top: 14px;
   line-height: 1.7;
@@ -409,6 +409,9 @@ code {
    ════════════════════════════════════════════════════════════ */
 #leaderboard {
   padding: 48px 24px var(--section-py);
+  background: var(--bg-alt);
+}
+.leaderboard-inner {
   max-width: var(--max-w);
   margin: 0 auto;
 }
@@ -547,7 +550,6 @@ code {
    ════════════════════════════════════════════════════════════ */
 #tgb {
   padding: var(--section-py) 24px;
-  background: var(--bg-alt);
   overflow: hidden;
 }
 .tgb-container {
