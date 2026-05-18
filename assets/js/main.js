@@ -194,7 +194,7 @@ function catFullLabel(cat) {
 /* ════════════════════════════════════════════════════
    SHARED SLIDESHOW HELPER
    ════════════════════════════════════════════════════ */
-function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn, interval = 4500 }) {
+function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn, interval = 4500, step = 1 }) {
   let idx = 0;
   let timer;
   let frozen = false;
@@ -220,8 +220,8 @@ function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn
     }
   }
 
-  function next()  { goTo((idx + 1) % items.length, false); }
-  function prev()  { goTo((idx - 1 + items.length) % items.length, false); }
+  function next()  { goTo((idx + step) % items.length, false); }
+  function prev()  { goTo((idx - step + items.length) % items.length, false); }
 
   function resetTimer() {
     clearInterval(timer);
@@ -230,8 +230,8 @@ function makeSlideshow({ viewport, items, renderCard, selectEl, prevBtn, nextBtn
   resetTimer();
 
   if (selectEl) selectEl.addEventListener('change', () => goTo(+selectEl.value, true));
-  if (prevBtn)  prevBtn.addEventListener('click', () => goTo((idx - 1 + items.length) % items.length, true));
-  if (nextBtn)  nextBtn.addEventListener('click', () => goTo((idx + 1) % items.length, true));
+  if (prevBtn)  prevBtn.addEventListener('click', () => { goTo((idx - step + items.length) % items.length, true); });
+  if (nextBtn)  nextBtn.addEventListener('click', () => { goTo((idx + step) % items.length, true); });
 
   return { goTo, next, prev };
 }
@@ -283,7 +283,7 @@ function buildGallery() {
     return card;
   }
 
-  makeSlideshow({ viewport, items: GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn });
+  makeSlideshow({ viewport, items: GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn, step: 6 });
 }
 
 /* ════════════════════════════════════════════════════
@@ -333,7 +333,7 @@ function buildTgbSlideshow() {
     return card;
   }
 
-  makeSlideshow({ viewport, items: TGB_GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn });
+  makeSlideshow({ viewport, items: TGB_GALLERY_ORDER, renderCard, selectEl, prevBtn, nextBtn, step: 5 });
 }
 
 /* ════════════════════════════════════════════════════
