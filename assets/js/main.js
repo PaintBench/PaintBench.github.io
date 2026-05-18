@@ -2,113 +2,68 @@
    PaintBench — main.js
    ═══════════════════════════════════════════════════ */
 
-/* ── Gallery task data (real instructions from the benchmark) ── */
+/* ── Gallery task data — one real benchmark example per task ── */
 const GALLERY_ORDER = [
-  // Round 1 — one from each category
-  {
-    key: "translation", cat: "geo", label: "Translation",
-    instruction: "Translate the red triangle right by 14.10% of the image width. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
-    model: "FLUX.2-dev",
-  },
-  {
-    key: "construction", cat: "str", label: "Construction",
-    instruction: "Draw a filled black (#000000) polygon with vertices in order at the center of the ring, the center of the diamond, the top edge midpoint of the image, and the center of the hexagon. Place it on top of any existing shapes.",
-    model: "Qwen-Image-Edit",
-  },
-  {
-    key: "recolor", cat: "col", label: "Recolor",
-    instruction: "Recolor all cloud shapes to the color of the shape at (93.36%, 71.09%).",
-    model: "FLUX.1-Kontext",
-  },
-  {
-    key: "comparison", cat: "sym", label: "Comparison",
-    instruction: "Remove the 6th smallest gray shape.",
-    model: "BAGEL-7B-MoT",
-  },
-  // Round 2
-  {
-    key: "rotation", cat: "geo", label: "Rotation",
-    instruction: "Rotate the black rectangle by 9° clockwise about (73.31%, 43.34%). Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
-    model: "LongCat-Edit",
-  },
-  {
-    key: "removal", cat: "str", label: "Removal",
-    instruction: "Remove all shapes except the one at (53.52%, 74.22%).",
-    model: "Nano Banana 1",
-  },
-  {
-    key: "flood_fill", cat: "col", label: "Flood Fill",
-    instruction: "Recolor all background pixels inside the blue outlined polygon to black (#000000). Keep the outline as is.",
-    model: "FLUX.2-dev",
-  },
-  {
-    key: "ordering", cat: "sym", label: "Ordering",
-    instruction: "Rearrange the rectangle shapes left-to-right in increasing order of width, keeping each shape in the same position inside its box.",
-    model: "Qwen-Image-Edit",
-  },
-  // Round 3
-  {
-    key: "reflection", cat: "geo", label: "Reflection",
-    instruction: "Reflect the white hexagon across the line that passes through the center of the white hexagon and the arc midpoint of the white semicircle. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
-    model: "BAGEL-7B-MoT",
-  },
-  {
-    key: "copying", cat: "str", label: "Copying",
-    instruction: "Copy the shapes (ignoring background) in the lower outlined square into the upper outlined square, maintaining the exact shape positions.",
-    model: "FLUX.1-Kontext",
-  },
-  {
-    key: "blending", cat: "col", label: "Blending",
-    instruction: "Blend the color pink (#FFC0CB) at 38% opacity over all pixels inside the white outlined polygon. Keep the outline as is.",
-    model: "LongCat-Edit",
-  },
-  {
-    key: "pattern", cat: "sym", label: "Pattern",
-    instruction: "Fill in the missing shapes in this 3×8 pattern.",
-    model: "Nano Banana 1",
-  },
-  // Round 4
-  {
-    key: "scaling", cat: "geo", label: "Scaling",
-    instruction: "Scale the white star uniformly so its bounding box height matches the bounding box height of the blue rectangle, keeping its bottom-left bounding box corner fixed.",
-    model: "FLUX.2-dev",
-  },
-  {
-    key: "border", cat: "str", label: "Border",
-    instruction: "Color all pixels within a Euclidean distance of at most 2.5% image width from any pixel in the rectangle to white (#FFFFFF), without recoloring the shape itself.",
-    model: "Qwen-Image-Edit",
-  },
-  {
-    key: "gradient", cat: "col", label: "Gradient",
-    instruction: "Apply a linear RGB gradient from purple (#800080) at the bottom-right corner to black (#000000) at the top-left corner of the interior of the orange outlined region. Recolor only background pixels; keep non-background pixels and the outline as is.",
-    model: "BAGEL-7B-MoT",
-  },
-  {
-    key: "counting", cat: "sym", label: "Counting",
-    instruction: "The black shapes arranged in a line on the bottom of the image are used as tallies. Remove tallies from the right so the number of tallies equals the number of rectangle shapes.",
-    model: "FLUX.1-Kontext",
-  },
-  // Round 5
-  {
-    key: "shearing", cat: "geo", label: "Shearing",
-    instruction: "Shear the orange rectangle so its right bounding box edge shifts down by 58% of its bounding box height, keeping the left bounding box edge fixed. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
-    model: "LongCat-Edit",
-  },
-  {
-    key: "cropping", cat: "str", label: "Cropping",
-    instruction: "Crop to the interior of the outlined region, deskewing so that the highest corner of the region interior corresponds to the top-left corner of the cropped image. Scale to fill the canvas using nearest-neighbor interpolation.",
-    model: "Nano Banana 1",
-  },
-  {
-    key: "point_operations", cat: "col", label: "Point Operations",
-    instruction: "Convert all pixels inside the green outlined polygon to grayscale (luminance = 0.299R + 0.587G + 0.114B). Keep the outline as is.",
-    model: "FLUX.2-dev",
-  },
-  {
-    key: "legend", cat: "sym", label: "Legend",
-    instruction: "Apply the legend at the left of the image. Recolor shapes whose color points to a new color, and remove shapes whose color points to an X. Keep the legend in place.",
-    model: "Qwen-Image-Edit",
-  },
+  { key:"translation",      cat:"geo", label:"Translation",
+    instruction:"Translate the star so that its center aligns with the center of the yellow circle. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    model:"GPT Image 2", iou:54.4 },
+  { key:"construction",     cat:"str", label:"Construction",
+    instruction:"Draw a filled white (#FFFFFF) polygon with vertices in order at the center of the ring, the center of the ring, the pointy tip of the heart, the pointy tip of the heart, and the top-right corner of the image. Place it on top of any existing shapes.",
+    model:"Nano Banana 2", iou:79.2 },
+  { key:"recolor",          cat:"col", label:"Recolor",
+    instruction:"Recolor all purple shapes to orange (#FFA500).",
+    model:"GPT Image 2", iou:62.9 },
+  { key:"comparison",       cat:"sym", label:"Comparison",
+    instruction:"Remove the 2nd smallest gray shape.",
+    model:"Nano Banana 2", iou:68.3 },
+  { key:"rotation",         cat:"geo", label:"Rotation",
+    instruction:"Rotate the purple star by 180° clockwise about the arc midpoint of the black semicircle. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    model:"GPT Image 2", iou:34.7 },
+  { key:"removal",          cat:"str", label:"Removal",
+    instruction:"Remove all shapes except those that are a red ring.",
+    model:"Nano Banana 2", iou:91.1 },
+  { key:"flood_fill",       cat:"col", label:"Flood Fill",
+    instruction:"Recolor all non-background pixels inside the brown outlined polygon to yellow (#FFFF00). Keep the outline as is.",
+    model:"GPT Image 2", iou:71.8 },
+  { key:"ordering",         cat:"sym", label:"Ordering",
+    instruction:"Rearrange the yellow heart shapes top-to-bottom in decreasing order of size, keeping each shape in the same position inside its box.",
+    model:"Nano Banana 2", iou:8.6 },
+  { key:"reflection",       cat:"geo", label:"Reflection",
+    instruction:"Reflect the star across the horizontal center line of its bounding box. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    model:"GPT Image 2", iou:0.0 },
+  { key:"copying",          cat:"str", label:"Copying",
+    instruction:"Copy the shapes (ignoring background) in the right outlined square into the left outlined square, maintaining the exact shape positions.",
+    model:"Nano Banana 2", iou:55.9 },
+  { key:"blending",         cat:"col", label:"Blending",
+    instruction:"Blend the color gray (#808080) at 35% opacity over all pixels inside the white outlined polygon. Keep the outline as is.",
+    model:"GPT Image 2", iou:0.0 },
+  { key:"pattern",          cat:"sym", label:"Pattern",
+    instruction:"Fill in the missing shape in this 5×10 pattern.",
+    model:"Nano Banana 2", iou:2.3 },
+  { key:"scaling",          cat:"geo", label:"Scaling",
+    instruction:"Scale the black shape uniformly so its bounding box width matches the bounding box width of the rectangle, keeping its bounding box center fixed. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    model:"GPT Image 2", iou:0.0 },
+  { key:"border",           cat:"str", label:"Border",
+    instruction:"Color all pixels within a Euclidean distance of at most 4.0% image width from any pixel in the gray cloud to white (#FFFFFF), without recoloring the shape itself.",
+    model:"Nano Banana 2", iou:57.0 },
+  { key:"gradient",         cat:"col", label:"Gradient",
+    instruction:"Apply a linear RGB gradient from black (#000000) at the left edge to pink (#FFC0CB) at the right edge of the interior of the gray outlined region. Recolor only background pixels; keep non-background pixels and the outline as is.",
+    model:"Nano Banana 2", iou:42.3 },
+  { key:"counting",         cat:"sym", label:"Counting",
+    instruction:"The brown shapes arranged in a line on the right of the image are used as tallies. Remove tallies from the bottom so the number of tallies equals the number of yellow shapes.",
+    model:"GPT Image 2", iou:45.4 },
+  { key:"shearing",         cat:"geo", label:"Shearing",
+    instruction:"Shear the blue shape so its bottom bounding box edge shifts left by 68% of its bounding box width, keeping the top bounding box edge fixed. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    model:"GPT Image 2", iou:3.6 },
+  { key:"cropping",         cat:"str", label:"Cropping",
+    instruction:"Crop to the interior of the outlined region. Scale to fill the canvas using nearest-neighbor interpolation.",
+    model:"Nano Banana 2", iou:51.9 },
+  { key:"point_operations", cat:"col", label:"Point Operations",
+    instruction:"Invert the colors of all pixels inside the orange outlined polygon. Keep the outline as is.",
+    model:"GPT Image 2", iou:14.9 },
+  { key:"legend",           cat:"sym", label:"Legend",
+    instruction:"Apply the legend at the left of the image. Recolor shapes whose color points to a new color, and remove shapes whose color points to an X. Keep the legend in place.",
+    model:"Nano Banana 2", iou:76.3 },
 ];
 
 /* ── Full model data (mIoU %, averaged across all 8 visual conditions) ── */
@@ -283,9 +238,9 @@ function buildGallery() {
         </div>
         <div class="g-sep">|</div>
         <div class="g-img-slot">
-          <div class="g-placeholder"></div>
+          <img src="assets/img/ex_${t.key}_output.png" alt="${t.label} model output" />
           <span class="g-img-label">Model Output</span>
-          <span class="g-model-name">${t.model}</span>
+          <span class="g-model-name">${t.model} &middot; ${t.iou.toFixed(1)}% mIoU</span>
         </div>
       </div>
       <p class="g-instruction"><span class="g-instr-label">Instruction:</span>${t.instruction}</p>
