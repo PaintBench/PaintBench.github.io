@@ -441,9 +441,47 @@ function initCopy() {
   });
 }
 
+/* ── Stat count-up ───────────────────────────────────────────── */
+function initStatCountUp() {
+  const cells = document.querySelectorAll('.stat-val');
+  if (!cells.length) return;
+
+  const targets = [
+    { el: cells[0], end: 20,   decimals: 0, suffix: '' },
+    { el: cells[1], end: 1000, decimals: 0, suffix: '' },
+    { el: cells[2], end: 11,   decimals: 0, suffix: '' },
+    { el: cells[3], end: 23.5, decimals: 1, suffix: '%' },
+  ];
+
+  function countUp(stat) {
+    const duration = 900, start = performance.now();
+    const initial = stat.el.textContent;
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val = ease * stat.end;
+      stat.el.textContent = (stat.decimals === 0
+        ? Math.round(val).toLocaleString()
+        : val.toFixed(stat.decimals)) + stat.suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      targets.forEach(countUp);
+      observer.disconnect();
+    }
+  }, { threshold: 0.5 });
+
+  observer.observe(document.querySelector('.stats-bar'));
+}
+
 /* ── Boot ────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
   initNavCanvas();
+  initStatCountUp();
   initSlider();
   initTaxonomy();
   buildHeatmap();
