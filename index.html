@@ -29,7 +29,7 @@
 <!-- ── Hero ────────────────────────────────────────────────────── -->
 <section id="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">NeurIPS 2026 &nbsp;·&nbsp; Evaluations &amp; Datasets Track</div>
+    <!-- <div class="hero-eyebrow">NeurIPS 2026 &nbsp;·&nbsp; Evaluations &amp; Datasets Track</div> -->
     <h1 class="hero-title">Can models paint<br>by the numbers?</h1>
     <p class="hero-sub">
       <em>PaintBench</em> is the first pixel-level benchmark for precise,
@@ -386,31 +386,31 @@
       beyond synthetic geometric scenes.
     </p>
 
-    <div class="tgb-bar-list">
-      <div class="tgb-bar-row">
-        <span class="tgb-name">Nano Banana 2</span>
-        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:35%"></div></div>
-        <span class="tgb-val">~35%</span>
-      </div>
-      <div class="tgb-bar-row">
-        <span class="tgb-name">GPT Image Edit 2</span>
-        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:28%"></div></div>
-        <span class="tgb-val">~28%</span>
-      </div>
-      <div class="tgb-bar-row">
-        <span class="tgb-name">Nano Banana 1</span>
-        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:19%"></div></div>
-        <span class="tgb-val">~19%</span>
-      </div>
-      <div class="tgb-bar-row">
-        <span class="tgb-name">Other models</span>
-        <div class="tgb-bar-bg"><div class="tgb-bar-fill" style="width:8%; background:var(--muted)"></div></div>
-        <span class="tgb-val">&lt;10%</span>
+    <div class="fig-card" style="max-width:720px; margin-bottom:40px;">
+      <img src="assets/figures/tgf_examples.png" alt="TinyGrafixBench: 5 chart types × 4 primitive operations" />
+      <div class="fig-caption">
+        Five chart types × 4 primitive operations = 20 tasks, 600 problems total.
+        Each row: input image, instruction, ground-truth answer. Same pixel-level IoU evaluation as PaintBench.
       </div>
     </div>
-    <p style="font-size:.78rem; color:var(--muted); margin-top:16px;">
-      Full per-chart-type results in the paper.
-    </p>
+
+    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (Spearman ρ = 0.88)</p>
+    <div class="heatmap-scroll">
+      <table class="heatmap-table tgb-hm">
+        <thead>
+          <tr>
+            <th class="th-model" style="vertical-align:bottom">Model</th>
+            <th class="th-overall">Overall</th>
+            <th>Bar Chart</th>
+            <th>Scatter</th>
+            <th>Line Chart</th>
+            <th>Heatmap</th>
+            <th>Network</th>
+          </tr>
+        </thead>
+        <tbody id="tgb-hm-body"></tbody>
+      </table>
+    </div>
   </div>
 </section>
 

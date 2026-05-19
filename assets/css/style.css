@@ -384,12 +384,21 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* ── §05 TGB ─────────────────────────────────────────────────── */
-.tgb-bar-list { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
-.tgb-bar-row { display: flex; align-items: center; gap: 12px; }
-.tgb-name { font-size: .82rem; font-weight: 600; min-width: 160px; }
-.tgb-bar-bg { flex: 1; height: 8px; background: var(--bg-dim); border-radius: 99px; border: 1px solid var(--rule); }
-.tgb-bar-fill { height: 100%; border-radius: 99px; background: var(--sym); }
-.tgb-val { font-family: var(--ff-mono); font-size: .75rem; color: var(--muted); min-width: 40px; text-align: right; }
+.fig-card {
+  border: 1px solid var(--rule); border-radius: 10px;
+  overflow: hidden; background: var(--bg-dim);
+}
+.fig-card img { width: 100%; display: block; }
+.fig-caption {
+  padding: 14px 18px;
+  font-size: .78rem; color: var(--muted); line-height: 1.65;
+}
+
+.tgb-hm-label {
+  display: block;
+  font-size: .78rem; font-weight: 600; color: var(--ink-2);
+  margin-bottom: 14px;
+}
 
 /* ── Citation ────────────────────────────────────────────────── */
 .authors {

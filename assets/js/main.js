@@ -172,6 +172,60 @@ function buildHeatmap() {
   });
 }
 
+/* ── TinyGrafixBench heatmap ─────────────────────────────────── */
+const TGB_MODELS = [
+  { name:"Nano Banana 2",   overall:15.9, bar:38.9, scatter:4.2,  line:11.5, heatmap:20.2, network:4.8  },
+  { name:"GPT Image Edit 2",overall:15.6, bar:34.8, scatter:6.8,  line:16.0, heatmap:15.5, network:4.8  },
+  { name:"Nano Banana 1",   overall:5.3,  bar:11.5, scatter:3.7,  line:4.7,  heatmap:4.0,  network:2.7  },
+  { name:"Qwen-Image-Edit", overall:3.4,  bar:4.8,  scatter:1.3,  line:4.4,  heatmap:4.9,  network:1.6  },
+  { name:"FLUX.2-Klein-9B", overall:3.4,  bar:2.9,  scatter:2.1,  line:4.9,  heatmap:4.8,  network:2.4  },
+  { name:"LongCat-Edit",    overall:3.2,  bar:2.9,  scatter:1.0,  line:3.2,  heatmap:7.9,  network:0.8  },
+  { name:"FLUX.2-dev",      overall:3.1,  bar:2.3,  scatter:4.2,  line:3.8,  heatmap:3.2,  network:1.9  },
+  { name:"FLUX.1-Kontext",  overall:3.1,  bar:1.3,  scatter:4.3,  line:4.5,  heatmap:3.5,  network:1.9  },
+  { name:"BAGEL-7B-MoT",    overall:2.7,  bar:2.7,  scatter:2.1,  line:4.9,  heatmap:2.0,  network:1.8  },
+  { name:"HunyuanImage-3",  overall:0.3,  bar:0.2,  scatter:0.1,  line:0.0,  heatmap:0.9,  network:0.1  },
+  { name:"InstructPix2Pix", overall:0.2,  bar:0.1,  scatter:0.3,  line:0.1,  heatmap:0.0,  network:0.1  },
+];
+
+const TGB_COLS = [
+  { key:"bar",     label:"Bar Chart"   },
+  { key:"scatter", label:"Scatter"     },
+  { key:"line",    label:"Line Chart"  },
+  { key:"heatmap", label:"Heatmap"     },
+  { key:"network", label:"Network"     },
+];
+
+function buildTgbHeatmap() {
+  const tbody = document.getElementById("tgb-hm-body");
+  if (!tbody) return;
+
+  TGB_MODELS.forEach(m => {
+    const tr = document.createElement("tr");
+
+    const tdName = document.createElement("td");
+    tdName.className = "td-model";
+    tdName.textContent = m.name;
+    tr.appendChild(tdName);
+
+    const tdOverall = document.createElement("td");
+    tdOverall.className = "td-overall";
+    tdOverall.textContent = m.overall.toFixed(1);
+    tr.appendChild(tdOverall);
+
+    TGB_COLS.forEach(col => {
+      const v = m[col.key];
+      const td = document.createElement("td");
+      td.style.background = scoreToColor(v, "sym");
+      td.style.color = textColor(v);
+      td.innerHTML = `<span class="hm-score">${v.toFixed(1)}</span>`;
+      td.title = `${m.name} — ${col.label}: ${v.toFixed(1)}`;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+}
+
 /* ── Copy citation ───────────────────────────────────────────── */
 function initCopy() {
   const btn = document.getElementById("copy-btn");
@@ -191,5 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSlider();
   initTaxonomy();
   buildHeatmap();
+  buildTgbHeatmap();
   initCopy();
 });
