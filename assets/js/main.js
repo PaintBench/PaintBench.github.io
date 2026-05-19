@@ -327,6 +327,52 @@ function buildHeatmap() {
   });
 }
 
+/* ── TGB carousel ────────────────────────────────────────────── */
+const TGB_TASKS = [
+  { key:"bar_chart_add_bar",               chart:"Bar Chart",   task:"Add Bar",            cat:"tgb-bar",     instruction:'Add the bar for "aLid" with value 0.805 and color #E8CA94.' },
+  { key:"bar_chart_recolor_bar",           chart:"Bar Chart",   task:"Recolor Bar",         cat:"tgb-bar",     instruction:'Recolor the bar for "zjYi" to #DE9C7F.' },
+  { key:"bar_chart_remove_bar",            chart:"Bar Chart",   task:"Remove Bar",          cat:"tgb-bar",     instruction:'Remove the bar and label for "NgifvfB". Keep everything else in the same place.' },
+  { key:"bar_chart_sort_bars",             chart:"Bar Chart",   task:"Sort Bars",           cat:"tgb-bar",     instruction:"Sort the bars in ascending order, moving the corresponding labels." },
+  { key:"scatter_plot_draw_best_fit_line", chart:"Scatter Plot",task:"Draw Best-Fit Line",  cat:"tgb-scatter", instruction:"Draw the line of best fit for the class of points without a line. Use the same color as those points and the same thickness as the existing line." },
+  { key:"scatter_plot_recolor_class",      chart:"Scatter Plot",task:"Recolor Class",       cat:"tgb-scatter", instruction:"Recolor the line of best fit and its corresponding points to #90827B." },
+  { key:"scatter_plot_remove_outlier",     chart:"Scatter Plot",task:"Remove Outlier",      cat:"tgb-scatter", instruction:"In the class of points with the line of best fit, remove the point that is vertically furthest from the line. Keep the line in place." },
+  { key:"scatter_plot_swap_axes",          chart:"Scatter Plot",task:"Swap Axes",           cat:"tgb-scatter", instruction:"Swap the x and y coordinates of every point and the line of best fit." },
+  { key:"line_chart_draw_segments",        chart:"Line Chart",  task:"Draw Segments",       cat:"tgb-line",    instruction:"Connect the gaps with straight segments in the same width and color as existing segments." },
+  { key:"line_chart_filter_series",        chart:"Line Chart",  task:"Filter Series",       cat:"tgb-line",    instruction:'Only show the parts of the series where "otV" is at least 208.' },
+  { key:"line_chart_normalize_series",     chart:"Line Chart",  task:"Normalize Series",    cat:"tgb-line",    instruction:'Scale and shift the series vertically so its lowest point corresponds to −60.6 and its highest point corresponds to 125. Keep the axes unchanged.' },
+  { key:"line_chart_shade_interval",       chart:"Line Chart",  task:"Shade Interval",      cat:"tgb-line",    instruction:'Shade the area under the series between x = 1.82e+04 and x = 4.61e+04 with the color #5972AC.' },
+  { key:"heatmap_add_cell",                chart:"Heatmap",     task:"Add Cell",            cat:"tgb-heatmap", instruction:"Fill the empty cell at row 2, column 5 (1-based, top-left) with the color corresponding to value −4.78e+03." },
+  { key:"heatmap_change_colormap",         chart:"Heatmap",     task:"Change Colormap",     cat:"tgb-heatmap", instruction:"Edit the heatmap and key to use a gradient with a low-value color of #DED675 and a high-value color of #59ED27." },
+  { key:"heatmap_mask_cells",              chart:"Heatmap",     task:"Mask Cells",          cat:"tgb-heatmap", instruction:"Remove every cell with a value greater than 0.059." },
+  { key:"heatmap_shift_heatmap",           chart:"Heatmap",     task:"Shift Heatmap",       cat:"tgb-heatmap", instruction:"Shift the heatmap 2 cells down. Cells that fall off the edge are discarded; exposed cells become empty." },
+  { key:"network_add_node",                chart:"Network",     task:"Add Node",            cat:"tgb-network", instruction:'Add the node "NexDt" so that all nodes are evenly spaced on a circle. Connect it to "ONZi".' },
+  { key:"network_recolor_node",            chart:"Network",     task:"Recolor Node",        cat:"tgb-network", instruction:'Recolor node "oav" to #8F7145. Update the color in both the graph and the key.' },
+  { key:"network_remove_node",             chart:"Network",     task:"Remove Node",         cat:"tgb-network", instruction:'Remove node "Qxl" and its incident edges. Leave the key unchanged.' },
+  { key:"network_swap_nodes",              chart:"Network",     task:"Swap Nodes",          cat:"tgb-network", instruction:'Swap the positions of nodes "dKMlN" and "NTpp".' },
+];
+
+function buildTgbCarousel() {
+  const track = document.getElementById('tgb-marquee-track');
+  if (!track) return;
+
+  const makeCard = t => {
+    const div = document.createElement('div');
+    div.className = 'tgb-v-card';
+    div.innerHTML = `
+      <div class="tgb-v-card-type">${t.chart} &nbsp;·&nbsp; ${t.task}</div>
+      <div class="tgb-v-card-imgs">
+        <img src="assets/img/tgb_examples/${t.key}_input.png"  alt="Input"        loading="lazy" />
+        <div class="tgb-v-arrow">→</div>
+        <img src="assets/img/tgb_examples/${t.key}_answer.png" alt="Ground truth" loading="lazy" />
+      </div>
+      <p class="tgb-v-card-instruction">${t.instruction}</p>`;
+    return div;
+  };
+
+  // Two copies for seamless infinite loop
+  [...TGB_TASKS, ...TGB_TASKS].forEach(t => track.appendChild(makeCard(t)));
+}
+
 /* ── TinyGrafixBench heatmap ─────────────────────────────────── */
 const TGB_MODELS = [
   { name:"Nano Banana 2",   overall:15.9, bar:38.9, scatter:4.2,  line:11.5, heatmap:20.2, network:4.8  },
@@ -401,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSlider();
   initTaxonomy();
   buildHeatmap();
+  buildTgbCarousel();
   buildTgbHeatmap();
   initCopy();
 });

@@ -387,12 +387,11 @@
       beyond synthetic geometric scenes.
     </p>
 
-    <div class="fig-card" style="max-width:720px; margin-bottom:40px;">
-      <img src="assets/figures/tgf_examples.png" alt="TinyGrafixBench: 5 chart types × 4 primitive operations" />
-      <div class="fig-caption">
-        Five chart types × 4 primitive operations = 20 tasks, 600 problems total.
-        Each row: input image, instruction, ground-truth answer. Same pixel-level IoU evaluation as PaintBench.
-      </div>
+    <!-- TGB auto-scroll marquee -->
+    <div class="tgb-marquee-wrap">
+      <div class="tgb-marquee-fade-top"></div>
+      <div class="tgb-marquee-track" id="tgb-marquee-track"></div>
+      <div class="tgb-marquee-fade-bot"></div>
     </div>
 
     <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (Spearman ρ = 0.88)</p>
@@ -428,12 +427,11 @@
     <div class="sec-num">Citation</div>
     <div class="cite-block">
       <button class="copy-btn" id="copy-btn">Copy</button>
-<pre id="cite-text">@inproceedings{paintbench2026,
+<pre id="cite-text">@article{paintbench2026,
   title     = {Deterministic Evaluation of Precise Visual Editing},
   author    = {Xu, Kai and Brown, Ellis and Madhu, Shrikar and
                Fergus, Rob and He, He and Xie, Saining},
-  booktitle = {Advances in Neural Information Processing Systems
-               (Evaluations and Datasets Track)},
+  journal   = {arXiv preprint},
   year      = {2026}
 }</pre>
     </div>

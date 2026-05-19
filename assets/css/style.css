@@ -391,14 +391,54 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* ── §05 TGB ─────────────────────────────────────────────────── */
-.fig-card {
-  border: 1px solid var(--rule); border-radius: 10px;
-  overflow: hidden; background: var(--bg-dim);
+/* TGB auto-scroll marquee */
+@keyframes marquee-h {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-.fig-card img { width: 100%; display: block; }
-.fig-caption {
-  padding: 14px 18px;
-  font-size: .78rem; color: var(--muted); line-height: 1.65;
+.tgb-marquee-wrap {
+  position: relative;
+  overflow: hidden; margin-bottom: 40px;
+  border: 1px solid var(--rule); border-radius: 10px;
+}
+.tgb-marquee-track {
+  display: flex; flex-direction: row; gap: 12px;
+  padding: 12px; width: max-content;
+  animation: marquee-h 60s linear infinite;
+}
+.tgb-marquee-track:hover { animation-play-state: paused; }
+.tgb-marquee-fade-top,
+.tgb-marquee-fade-bot {
+  position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+  pointer-events: none;
+}
+.tgb-marquee-fade-top { left:  0; background: linear-gradient(to right, var(--bg), transparent); }
+.tgb-marquee-fade-bot { right: 0; background: linear-gradient(to left,  var(--bg), transparent); }
+
+/* TGB marquee card */
+.tgb-v-card {
+  background: var(--bg); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 18px 20px;
+  flex-shrink: 0; width: 520px;
+}
+.tgb-v-card-type {
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+}
+.tgb-v-card-imgs {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 12px; align-items: center; margin-bottom: 12px;
+}
+.tgb-v-card-imgs img {
+  width: 100%; border-radius: 6px;
+  border: 1px solid var(--rule); background: #fff;
+}
+.tgb-v-arrow { font-size: 1.1rem; color: var(--muted); text-align: center; }
+.tgb-v-card-instruction {
+  font-size: .8rem; color: var(--ink-2); line-height: 1.55;
+  font-style: italic;
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
 }
 
 .tgb-hm-label {
