@@ -1,3 +1,158 @@
+/* ── Nav canvas ──────────────────────────────────────────────── */
+function initNavCanvas() {
+  const canvas = document.getElementById('nav-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const nav = canvas.closest('nav');
+  let mouse = { x: -9999, y: -9999 };
+
+  const SP = 28;          // grid spacing
+  const REPEL_R = 68, REPEL_F = 0.5;
+  const BLUE = 'rgba(43,94,167,';
+  let dots = [], geom = [];
+
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+
+  function buildScene() {
+    const W = canvas.width, H = canvas.height;
+    dots = []; geom = [];
+
+    /* dot grid — minimal jitter so it reads as intentional */
+    const cols = Math.ceil(W / SP) + 2;
+    const rows = Math.ceil(H / SP) + 1;
+    const offY = (H - (rows - 1) * SP) / 2;
+    for (let c = 0; c < cols; c++) {
+      for (let r = 0; r < rows; r++) {
+        const ox = c * SP + rnd(-2, 2), oy = offY + r * SP + rnd(-2, 2);
+        dots.push({ x: ox, y: oy, ox, oy, vx: 0, vy: 0 });
+      }
+    }
+
+    /* 3 partial arcs — spaced across width, radius fits within nav */
+    [0.18, 0.52, 0.82].forEach(xf => {
+      const r = rnd(10, H * 0.42);
+      geom.push({
+        kind: 'arc',
+        cx: W * xf + rnd(-24, 24), cy: rnd(r + 2, H - r - 2),
+        r,
+        a0: rnd(0, Math.PI * 2),
+        sweep: rnd(0.55, 1.15) * Math.PI,
+        rot: (Math.random() < 0.5 ? 1 : -1) * rnd(0.0005, 0.0009),
+        t: 0,
+      });
+    });
+
+    /* 4 measurement lines — nearly horizontal, short, with tick caps */
+    for (let i = 0; i < 4; i++) {
+      const x1 = rnd(W * 0.05, W * 0.75);
+      const y1 = rnd(H * 0.2, H * 0.8);
+      const len = rnd(55, 110), angle = rnd(-0.12, 0.12);
+      const x2 = x1 + Math.cos(angle) * len;
+      const y2 = Math.min(H - 5, Math.max(5, y1 + Math.sin(angle) * len));
+      geom.push({ kind: 'line', x1, y1, x2, y2 });
+    }
+  }
+
+  function resize() {
+    canvas.width = nav.offsetWidth;
+    canvas.height = nav.offsetHeight;
+    buildScene();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  nav.addEventListener('mousemove', e => {
+    const rc = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rc.left; mouse.y = e.clientY - rc.top;
+  });
+  nav.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    /* physics */
+    dots.forEach(d => {
+      const mx = d.x - mouse.x, my = d.y - mouse.y;
+      const md = Math.sqrt(mx * mx + my * my);
+      if (md < REPEL_R && md > 0) {
+        const f = (1 - md / REPEL_R) * REPEL_F;
+        d.vx += (mx / md) * f; d.vy += (my / md) * f;
+      }
+      d.vx += (d.ox - d.x) * 0.06; d.vy += (d.oy - d.y) * 0.06;
+      d.vx *= 0.78; d.vy *= 0.78;
+      d.x += d.vx; d.y += d.vy;
+    });
+
+    /* connections — only direct neighbors */
+    ctx.lineWidth = 0.65;
+    ctx.setLineDash([2, 5]);
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+        if (Math.abs(dx) > SP * 1.4 || Math.abs(dy) > SP * 1.4) continue;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < SP * 1.4) {
+          ctx.strokeStyle = `rgba(20,20,20,${(1 - dist / (SP * 1.4)) * 0.2})`;
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* arcs */
+    geom.filter(g => g.kind === 'arc').forEach(g => {
+      g.t += g.rot;
+      ctx.strokeStyle = BLUE + '0.42)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 5]);
+      ctx.beginPath();
+      ctx.arc(g.cx, g.cy, g.r, g.a0 + g.t, g.a0 + g.t + g.sweep);
+      ctx.stroke();
+    });
+
+    /* measurement lines */
+    geom.filter(g => g.kind === 'line').forEach(g => {
+      ctx.strokeStyle = BLUE + '0.36)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(g.x1, g.y1); ctx.lineTo(g.x2, g.y2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.strokeStyle = BLUE + '0.5)';
+      const ang = Math.atan2(g.y2 - g.y1, g.x2 - g.x1) + Math.PI / 2;
+      [[g.x1, g.y1], [g.x2, g.y2]].forEach(([px, py]) => {
+        ctx.beginPath();
+        ctx.moveTo(px + Math.cos(ang) * 4, py + Math.sin(ang) * 4);
+        ctx.lineTo(px - Math.cos(ang) * 4, py - Math.sin(ang) * 4);
+        ctx.stroke();
+      });
+    });
+
+    ctx.setLineDash([]);
+
+    /* dots */
+    dots.forEach(d => {
+      ctx.fillStyle = 'rgba(20,20,20,0.36)';
+      ctx.beginPath(); ctx.arc(d.x, d.y, 1.5, 0, Math.PI * 2); ctx.fill();
+    });
+
+    /* ruler ticks */
+    ctx.lineWidth = 1;
+    for (let x = 0; x < canvas.width; x += 8) {
+      const h = x % 40 === 0 ? 6 : x % 20 === 0 ? 3.5 : 1.5;
+      ctx.strokeStyle = x % 40 === 0 ? 'rgba(20,20,20,0.28)' : 'rgba(20,20,20,0.16)';
+      ctx.beginPath();
+      ctx.moveTo(x + 0.5, canvas.height - h); ctx.lineTo(x + 0.5, canvas.height);
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
 /* ── ΔE Slider ───────────────────────────────────────────────── */
 const EVAL_DATA = {
   instruction: "Translate the circle right by 13.35% of the image width. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
@@ -242,6 +397,7 @@ function initCopy() {
 
 /* ── Boot ────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
+  initNavCanvas();
   initSlider();
   initTaxonomy();
   buildHeatmap();
