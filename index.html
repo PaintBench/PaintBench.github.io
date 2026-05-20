@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PaintBench — Deterministic Evaluation of Precise Visual Editing</title>
-  <meta name="description" content="PaintBench: a pixel-level benchmark for evaluating precise, deterministic visual editing across 20 tasks and 1,000 problems. The best model today scores 23.5%." />
+  <meta name="description" content="PaintBench: a pixel-level benchmark for evaluating precise, deterministic visual editing across 20 tasks and 1,920 problems. The best model today scores 16.4%." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -35,8 +35,8 @@
     <h1 class="hero-title">Can models paint<br>by the numbers?</h1>
     <p class="hero-sub">
       <em>PaintBench</em> is the first pixel-level benchmark for precise,
-      deterministic visual editing — 20 primitive tasks, 1,000 problems,
-      zero model judges. The best model today scores&nbsp;<em>23.5%</em>.
+      deterministic visual editing — 20 primitive tasks, 1,920 problems,
+      zero model judges. The best model today scores&nbsp;<em>16.4%</em>.
     </p>
     <div class="btn-row">
       <a href="#" class="btn btn-dark">📄 Paper <span style="opacity:.5;font-weight:400">(arXiv soon)</span></a>
@@ -59,7 +59,7 @@
         <div class="stat-label">Primitive editing tasks</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-val" style="color:var(--str)">1,000</div>
+        <div class="stat-val" style="color:var(--str)">1,920</div>
         <div class="stat-label">Benchmark problems</div>
       </div>
       <div class="stat-cell">
@@ -67,7 +67,7 @@
         <div class="stat-label">Pixel tolerance levels</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-val" style="color:var(--sym)">23.5%</div>
+        <div class="stat-val" style="color:var(--sym)">16.4%</div>
         <div class="stat-label">Best model mIoU</div>
       </div>
     </div>
@@ -148,7 +148,7 @@
     <p class="sec-body">
       Tasks span a gradient from simple color operations to precise geometric transformations
       requiring exact spatial reasoning. Each task is fully parameterized by a random seed —
-      50 distinct problems per task, 1,000 total. No web-scraped data, no ambiguous outputs.
+      1,920 problems total (20 tasks × 8 visual conditions × 12 problems each). No web-scraped data, no ambiguous outputs.
     </p>
 
     <div class="taxonomy-layout">
@@ -243,7 +243,7 @@
       <h2 class="sec-title">The benchmark<br>is far from solved.</h2>
       <p class="sec-body">
         mIoU scores (%) across 11 ΔE tolerance levels.
-        The top model scores <strong>23.5% overall</strong>.
+        The top model scores <strong>16.4% overall</strong>.
         Geometric and structural tasks expose a hard capability gap —
         models fail not because they misunderstand the instruction,
         but because their spatial rendering engine can't execute it precisely.
@@ -395,7 +395,7 @@
       <div class="tgb-marquee-fade-bot"></div>
     </div>
 
-    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (Spearman ρ = 0.88)</p>
+    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (Spearman r<sub>s</sub> = 0.77, p = 0.005)</p>
     <div class="heatmap-scroll">
       <table class="heatmap-table tgb-hm">
         <thead>
@@ -419,13 +419,15 @@
 <section id="models">
   <div class="wrap">
     <div class="sec-num">06 / Model Explorer</div>
-    <h2 class="sec-title">Every model.<br>Where it shines.</h2>
+    <h2 class="sec-title">Same rank.<br>Different skills.</h2>
     <p class="sec-body">
-      All 11 models ranked by overall mIoU. Each card breaks down performance
-      across the four task categories — color-coded to show where a model
-      has a relative edge.
+      Horizontal position = geometric &amp; structural avg. mIoU.
+      Vertical position = color &amp; symbolic avg. mIoU.
+      Bubble size scales with overall score.
+      The two top models occupy opposite quadrants — NB-2 leads on color and symbolic tasks,
+      GPT-I2 leads on geometric and structural ones.
     </p>
-    <div class="model-grid" id="model-grid"></div>
+    <svg id="model-scatter"></svg>
   </div>
 </section>
 

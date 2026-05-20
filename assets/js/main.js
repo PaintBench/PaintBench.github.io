@@ -275,17 +275,17 @@ const TASK_ORDER = [
 ];
 
 const MODELS_HM = [
-  { name:"Nano Banana 2", scores:{ translation:23.9,rotation:16.6,reflection:10.9,scaling:9.0,shearing:4.4,construction:20.0,removal:45.8,copying:14.1,border:27.4,cropping:26.3,recolor:31.2,flood_fill:37.4,blending:8.1,gradient:13.8,point_operations:26.3,comparison:39.8,ordering:21.5,pattern:15.9,counting:18.8,legend:58.8 }, overall:23.5 },
-  { name:"GPT Image Edit 2", scores:{ translation:27.2,rotation:19.1,reflection:14.7,scaling:13.8,shearing:12.4,construction:20.6,removal:53.0,copying:15.3,border:25.0,cropping:27.2,recolor:34.2,flood_fill:35.3,blending:7.8,gradient:2.2,point_operations:7.2,comparison:32.7,ordering:24.6,pattern:19.2,counting:16.8,legend:27.8 }, overall:21.8 },
-  { name:"Nano Banana 1", scores:{ translation:16.4,rotation:10.2,reflection:10.7,scaling:7.4,shearing:4.7,construction:6.7,removal:33.9,copying:12.2,border:8.6,cropping:12.8,recolor:8.4,flood_fill:14.5,blending:6.7,gradient:4.0,point_operations:10.6,comparison:19.8,ordering:19.8,pattern:10.8,counting:18.8,legend:40.7 }, overall:13.9 },
-  { name:"Qwen-Image-Edit", scores:{ translation:7.2,rotation:7.4,reflection:3.9,scaling:2.3,shearing:3.6,construction:4.8,removal:29.4,copying:6.8,border:0.5,cropping:7.9,recolor:6.6,flood_fill:18.2,blending:3.8,gradient:0.3,point_operations:2.3,comparison:14.2,ordering:9.7,pattern:9.1,counting:6.2,legend:0.5 }, overall:7.2 },
-  { name:"BAGEL-7B-MoT", scores:{ translation:3.5,rotation:6.6,reflection:3.9,scaling:1.9,shearing:5.3,construction:2.0,removal:29.9,copying:6.0,border:0.2,cropping:14.0,recolor:5.2,flood_fill:3.8,blending:0.3,gradient:0.5,point_operations:0.6,comparison:12.0,ordering:5.5,pattern:6.1,counting:3.9,legend:12.1 }, overall:6.2 },
-  { name:"FLUX.2-dev", scores:{ translation:8.5,rotation:9.0,reflection:5.8,scaling:3.0,shearing:4.3,construction:4.7,removal:20.5,copying:0.7,border:0.5,cropping:16.9,recolor:4.3,flood_fill:5.9,blending:0.8,gradient:1.8,point_operations:1.8,comparison:13.0,ordering:6.0,pattern:3.8,counting:1.3,legend:0.4 }, overall:5.6 },
-  { name:"FLUX.1-Kontext", scores:{ translation:6.1,rotation:5.5,reflection:3.7,scaling:5.1,shearing:3.6,construction:5.8,removal:14.7,copying:0.8,border:0.3,cropping:10.1,recolor:4.5,flood_fill:5.8,blending:0.8,gradient:0.9,point_operations:1.4,comparison:7.8,ordering:4.4,pattern:1.8,counting:2.4,legend:4.3 }, overall:4.5 },
-  { name:"FLUX.2-Klein-9B", scores:{ translation:4.1,rotation:3.4,reflection:1.6,scaling:0.7,shearing:1.3,construction:4.1,removal:24.2,copying:6.3,border:0.0,cropping:5.4,recolor:2.7,flood_fill:3.7,blending:0.2,gradient:1.9,point_operations:1.1,comparison:17.1,ordering:1.1,pattern:2.0,counting:1.3,legend:0.0 }, overall:4.1 },
-  { name:"LongCat-Edit", scores:{ translation:2.8,rotation:2.5,reflection:2.5,scaling:1.7,shearing:1.5,construction:2.1,removal:19.2,copying:6.1,border:0.0,cropping:10.6,recolor:1.6,flood_fill:5.3,blending:1.8,gradient:0.2,point_operations:1.8,comparison:3.5,ordering:4.0,pattern:1.1,counting:4.6,legend:1.5 }, overall:3.7 },
-  { name:"HunyuanImage-3", scores:{ translation:1.0,rotation:0.4,reflection:0.1,scaling:0.4,shearing:0.6,construction:0.6,removal:1.6,copying:0.1,border:0.2,cropping:1.8,recolor:0.4,flood_fill:0.2,blending:0.0,gradient:0.1,point_operations:0.2,comparison:0.7,ordering:0.3,pattern:0.1,counting:0.4,legend:0.9 }, overall:0.5 },
-  { name:"InstructPix2Pix", scores:{ translation:0.1,rotation:0.0,reflection:0.0,scaling:0.0,shearing:0.0,construction:1.2,removal:0.5,copying:0.0,border:0.1,cropping:0.5,recolor:0.4,flood_fill:0.1,blending:0.0,gradient:0.1,point_operations:0.5,comparison:1.1,ordering:0.0,pattern:0.0,counting:0.0,legend:0.0 }, overall:0.2 },
+  { name:"Nano Banana 2",   scores:{ translation:12.3,rotation:7.6, reflection:4.4,scaling:3.0,shearing:3.1,construction:15.7,removal:37.8,copying:14.0,border:18.9,cropping:19.1,recolor:23.0,flood_fill:24.8,blending:5.3, gradient:13.0,point_operations:12.3,comparison:16.1,ordering:20.0,pattern:13.4,counting:16.3,legend:48.3 }, overall:16.4 },
+  { name:"GPT Image Edit 2",scores:{ translation:17.5,rotation:13.2,reflection:9.1,scaling:7.8,shearing:7.8,construction:14.3,removal:49.6,copying:13.9,border:15.2,cropping:28.5,recolor:27.1,flood_fill:27.1,blending:6.4, gradient:1.4, point_operations:5.4, comparison:10.7,ordering:21.0,pattern:13.7,counting:14.9,legend:21.3 }, overall:16.3 },
+  { name:"Nano Banana 1",   scores:{ translation:9.6, rotation:7.1, reflection:5.1,scaling:4.6,shearing:4.4,construction:4.8, removal:31.5,copying:12.8,border:4.6, cropping:9.5, recolor:5.7, flood_fill:11.2,blending:2.6, gradient:2.9, point_operations:7.4, comparison:14.3,ordering:18.2,pattern:8.7, counting:14.8,legend:36.7 }, overall:10.8 },
+  { name:"Qwen-Image-Edit", scores:{ translation:5.3, rotation:5.5, reflection:3.0,scaling:1.9,shearing:1.4,construction:5.3, removal:25.1,copying:6.0, border:0.6, cropping:7.8, recolor:5.8, flood_fill:16.3,blending:1.2, gradient:0.7, point_operations:2.2, comparison:12.9,ordering:8.0, pattern:8.0, counting:8.4, legend:1.1  }, overall:6.3  },
+  { name:"BAGEL-7B-MoT",   scores:{ translation:3.6, rotation:4.0, reflection:1.8,scaling:1.0,shearing:1.4,construction:1.0, removal:25.7,copying:4.9, border:0.1, cropping:16.5,recolor:6.3, flood_fill:2.3, blending:1.1, gradient:0.2, point_operations:0.7, comparison:4.2, ordering:5.1, pattern:4.4, counting:5.5, legend:6.1  }, overall:4.8  },
+  { name:"FLUX.2-dev",     scores:{ translation:4.5, rotation:5.6, reflection:4.0,scaling:0.8,shearing:1.6,construction:3.4, removal:19.4,copying:1.4, border:0.4, cropping:14.7,recolor:4.6, flood_fill:4.9, blending:0.7, gradient:0.8, point_operations:2.1, comparison:6.2, ordering:6.2, pattern:5.4, counting:1.6, legend:0.7  }, overall:4.5  },
+  { name:"FLUX.1-Kontext",  scores:{ translation:2.7, rotation:3.0, reflection:2.5,scaling:1.8,shearing:1.6,construction:5.3, removal:21.0,copying:0.8, border:0.3, cropping:9.2, recolor:2.0, flood_fill:2.6, blending:1.7, gradient:0.5, point_operations:1.1, comparison:6.0, ordering:3.9, pattern:2.3, counting:1.9, legend:3.6  }, overall:3.7  },
+  { name:"LongCat-Edit",   scores:{ translation:3.9, rotation:2.9, reflection:2.5,scaling:0.7,shearing:1.2,construction:2.4, removal:18.5,copying:3.2, border:0.1, cropping:10.9,recolor:2.4, flood_fill:4.7, blending:0.9, gradient:0.1, point_operations:0.9, comparison:7.5, ordering:4.5, pattern:0.9, counting:2.2, legend:2.4  }, overall:3.6  },
+  { name:"FLUX.2-Klein-9B",scores:{ translation:3.0, rotation:1.9, reflection:1.1,scaling:0.8,shearing:0.5,construction:3.1, removal:20.3,copying:4.5, border:0.1, cropping:5.4, recolor:4.1, flood_fill:3.8, blending:1.2, gradient:1.1, point_operations:1.7, comparison:8.2, ordering:1.8, pattern:3.2, counting:2.3, legend:0.5  }, overall:3.4  },
+  { name:"HunyuanImage-3", scores:{ translation:0.1, rotation:0.1, reflection:0.0,scaling:0.2,shearing:0.0,construction:0.6, removal:3.0, copying:0.1, border:0.1, cropping:1.1, recolor:0.3, flood_fill:0.3, blending:0.1, gradient:0.1, point_operations:0.3, comparison:0.4, ordering:0.2, pattern:0.4, counting:0.3, legend:0.1  }, overall:0.4  },
+  { name:"InstructPix2Pix",scores:{ translation:0.0, rotation:0.1, reflection:0.0,scaling:0.0,shearing:0.0,construction:1.2, removal:3.2, copying:0.0, border:0.1, cropping:0.1, recolor:0.4, flood_fill:0.2, blending:0.1, gradient:0.0, point_operations:0.6, comparison:0.5, ordering:0.1, pattern:0.0, counting:0.0, legend:0.0  }, overall:0.3  },
 ];
 
 const HUE = { geo:218, str:16, col:148, sym:278 };
@@ -452,9 +452,9 @@ function initStatCountUp() {
 
   const targets = [
     { el: cells[0], end: 20,   decimals: 0, suffix: '' },
-    { el: cells[1], end: 1000, decimals: 0, suffix: '' },
+    { el: cells[1], end: 1920, decimals: 0, suffix: '' },
     { el: cells[2], end: 11,   decimals: 0, suffix: '' },
-    { el: cells[3], end: 23.5, decimals: 1, suffix: '%' },
+    { el: cells[3], end: 16.4, decimals: 1, suffix: '%' },
   ];
 
   function countUp(stat) {
@@ -500,61 +500,113 @@ const TASK_LABELS = {
   counting:'Counting', legend:'Legend',
 };
 
+const MODEL_ABBR = {
+  'Nano Banana 2':   'NB-2',    'GPT Image Edit 2': 'GPT-I2',
+  'Nano Banana 1':   'NB-1',    'Qwen-Image-Edit':  'Qwen-IE',
+  'BAGEL-7B-MoT':    'BAGEL',   'FLUX.2-dev':       'FLUX.2-D',
+  'FLUX.1-Kontext':  'FLUX.1-Kt','LongCat-Edit':    'LCat-IE',
+  'FLUX.2-Klein-9B': 'FLUX.2-Kl','HunyuanImage-3':  'HY-3',
+  'InstructPix2Pix': 'IP2P',
+};
+// manual label offsets [dx-from-circle-edge, dy, text-anchor]
+const SC_LBL = {
+  'NB-2':     [  6, -5, 'start'], 'GPT-I2':   [  6, -5, 'start'],
+  'NB-1':     [  6, -5, 'start'], 'Qwen-IE':  [  6, -7, 'start'],
+  'BAGEL':    [  6,  5, 'start'], 'FLUX.2-D': [ -4, -8, 'end'  ],
+  'FLUX.1-Kt':[  6, 11, 'start'], 'LCat-IE':  [ -4, 11, 'end'  ],
+  'FLUX.2-Kl':[ -4, -7, 'end'  ], 'HY-3':     [  5, -5, 'start'],
+  'IP2P':     [ -4, 10, 'end'  ],
+};
+
 function buildModelExplorer() {
-  const grid = document.getElementById('model-grid');
-  if (!grid) return;
+  const svg = document.getElementById('model-scatter');
+  if (!svg) return;
 
-  // max category avg across all models — used to normalise bar widths
-  const allCatAvgs = { geo:[], str:[], col:[], sym:[] };
-  MODELS_HM.forEach(m => {
-    for (const cat of Object.keys(CAT_TASKS)) {
-      const avg = CAT_TASKS[cat].reduce((s,t) => s + (m.scores[t]??0), 0) / CAT_TASKS[cat].length;
-      allCatAvgs[cat].push(avg);
-    }
+  const ns = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v));
+    if (text !== undefined) el.textContent = text;
+    return el;
+  };
+
+  const W = 760, H = 420;
+  const pad = { top: 28, right: 28, bottom: 50, left: 52 };
+  const pw = W - pad.left - pad.right, ph = H - pad.top - pad.bottom;
+  const maxX = 20, maxY = 22;
+  const sx = v => pad.left + (v / maxX) * pw;
+  const sy = v => pad.top + ph - (v / maxY) * ph;
+  const sr = v => 3.5 + (v / 16.4) * 12.5;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', '100%');
+
+  // compute scatter coords
+  const pts = MODELS_HM.map(m => {
+    const avg = keys => keys.reduce((s, k) => s + (m.scores[k] || 0), 0) / keys.length;
+    return {
+      name: m.name, abbr: MODEL_ABBR[m.name] || m.name,
+      x: (avg(CAT_TASKS.geo) + avg(CAT_TASKS.str)) / 2,
+      y: (avg(CAT_TASKS.col) + avg(CAT_TASKS.sym)) / 2,
+      overall: m.overall,
+    };
   });
-  const catMax = {};
-  for (const cat of Object.keys(CAT_TASKS)) catMax[cat] = Math.max(...allCatAvgs[cat]);
 
-  MODELS_HM.forEach((m, i) => {
-    const catScores = {};
-    for (const cat of Object.keys(CAT_TASKS))
-      catScores[cat] = CAT_TASKS[cat].reduce((s,t) => s + (m.scores[t]??0), 0) / CAT_TASKS[cat].length;
+  // gridlines + tick labels
+  const gg = mk('g', {});
+  for (let v = 0; v <= 20; v += 5) {
+    gg.appendChild(mk('line', { x1:sx(v), y1:pad.top, x2:sx(v), y2:pad.top+ph, stroke:'rgba(20,20,20,.07)', 'stroke-width':1 }));
+    gg.appendChild(mk('text', { x:sx(v), y:pad.top+ph+16, 'text-anchor':'middle', fill:'rgba(20,20,20,.38)', 'font-size':10, 'font-family':'Inter,sans-serif' }, String(v)));
+  }
+  for (let v = 5; v <= 20; v += 5) {
+    gg.appendChild(mk('line', { x1:pad.left, y1:sy(v), x2:pad.left+pw, y2:sy(v), stroke:'rgba(20,20,20,.07)', 'stroke-width':1 }));
+    gg.appendChild(mk('text', { x:pad.left-8, y:sy(v)+4, 'text-anchor':'end', fill:'rgba(20,20,20,.38)', 'font-size':10, 'font-family':'Inter,sans-serif' }, String(v)));
+  }
+  svg.appendChild(gg);
 
-    // best task and which category it belongs to
-    const [bestTaskKey] = Object.entries(m.scores).sort((a,b) => b[1]-a[1])[0];
-    const bestCat = Object.keys(CAT_TASKS).find(c => CAT_TASKS[c].includes(bestTaskKey));
+  // axes
+  const ag = mk('g', { stroke:'rgba(20,20,20,.2)', 'stroke-width':1, fill:'none' });
+  ag.appendChild(mk('line', { x1:pad.left, y1:pad.top,    x2:pad.left,    y2:pad.top+ph }));
+  ag.appendChild(mk('line', { x1:pad.left, y1:pad.top+ph, x2:pad.left+pw, y2:pad.top+ph }));
+  svg.appendChild(ag);
 
-    // strongest category (relative to other models)
-    const relStrength = Object.entries(catScores)
-      .map(([cat, val]) => ({ cat, rel: catMax[cat] > 0 ? val / catMax[cat] : 0 }))
-      .sort((a,b) => b.rel - a.rel)[0].cat;
+  // parity line y = x
+  const diagEnd = Math.min(maxX, maxY);
+  const dg = mk('g', {});
+  dg.appendChild(mk('line', { x1:sx(0), y1:sy(0), x2:sx(diagEnd), y2:sy(diagEnd), stroke:'rgba(20,20,20,.11)', 'stroke-width':1, 'stroke-dasharray':'4 4', fill:'none' }));
+  dg.appendChild(mk('text', { x:sx(9)+6, y:sy(9)-5, fill:'rgba(20,20,20,.22)', 'font-size':9, 'font-style':'italic', 'font-family':'Inter,sans-serif' }, 'parity'));
+  svg.appendChild(dg);
 
-    const bars = Object.entries(catScores).map(([cat, val]) => `
-      <div class="mc-row">
-        <span class="mc-cat-lbl">${CAT_LABELS[cat]}</span>
-        <div class="mc-track">
-          <div class="mc-bar mc-bar-${cat}" style="width:${catMax[cat]>0 ? (val/catMax[cat]*100).toFixed(1) : 0}%"></div>
-        </div>
-        <span class="mc-val">${val.toFixed(1)}</span>
-      </div>`).join('');
+  // axis labels
+  svg.appendChild(mk('text', { x:pad.left+pw/2, y:H-4, 'text-anchor':'middle', fill:'rgba(20,20,20,.5)', 'font-size':11, 'font-weight':500, 'font-family':'Inter,sans-serif' }, 'Geometric & Structural avg. mIoU (%)'));
+  const ylg = mk('g', { transform:'rotate(-90)' });
+  ylg.appendChild(mk('text', { x:-(pad.top+ph/2), y:13, 'text-anchor':'middle', fill:'rgba(20,20,20,.5)', 'font-size':11, 'font-weight':500, 'font-family':'Inter,sans-serif' }, 'Color & Symbolic avg. mIoU (%)'));
+  svg.appendChild(ylg);
 
-    const card = document.createElement('div');
-    card.className = `model-card${i === 0 ? ' model-card-top' : ''}`;
-    card.innerHTML = `
-      <div class="mc-head">
-        <span class="mc-rank">#${i+1}</span>
-        <span class="mc-name">${m.name}</span>
-        <span class="mc-score">${m.overall.toFixed(1)}<span class="mc-pct">%</span></span>
-      </div>
-      <div class="mc-bars">${bars}</div>
-      <div class="mc-foot">
-        <span class="mc-best-lbl">Best task</span>
-        <span class="mc-best mc-best-${bestCat}">${TASK_LABELS[bestTaskKey]}</span>
-        <span class="mc-edge-lbl">Edge in</span>
-        <span class="mc-best mc-best-${relStrength}">${CAT_LABELS[relStrength]}</span>
-      </div>`;
-    grid.appendChild(card);
+  // model colors
+  const COLORS = { 'NB-2':'#5B2085', 'GPT-I2':'#2B5EA7', 'NB-1':'#1D6645' };
+  const MUTED = '#A0A09A';
+
+  const dotsG = mk('g', {}), labelsG = mk('g', {});
+  pts.forEach(p => {
+    const cx = sx(p.x), cy = sy(p.y), r = sr(p.overall);
+    const color = COLORS[p.abbr] || MUTED;
+    const top3  = !!COLORS[p.abbr];
+
+    const circ = mk('circle', { cx, cy, r, fill:color, 'fill-opacity': top3 ? 0.82 : 0.48,
+      stroke:color, 'stroke-width': top3 ? 1.5 : 0.8 });
+    circ.appendChild(mk('title', {}, `${p.name}\nOverall: ${p.overall.toFixed(1)}%\nGeo+Str: ${p.x.toFixed(1)}  Col+Sym: ${p.y.toFixed(1)}`));
+    dotsG.appendChild(circ);
+
+    const [dx, dy, anchor] = SC_LBL[p.abbr] || [6, -5, 'start'];
+    const lx = anchor === 'end' ? cx - r + dx : cx + r + dx;
+    labelsG.appendChild(mk('text', { x:lx, y:cy+dy, 'text-anchor':anchor, fill:color,
+      'font-size': top3 ? 11 : 9.5, 'font-weight': top3 ? 700 : 400,
+      'font-family':'Inter,sans-serif', 'pointer-events':'none' }, p.abbr));
   });
+
+  svg.appendChild(dotsG);
+  svg.appendChild(labelsG);
 }
 
 /* ── Boot ────────────────────────────────────────────────────── */
