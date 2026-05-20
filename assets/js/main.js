@@ -482,6 +482,81 @@ function initStatCountUp() {
   observer.observe(document.querySelector('.stats-bar'));
 }
 
+/* ── Model Explorer ──────────────────────────────────────────── */
+const CAT_TASKS = {
+  geo: ['translation','rotation','reflection','scaling','shearing'],
+  str: ['construction','removal','copying','border','cropping'],
+  col: ['recolor','flood_fill','blending','gradient','point_operations'],
+  sym: ['comparison','ordering','pattern','counting','legend'],
+};
+const CAT_LABELS  = { geo:'Geometric', str:'Structural', col:'Color', sym:'Symbolic' };
+const TASK_LABELS = {
+  translation:'Translation', rotation:'Rotation', reflection:'Reflection',
+  scaling:'Scaling', shearing:'Shearing', construction:'Construction',
+  removal:'Removal', copying:'Copying', border:'Border', cropping:'Cropping',
+  recolor:'Recolor', flood_fill:'Flood Fill', blending:'Blending',
+  gradient:'Gradient', point_operations:'Point Ops',
+  comparison:'Comparison', ordering:'Ordering', pattern:'Pattern',
+  counting:'Counting', legend:'Legend',
+};
+
+function buildModelExplorer() {
+  const grid = document.getElementById('model-grid');
+  if (!grid) return;
+
+  // max category avg across all models — used to normalise bar widths
+  const allCatAvgs = { geo:[], str:[], col:[], sym:[] };
+  MODELS_HM.forEach(m => {
+    for (const cat of Object.keys(CAT_TASKS)) {
+      const avg = CAT_TASKS[cat].reduce((s,t) => s + (m.scores[t]??0), 0) / CAT_TASKS[cat].length;
+      allCatAvgs[cat].push(avg);
+    }
+  });
+  const catMax = {};
+  for (const cat of Object.keys(CAT_TASKS)) catMax[cat] = Math.max(...allCatAvgs[cat]);
+
+  MODELS_HM.forEach((m, i) => {
+    const catScores = {};
+    for (const cat of Object.keys(CAT_TASKS))
+      catScores[cat] = CAT_TASKS[cat].reduce((s,t) => s + (m.scores[t]??0), 0) / CAT_TASKS[cat].length;
+
+    // best task and which category it belongs to
+    const [bestTaskKey] = Object.entries(m.scores).sort((a,b) => b[1]-a[1])[0];
+    const bestCat = Object.keys(CAT_TASKS).find(c => CAT_TASKS[c].includes(bestTaskKey));
+
+    // strongest category (relative to other models)
+    const relStrength = Object.entries(catScores)
+      .map(([cat, val]) => ({ cat, rel: catMax[cat] > 0 ? val / catMax[cat] : 0 }))
+      .sort((a,b) => b.rel - a.rel)[0].cat;
+
+    const bars = Object.entries(catScores).map(([cat, val]) => `
+      <div class="mc-row">
+        <span class="mc-cat-lbl">${CAT_LABELS[cat]}</span>
+        <div class="mc-track">
+          <div class="mc-bar mc-bar-${cat}" style="width:${catMax[cat]>0 ? (val/catMax[cat]*100).toFixed(1) : 0}%"></div>
+        </div>
+        <span class="mc-val">${val.toFixed(1)}</span>
+      </div>`).join('');
+
+    const card = document.createElement('div');
+    card.className = `model-card${i === 0 ? ' model-card-top' : ''}`;
+    card.innerHTML = `
+      <div class="mc-head">
+        <span class="mc-rank">#${i+1}</span>
+        <span class="mc-name">${m.name}</span>
+        <span class="mc-score">${m.overall.toFixed(1)}<span class="mc-pct">%</span></span>
+      </div>
+      <div class="mc-bars">${bars}</div>
+      <div class="mc-foot">
+        <span class="mc-best-lbl">Best task</span>
+        <span class="mc-best mc-best-${bestCat}">${TASK_LABELS[bestTaskKey]}</span>
+        <span class="mc-edge-lbl">Edge in</span>
+        <span class="mc-best mc-best-${relStrength}">${CAT_LABELS[relStrength]}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
 /* ── Boot ────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
   initNavCanvas();
@@ -491,5 +566,6 @@ document.addEventListener("DOMContentLoaded", () => {
   buildHeatmap();
   buildTgbCarousel();
   buildTgbHeatmap();
+  buildModelExplorer();
   initCopy();
 });
