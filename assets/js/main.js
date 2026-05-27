@@ -174,12 +174,12 @@ const HM_TASKS = [
 ];
 
 /* ── Helpers ──────────────────────────────────────── */
-const CAT_HUE = { geo: 218, str: 24, col: 142, sym: 278 };
-const CAT_SAT = { geo: 65,  str: 68, col: 55,  sym: 65  };
+const CAT_BG = { geo: "#dde8f7", str: "#fde8d8", col: "#d8f2e4", sym: "#ede0f9" };
 
-function scoreColor(score, cat) {
-  const h = CAT_HUE[cat], s = CAT_SAT[cat];
-  return `hsl(${h},${s}%,${96 - (score / 100) * 66}%)`;
+function scoreColor(score) {
+  // single blue hue, white→dark
+  const l = 97 - (score / 100) * 68;
+  return `hsl(220,70%,${l}%)`;
 }
 function scoreTextColor(score) {
   return score > 38 ? "rgba(255,255,255,.9)" : "rgba(15,15,30,.75)";
@@ -390,63 +390,72 @@ function buildHeatmap() {
   const body = document.getElementById("hm-body");
   if (!head || !body) return;
 
-  // Category group header
-  const catRow = document.createElement("tr");
-  catRow.className = "hm-cat-header";
-  catRow.innerHTML = `<th class="td-model"></th>`;
-  ["geo","str","col","sym"].forEach(cat => {
-    const count = HM_TASKS.filter(t => t.cat === cat).length;
-    const th = document.createElement("th");
-    th.colSpan = count;
-    th.className = `h-${cat}`;
-    th.textContent = catLabel(cat);
-    catRow.appendChild(th);
-  });
-  const thAll = document.createElement("th");
-  thAll.className = "h-all";
-  thAll.textContent = "Avg";
-  catRow.appendChild(thAll);
-  head.appendChild(catRow);
-
-  // Task name row
-  const taskRow = document.createElement("tr");
-  const thModel = document.createElement("th");
-  thModel.className = "td-model";
-  thModel.textContent = "Model";
-  taskRow.appendChild(thModel);
-  HM_TASKS.forEach(t => {
-    const th = document.createElement("th");
-    th.textContent = t.label;
-    taskRow.appendChild(th);
-  });
-  taskRow.appendChild(Object.assign(document.createElement("th"), { textContent: "Overall" }));
-  head.appendChild(taskRow);
-
-  // Model rows
+  // Header row: "Task" + one column per model
+  const headerRow = document.createElement("tr");
+  headerRow.innerHTML = `<th class="td-task">Task</th>`;
   MODELS.forEach(m => {
-    const tr = document.createElement("tr");
-    const tdName = document.createElement("td");
-    tdName.className = "td-model";
-    tdName.textContent = m.abbr;
-    tdName.title = m.name;
-    tr.appendChild(tdName);
+    const th = document.createElement("th");
+    th.className = "td-model-col";
+    th.textContent = m.abbr;
+    th.title = m.name;
+    headerRow.appendChild(th);
+  });
+  head.appendChild(headerRow);
 
-    HM_TASKS.forEach(t => {
+  // One row per task, grouped by category
+  let lastCat = null;
+  HM_TASKS.forEach(t => {
+    if (t.cat !== lastCat) {
+      lastCat = t.cat;
+      const catTr = document.createElement("tr");
+      catTr.className = "hm-cat-sep";
+      const catTd = document.createElement("td");
+      catTd.colSpan = MODELS.length + 1;
+      catTd.textContent = catFullLabel(t.cat);
+      catTd.style.background = CAT_BG[t.cat];
+      catTd.style.fontWeight = "600";
+      catTd.style.fontSize = "0.78rem";
+      catTd.style.padding = "3px 8px";
+      catTr.appendChild(catTd);
+      body.appendChild(catTr);
+    }
+
+    const tr = document.createElement("tr");
+    const tdTask = document.createElement("td");
+    tdTask.className = "td-task";
+    tdTask.textContent = t.label;
+    tr.appendChild(tdTask);
+
+    MODELS.forEach(m => {
       const v = m.tasks[t.key] ?? 0;
       const td = document.createElement("td");
-      td.style.background = scoreColor(v, t.cat);
+      td.style.background = scoreColor(v);
       td.style.color = scoreTextColor(v);
       td.innerHTML = `<span class="hm-score">${v.toFixed(0)}</span>`;
       td.title = `${m.name} — ${t.label}: ${v.toFixed(1)}%`;
       tr.appendChild(td);
     });
 
-    const tdOv = document.createElement("td");
-    tdOv.className = "td-overall";
-    tdOv.innerHTML = `<strong>${m.overall.toFixed(1)}</strong>`;
-    tr.appendChild(tdOv);
     body.appendChild(tr);
   });
+
+  // Overall avg row
+  const avgTr = document.createElement("tr");
+  avgTr.className = "hm-overall-row";
+  const avgTd = document.createElement("td");
+  avgTd.className = "td-task";
+  avgTd.textContent = "Overall";
+  avgTd.style.fontWeight = "700";
+  avgTr.appendChild(avgTd);
+  MODELS.forEach(m => {
+    const td = document.createElement("td");
+    td.className = "td-overall";
+    td.style.background = scoreColor(m.overall);
+    td.style.color = scoreTextColor(m.overall);
+    td.innerHTML = `<strong>${m.overall.toFixed(1)}</strong>`;
+    avgTr.appendChild(td);
+  });
+  body.appendChild(avgTr);
 }
 
 function initHeatmapToggle() {
