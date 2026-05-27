@@ -177,9 +177,9 @@ const HM_TASKS = [
 const CAT_BG = { geo: "#dde8f7", str: "#fde8d8", col: "#d8f2e4", sym: "#ede0f9" };
 
 function scoreColor(score) {
-  // single blue hue, white→dark
-  const l = 97 - (score / 100) * 68;
-  return `hsl(220,70%,${l}%)`;
+  // warm orange hue, white→dark
+  const l = 100 - (score / 100) * 68;
+  return `hsl(22,${score < 1 ? 0 : 85}%,${l}%)`;
 }
 function scoreTextColor(score) {
   return score > 38 ? "rgba(255,255,255,.9)" : "rgba(15,15,30,.75)";
