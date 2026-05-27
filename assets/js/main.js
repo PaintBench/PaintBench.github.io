@@ -431,7 +431,7 @@ function buildHeatmap() {
       const td = document.createElement("td");
       td.style.background = scoreColor(v);
       td.style.color = scoreTextColor(v);
-      td.innerHTML = `<span class="hm-score">${v.toFixed(0)}</span>`;
+      td.innerHTML = `<span class="hm-score">${v.toFixed(1)}</span>`;
       td.title = `${m.name} — ${t.label}: ${v.toFixed(1)}%`;
       tr.appendChild(td);
     });
