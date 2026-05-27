@@ -138,7 +138,7 @@ code {
    HERO
    ════════════════════════════════════════════════════════════ */
 #hero {
-  padding: 80px 24px 0;
+  padding: 20px 24px 0;
   max-width: var(--max-w);
   margin: 0 auto;
 }
@@ -810,7 +810,7 @@ code {
 
 @media (max-width: 640px) {
   :root { --section-py: 64px; }
-  #hero { padding: 52px 16px 0; }
+  #hero { padding: 16px 16px 0; }
   .hero-title { font-size: clamp(2.6rem, 12vw, 3.2rem); }
   .hero-ctas { gap: 8px; }
   .cta-arxiv, .cta-primary, .cta-secondary, .cta-hf, .cta-ghost { padding: 9px 14px; font-size: .82rem; }
