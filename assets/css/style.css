@@ -369,12 +369,14 @@ code {
   border: 1px solid var(--border);
 }
 .g-img-label {
-  font-size: .6rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .01em;
   color: var(--ink-3);
 }
+.g-img-slot:nth-child(1) .g-img-label { color: #2563eb; }
+.g-img-slot:nth-child(3) .g-img-label { color: #16a34a; }
+.g-img-slot:nth-child(5) .g-img-label { color: #dc2626; }
 .g-arrow { color: var(--border-2); font-size: 1.1rem; margin-top: -16px; }
 
 .g-instruction {
@@ -391,11 +393,11 @@ code {
   margin-right: 4px;
 }
 .g-model-name {
-  font-size: .6rem;
-  font-weight: 500;
-  color: var(--ink-3);
+  font-size: .82rem;
+  font-weight: 700;
+  color: #dc2626;
   text-align: center;
-  letter-spacing: .02em;
+  letter-spacing: .01em;
 }
 .g-card-images .g-img-slot:not(:last-child)::after {
   content: '';
