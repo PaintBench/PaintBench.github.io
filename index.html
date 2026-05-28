@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PaintBench — Deterministic Evaluation of Precise Visual Editing</title>
-  <meta name="description" content="PaintBench: a pixel-level benchmark for evaluating precise, deterministic visual editing across 20 tasks and 1,920 problems. The best model today scores 16.4%." />
+  <meta name="description" content="PaintBench: a pixel-level benchmark for evaluating precise, deterministic visual editing across 20 tasks and 1,920 problems. The best model today scores 17.1%." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -36,7 +36,7 @@
     <p class="hero-sub">
       <em>PaintBench</em> is the first pixel-level benchmark for precise,
       deterministic visual editing — 20 primitive tasks, 1,920 problems,
-      zero model judges. The best model today scores&nbsp;<em>16.4%</em>.
+      zero model judges. The best model today scores&nbsp;<em>17.1%</em>.
     </p>
     <div class="btn-row">
       <a href="#" class="btn btn-dark">📄 Paper <span style="opacity:.5;font-weight:400">(arXiv soon)</span></a>
@@ -67,7 +67,7 @@
         <div class="stat-label">Pixel tolerance levels</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-val" style="color:var(--sym)">16.4%</div>
+        <div class="stat-val" style="color:var(--sym)">17.1%</div>
         <div class="stat-label">Best model mIoU</div>
       </div>
     </div>
@@ -243,7 +243,7 @@
       <h2 class="sec-title">The benchmark<br>is far from solved.</h2>
       <p class="sec-body">
         mIoU scores (%) across 11 ΔE tolerance levels.
-        The top model scores <strong>16.4% overall</strong>.
+        The top model scores <strong>17.1% overall</strong>.
         Geometric and structural tasks expose a hard capability gap —
         models fail not because they misunderstand the instruction,
         but because their spatial rendering engine can't execute it precisely.
@@ -305,7 +305,7 @@
           <img src="assets/img/fm1_normalized_output.png" alt="Model output" />
         </div>
         <div class="failure-body">
-          <div class="failure-mode no-edit">No Edit</div>
+          <div class="failure-mode no-edit">Execution Omission</div>
           <div class="failure-model">BAGEL-7B-MoT · Construction</div>
           <div class="failure-instr">
             <mark class="tgb-hl">Draw a filled pink</mark> (#FFC0CB) circle centered at the leftmost point of the cloud
@@ -362,7 +362,7 @@
           <img src="assets/img/fm4_normalized_output.png" alt="Model output" />
         </div>
         <div class="failure-body">
-          <div class="failure-mode catastroph">Catastrophic Edit</div>
+          <div class="failure-mode catastroph">Structural Catastrophe</div>
           <div class="failure-model">BAGEL-7B-MoT · Cropping</div>
           <div class="failure-instr">
             <mark class="tgb-hl">Crop to the interior</mark> of the square outlined region.
@@ -382,7 +382,7 @@
     <h2 class="sec-title">TinyGrafixBench</h2>
     <p class="sec-body">
       The same deterministic evaluation framework applied to data visualization editing.
-      500 problems across 5 chart types, each with 4 primitive operations (Construction,
+      600 problems across 5 chart types, each with 4 primitive operations (Construction,
       Transformation, Removal, Recoloring). Model rankings mirror PaintBench —
       validating the benchmark design as a proxy for real-world editing capability
       beyond synthetic geometric scenes.
@@ -395,7 +395,7 @@
       <div class="tgb-marquee-fade-bot"></div>
     </div>
 
-    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (Spearman r<sub>s</sub> = 0.77, p = 0.005)</p>
+    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (linear R² = 0.91, p &lt; 0.001)</p>
     <div class="heatmap-scroll">
       <table class="heatmap-table tgb-hm">
         <thead>

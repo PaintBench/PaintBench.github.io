@@ -275,15 +275,15 @@ const TASK_ORDER = [
 ];
 
 const MODELS_HM = [
-  { name:"Nano Banana 2",   scores:{ translation:12.3,rotation:7.6, reflection:4.4,scaling:3.0,shearing:3.1,construction:15.7,removal:37.8,copying:14.0,border:18.9,cropping:19.1,recolor:23.0,flood_fill:24.8,blending:5.3, gradient:13.0,point_operations:12.3,comparison:16.1,ordering:20.0,pattern:13.4,counting:16.3,legend:48.3 }, overall:16.4 },
-  { name:"GPT Image Edit 2",scores:{ translation:17.5,rotation:13.2,reflection:9.1,scaling:7.8,shearing:7.8,construction:14.3,removal:49.6,copying:13.9,border:15.2,cropping:28.5,recolor:27.1,flood_fill:27.1,blending:6.4, gradient:1.4, point_operations:5.4, comparison:10.7,ordering:21.0,pattern:13.7,counting:14.9,legend:21.3 }, overall:16.3 },
-  { name:"Nano Banana 1",   scores:{ translation:9.6, rotation:7.1, reflection:5.1,scaling:4.6,shearing:4.4,construction:4.8, removal:31.5,copying:12.8,border:4.6, cropping:9.5, recolor:5.7, flood_fill:11.2,blending:2.6, gradient:2.9, point_operations:7.4, comparison:14.3,ordering:18.2,pattern:8.7, counting:14.8,legend:36.7 }, overall:10.8 },
-  { name:"Qwen-Image-Edit", scores:{ translation:5.3, rotation:5.5, reflection:3.0,scaling:1.9,shearing:1.4,construction:5.3, removal:25.1,copying:6.0, border:0.6, cropping:7.8, recolor:5.8, flood_fill:16.3,blending:1.2, gradient:0.7, point_operations:2.2, comparison:12.9,ordering:8.0, pattern:8.0, counting:8.4, legend:1.1  }, overall:6.3  },
-  { name:"BAGEL-7B-MoT",   scores:{ translation:3.6, rotation:4.0, reflection:1.8,scaling:1.0,shearing:1.4,construction:1.0, removal:25.7,copying:4.9, border:0.1, cropping:16.5,recolor:6.3, flood_fill:2.3, blending:1.1, gradient:0.2, point_operations:0.7, comparison:4.2, ordering:5.1, pattern:4.4, counting:5.5, legend:6.1  }, overall:4.8  },
-  { name:"FLUX.2-dev",     scores:{ translation:4.5, rotation:5.6, reflection:4.0,scaling:0.8,shearing:1.6,construction:3.4, removal:19.4,copying:1.4, border:0.4, cropping:14.7,recolor:4.6, flood_fill:4.9, blending:0.7, gradient:0.8, point_operations:2.1, comparison:6.2, ordering:6.2, pattern:5.4, counting:1.6, legend:0.7  }, overall:4.5  },
-  { name:"FLUX.1-Kontext",  scores:{ translation:2.7, rotation:3.0, reflection:2.5,scaling:1.8,shearing:1.6,construction:5.3, removal:21.0,copying:0.8, border:0.3, cropping:9.2, recolor:2.0, flood_fill:2.6, blending:1.7, gradient:0.5, point_operations:1.1, comparison:6.0, ordering:3.9, pattern:2.3, counting:1.9, legend:3.6  }, overall:3.7  },
+  { name:"Nano Banana 2",   scores:{ translation:12.3,rotation:7.6, reflection:4.4,scaling:3.0,shearing:3.1,construction:15.7,removal:45.8,copying:14.0,border:18.9,cropping:19.1,recolor:30.4,flood_fill:24.8,blending:5.3, gradient:13.0,point_operations:12.3,comparison:16.1,ordering:20.0,pattern:13.4,counting:16.3,legend:47.1 }, overall:17.1 },
+  { name:"GPT Image Edit 2",scores:{ translation:17.5,rotation:13.2,reflection:9.1,scaling:7.8,shearing:7.8,construction:14.3,removal:50.6,copying:13.9,border:15.2,cropping:28.5,recolor:27.1,flood_fill:27.1,blending:6.4, gradient:1.4, point_operations:5.4, comparison:10.7,ordering:21.0,pattern:13.7,counting:14.9,legend:19.4 }, overall:16.3 },
+  { name:"Nano Banana 1",   scores:{ translation:9.6, rotation:7.1, reflection:5.1,scaling:4.6,shearing:4.4,construction:4.8, removal:31.5,copying:12.8,border:4.6, cropping:9.5, recolor:5.7, flood_fill:11.2,blending:2.6, gradient:2.9, point_operations:7.4, comparison:14.3,ordering:18.2,pattern:8.7, counting:14.8,legend:36.7 }, overall:11.1 },
+  { name:"Qwen-Image-Edit", scores:{ translation:5.3, rotation:5.5, reflection:3.0,scaling:1.9,shearing:1.4,construction:5.3, removal:25.1,copying:6.0, border:0.6, cropping:7.8, recolor:5.8, flood_fill:16.3,blending:1.2, gradient:0.7, point_operations:2.2, comparison:12.9,ordering:8.0, pattern:8.0, counting:8.4, legend:1.1  }, overall:6.7  },
+  { name:"BAGEL-7B-MoT",   scores:{ translation:3.6, rotation:4.0, reflection:1.8,scaling:1.0,shearing:1.4,construction:1.0, removal:25.7,copying:4.9, border:0.1, cropping:16.5,recolor:6.3, flood_fill:2.3, blending:1.1, gradient:0.2, point_operations:0.7, comparison:4.2, ordering:5.1, pattern:4.4, counting:5.5, legend:6.1  }, overall:5.0  },
+  { name:"FLUX.2-dev",     scores:{ translation:4.5, rotation:5.6, reflection:4.0,scaling:0.8,shearing:1.6,construction:3.4, removal:19.4,copying:1.4, border:0.4, cropping:14.7,recolor:4.6, flood_fill:4.9, blending:0.7, gradient:0.8, point_operations:2.1, comparison:6.2, ordering:6.2, pattern:5.4, counting:1.6, legend:0.7  }, overall:4.6  },
+  { name:"FLUX.1-Kontext",  scores:{ translation:2.7, rotation:3.0, reflection:2.5,scaling:1.8,shearing:1.6,construction:5.3, removal:21.0,copying:0.8, border:0.3, cropping:9.2, recolor:2.0, flood_fill:2.6, blending:1.7, gradient:0.5, point_operations:1.1, comparison:6.0, ordering:3.9, pattern:2.3, counting:1.9, legend:3.6  }, overall:3.9  },
   { name:"LongCat-Edit",   scores:{ translation:3.9, rotation:2.9, reflection:2.5,scaling:0.7,shearing:1.2,construction:2.4, removal:18.5,copying:3.2, border:0.1, cropping:10.9,recolor:2.4, flood_fill:4.7, blending:0.9, gradient:0.1, point_operations:0.9, comparison:7.5, ordering:4.5, pattern:0.9, counting:2.2, legend:2.4  }, overall:3.6  },
-  { name:"FLUX.2-Klein-9B",scores:{ translation:3.0, rotation:1.9, reflection:1.1,scaling:0.8,shearing:0.5,construction:3.1, removal:20.3,copying:4.5, border:0.1, cropping:5.4, recolor:4.1, flood_fill:3.8, blending:1.2, gradient:1.1, point_operations:1.7, comparison:8.2, ordering:1.8, pattern:3.2, counting:2.3, legend:0.5  }, overall:3.4  },
+  { name:"FLUX.2-Klein-9B",scores:{ translation:3.0, rotation:1.9, reflection:1.1,scaling:0.8,shearing:0.5,construction:3.1, removal:20.3,copying:4.5, border:0.1, cropping:5.4, recolor:4.1, flood_fill:3.8, blending:1.2, gradient:1.1, point_operations:1.7, comparison:8.2, ordering:1.8, pattern:3.2, counting:2.3, legend:0.5  }, overall:3.5  },
   { name:"HunyuanImage-3", scores:{ translation:0.1, rotation:0.1, reflection:0.0,scaling:0.2,shearing:0.0,construction:0.6, removal:3.0, copying:0.1, border:0.1, cropping:1.1, recolor:0.3, flood_fill:0.3, blending:0.1, gradient:0.1, point_operations:0.3, comparison:0.4, ordering:0.2, pattern:0.4, counting:0.3, legend:0.1  }, overall:0.4  },
   { name:"InstructPix2Pix",scores:{ translation:0.0, rotation:0.1, reflection:0.0,scaling:0.0,shearing:0.0,construction:1.2, removal:3.2, copying:0.0, border:0.1, cropping:0.1, recolor:0.4, flood_fill:0.2, blending:0.1, gradient:0.0, point_operations:0.6, comparison:0.5, ordering:0.1, pattern:0.0, counting:0.0, legend:0.0  }, overall:0.3  },
 ];
@@ -382,7 +382,7 @@ const TGB_MODELS = [
   { name:"Nano Banana 2",   overall:15.9, bar:38.9, scatter:4.2,  line:11.5, heatmap:20.2, network:4.8  },
   { name:"GPT Image Edit 2",overall:15.6, bar:34.8, scatter:6.8,  line:16.0, heatmap:15.5, network:4.8  },
   { name:"Nano Banana 1",   overall:5.3,  bar:11.5, scatter:3.7,  line:4.7,  heatmap:4.0,  network:2.7  },
-  { name:"Qwen-Image-Edit", overall:3.4,  bar:4.8,  scatter:1.3,  line:4.4,  heatmap:4.9,  network:1.6  },
+  { name:"Qwen-Image-Edit", overall:4.3,  bar:4.8,  scatter:1.3,  line:4.4,  heatmap:4.9,  network:1.6  },
   { name:"FLUX.2-Klein-9B", overall:3.4,  bar:2.9,  scatter:2.1,  line:4.9,  heatmap:4.8,  network:2.4  },
   { name:"LongCat-Edit",    overall:3.2,  bar:2.9,  scatter:1.0,  line:3.2,  heatmap:7.9,  network:0.8  },
   { name:"FLUX.2-dev",      overall:3.1,  bar:2.3,  scatter:4.2,  line:3.8,  heatmap:3.2,  network:1.9  },
@@ -454,7 +454,7 @@ function initStatCountUp() {
     { el: cells[0], end: 20,   decimals: 0, suffix: '' },
     { el: cells[1], end: 1920, decimals: 0, suffix: '' },
     { el: cells[2], end: 11,   decimals: 0, suffix: '' },
-    { el: cells[3], end: 16.4, decimals: 1, suffix: '%' },
+    { el: cells[3], end: 17.1, decimals: 1, suffix: '%' },
   ];
 
   function countUp(stat) {
@@ -536,7 +536,7 @@ function buildModelExplorer() {
   const maxX = 20, maxY = 22;
   const sx = v => pad.left + (v / maxX) * pw;
   const sy = v => pad.top + ph - (v / maxY) * ph;
-  const sr = v => 3.5 + (v / 16.4) * 12.5;
+  const sr = v => 3.5 + (v / 17.1) * 12.5;
 
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.setAttribute('width', '100%');
