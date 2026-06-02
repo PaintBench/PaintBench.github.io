@@ -188,62 +188,172 @@ function initSlider() {
   update(0);
 }
 
-/* ── Task switcher ───────────────────────────────────────────── */
+/* ── Task data: all 20 tasks (baseline examples from the benchmark) ─ */
 const TASKS = {
-  geo: {
-    name: "Geometric Transformation",
+  // Geometric Transformation
+  translation: {
+    cat: "geo", label: "Translation",
     input:  "assets/img/ex_translation_input.png",
     answer: "assets/img/ex_translation_answer.png",
-    hl: "Translate the heart",
-    instruction: "Translate the heart so that its pointy tip aligns with the center of the cyan circle. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+    instruction: "Translate the red circle down by 29.75% of the image height. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
   },
-  str: {
-    name: "Structural Manipulation",
+  rotation: {
+    cat: "geo", label: "Rotation",
+    input:  "assets/img/ex_rotation_input.png",
+    answer: "assets/img/ex_rotation_answer.png",
+    instruction: "Rotate the red shape by 246\u00b0 clockwise about its highest point. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+  },
+  reflection: {
+    cat: "geo", label: "Reflection",
+    input:  "assets/img/ex_reflection_input.png",
+    answer: "assets/img/ex_reflection_answer.png",
+    instruction: "Reflect the green shape across the line that passes through the leftmost edge midpoint of the brown cross and the 30-degree vertex of the green triangle. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+  },
+  scaling: {
+    cat: "geo", label: "Scaling",
+    input:  "assets/img/ex_scaling_input.png",
+    answer: "assets/img/ex_scaling_answer.png",
+    instruction: "Scale the brown shape uniformly so its bounding box height matches the bounding box height of the white shape, keeping its bottom-right bounding box corner fixed.",
+  },
+  shearing: {
+    cat: "geo", label: "Shearing",
+    input:  "assets/img/ex_shearing_input.png",
+    answer: "assets/img/ex_shearing_answer.png",
+    instruction: "Shear the cross so its right bounding box edge shifts down by 58% of its bounding box height, keeping the left bounding box edge fixed. Place the transformed shape on top of any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+  },
+  // Structural Manipulation
+  construction: {
+    cat: "str", label: "Construction",
     input:  "assets/img/ex_construction_input.png",
     answer: "assets/img/ex_construction_answer.png",
-    hl: "Draw a filled gray",
-    instruction: "Draw a filled gray (#808080) polygon with vertices in order at the top edge midpoint of the image, the highest point of the cloud, and the center of the rectangle. Place it on top of any existing shapes.",
+    instruction: "Draw a filled purple (#800080) circle with diameter endpoints at (6.11%, 16.49%) and (24.29%, 13.39%). Place it on top of any existing shapes. Clip any parts that may extend beyond the image boundary.",
   },
-  col: {
-    name: "Color Change",
+  removal: {
+    cat: "str", label: "Removal",
+    input:  "assets/img/ex_removal_input.png",
+    answer: "assets/img/ex_removal_answer.png",
+    instruction: "Remove the purple star.",
+  },
+  copying: {
+    cat: "str", label: "Copying",
+    input:  "assets/img/ex_copying_input.png",
+    answer: "assets/img/ex_copying_answer.png",
+    instruction: "Copy the shapes (ignoring background) in the right outlined square into the left outlined square, maintaining the exact shape positions.",
+  },
+  border: {
+    cat: "str", label: "Border",
+    input:  "assets/img/ex_border_input.png",
+    answer: "assets/img/ex_border_answer.png",
+    instruction: "Color all pixels within a Euclidean distance of at most 3.2% image width from any pixel in the orange heart to black (#000000), without recoloring the shape itself.",
+  },
+  cropping: {
+    cat: "str", label: "Cropping",
+    input:  "assets/img/ex_cropping_input.png",
+    answer: "assets/img/ex_cropping_answer.png",
+    instruction: "Crop to the interior of the outlined region, deskewing so that the highest corner of the region interior corresponds to the top-left corner of the cropped image. Scale to fill the canvas using nearest-neighbor interpolation.",
+  },
+  // Color Change
+  recolor: {
+    cat: "col", label: "Recolor",
+    input:  "assets/img/ex_recolor_input.png",
+    answer: "assets/img/ex_recolor_answer.png",
+    instruction: "Recolor the cloud to the color of the shape at (67.48%, 39.45%).",
+  },
+  flood_fill: {
+    cat: "col", label: "Flood Fill",
+    input:  "assets/img/ex_flood_fill_input.png",
+    answer: "assets/img/ex_flood_fill_answer.png",
+    instruction: "Recolor all non-background pixels inside the green outlined polygon to pink (#FFC0CB). Keep the outline as is.",
+  },
+  blending: {
+    cat: "col", label: "Blending",
+    input:  "assets/img/ex_blending_input.png",
+    answer: "assets/img/ex_blending_answer.png",
+    instruction: "Blend the color green (#00FF00) at 18% opacity over all pixels inside the black outlined polygon. Keep the outline as is.",
+  },
+  gradient: {
+    cat: "col", label: "Gradient",
     input:  "assets/img/ex_gradient_input.png",
     answer: "assets/img/ex_gradient_answer.png",
-    hl: "Apply a linear RGB gradient",
-    instruction: "Apply a linear RGB gradient from black (#000000) at the top edge to red (#FF0000) at the bottom edge of the interior of the orange outlined region. Recolor only background pixels; keep non-background pixels and the outline as is.",
+    instruction: "Apply a linear RGB gradient from gray (#808080) at the bottom-right corner to purple (#800080) at the top-left corner of the interior of the black outlined region. Recolor only background pixels; keep non-background pixels and the outline as is.",
   },
-  sym: {
-    name: "Symbolic Reasoning",
+  point_operations: {
+    cat: "col", label: "Point Operations",
+    input:  "assets/img/ex_point_operations_input.png",
+    answer: "assets/img/ex_point_operations_answer.png",
+    instruction: "Invert the colors of all pixels inside the red outlined polygon. Keep the outline as is.",
+  },
+  // Symbolic Reasoning
+  comparison: {
+    cat: "sym", label: "Comparison",
+    input:  "assets/img/ex_comparison_input.png",
+    answer: "assets/img/ex_comparison_answer.png",
+    instruction: "Remove the tallest purple shape.",
+  },
+  ordering: {
+    cat: "sym", label: "Ordering",
+    input:  "assets/img/ex_ordering_input.png",
+    answer: "assets/img/ex_ordering_answer.png",
+    instruction: "Rearrange the semicircle shapes left-to-right in increasing order of size, keeping each shape in the same position inside its box.",
+  },
+  pattern: {
+    cat: "sym", label: "Pattern",
+    input:  "assets/img/ex_pattern_input.png",
+    answer: "assets/img/ex_pattern_answer.png",
+    instruction: "Fill in the missing shape in this 5\u00d710 pattern.",
+  },
+  counting: {
+    cat: "sym", label: "Counting",
     input:  "assets/img/ex_counting_input.png",
     answer: "assets/img/ex_counting_answer.png",
-    hl: "Add one more cyan",
-    instruction: "Add one more cyan (#00FFFF) star to the image, matching the size and style of the existing cyan stars.",
+    instruction: "The white shapes arranged in a line on the right of the image are used as tallies. Remove tallies from the top so the number of tallies equals the number of green shapes.",
+  },
+  legend: {
+    cat: "sym", label: "Legend",
+    input:  "assets/img/ex_legend_input.png",
+    answer: "assets/img/ex_legend_answer.png",
+    instruction: "Apply the legend at the bottom of the image. Recolor shapes whose color points to a new color, and remove shapes whose color points to an X. Keep the legend in place.",
   },
 };
 
+/* ── Task switcher (category accordion + per-task) ───────────── */
 function initTaxonomy() {
-  const btns   = document.querySelectorAll(".cat-btn");
-  const panels = document.querySelectorAll(".cat-panel");
-  if (!btns.length) return;
+  const catBtns  = document.querySelectorAll(".cat-btn");
+  const taskBtns = document.querySelectorAll(".task-btn");
+  if (!catBtns.length) return;
 
-  btns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const cat = btn.dataset.cat;
-      btns.forEach(b => b.classList.remove("active"));
-      panels.forEach(p => p.classList.remove("active"));
-      btn.classList.add("active");
-      const panel = document.getElementById(`panel-${cat}`);
-      if (panel) {
-        panel.classList.add("active");
-        const t = TASKS[cat];
-        panel.querySelector(".ex-input").src = t.input;
-        panel.querySelector(".ex-answer").src = t.answer;
-        panel.querySelector(".ex-instruction").textContent = t.instruction;
-      }
+  const exInput  = document.getElementById("ex-input");
+  const exAnswer = document.getElementById("ex-answer");
+  const exInstr  = document.getElementById("ex-instr");
+
+  function showTask(taskKey) {
+    const t = TASKS[taskKey];
+    if (!t) return;
+    exInput.src  = t.input;
+    exAnswer.src = t.answer;
+    exInstr.textContent = t.instruction;
+    taskBtns.forEach(b => {
+      b.classList.toggle("active", b.dataset.task === taskKey);
     });
+  }
+
+  function showCat(cat) {
+    catBtns.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
+    ["geo", "str", "col", "sym"].forEach(c => {
+      const el = document.getElementById(`tasks-${c}`);
+      if (el) el.style.display = c === cat ? "flex" : "none";
+    });
+    showTask(CAT_TASKS[cat][0]);
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => showCat(btn.dataset.cat));
+  });
+  taskBtns.forEach(btn => {
+    btn.addEventListener("click", () => showTask(btn.dataset.task));
   });
 
-  // Activate first by default
-  btns[0].click();
+  showCat("geo");
 }
 
 /* ── Heatmap ─────────────────────────────────────────────────── */
