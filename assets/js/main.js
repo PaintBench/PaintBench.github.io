@@ -586,9 +586,7 @@ function initStatCountUp() {
 
   const targets = [
     { el: cells[0], end: 20,   decimals: 0, suffix: '' },
-    { el: cells[1], end: 1920, decimals: 0, suffix: '' },
-    { el: cells[2], end: 11,   decimals: 0, suffix: '' },
-    { el: cells[3], end: 17.1, decimals: 1, suffix: '%' },
+    { el: cells[2], end: 17.1, decimals: 1, suffix: '%' },
   ];
 
   function countUp(stat) {
