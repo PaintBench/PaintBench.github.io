@@ -32,13 +32,31 @@
 <!-- ── Hero ────────────────────────────────────────────────────── -->
 <section id="hero">
   <div class="wrap">
-    <!-- <div class="hero-eyebrow">NeurIPS 2026 &nbsp;·&nbsp; Evaluations &amp; Datasets Track</div> -->
-    <h1 class="hero-title">Can models paint<br>by the numbers?</h1>
+    <h1 class="hero-title">PaintBench</h1>
+    <p class="hero-tagline">Can multimodal AI models make exact visual edits?</p>
     <p class="hero-sub">
-      <em>PaintBench</em> is the first pixel-level benchmark for precise,
-      deterministic visual editing — 20 primitive tasks, 1,920 problems,
-      zero model judges. The best model today scores&nbsp;<em>17.1%</em>.
+      A procedurally generated, deterministically evaluated benchmark for precise visual editing.
+      20 fundamental operations, infinite problem variety, zero judge models.
+      The highest-performing model today scores only&nbsp;<em>17.1%</em>.
     </p>
+    <div class="hero-authors">
+      <a href="#" class="author-name">Kai Xu</a><sup>*</sup>
+      <span class="author-sep">&thinsp;·&thinsp;</span>
+      <a href="#" class="author-name">Ellis Brown</a><sup>*</sup>
+      <span class="author-sep">&thinsp;·&thinsp;</span>
+      <a href="#" class="author-name">Shrikar Madhu</a>
+      <span class="author-sep">&thinsp;·&thinsp;</span>
+      <a href="#" class="author-name">Rob Fergus</a>
+      <span class="author-sep">&thinsp;·&thinsp;</span>
+      <a href="#" class="author-name">He He</a>
+      <span class="author-sep">&thinsp;·&thinsp;</span>
+      <a href="#" class="author-name">Saining Xie</a>
+    </div>
+    <div class="hero-affil">
+      <span class="affil-eq">* Equal contribution</span>
+      <span class="affil-sep"> &nbsp;·&nbsp; </span>
+      <span>New York University</span>
+    </div>
     <div class="btn-row">
       <a href="https://arxiv.org/abs/2606.00188" target="_blank" rel="noopener" class="btn btn-dark">📄 Paper</a>
       <a href="https://huggingface.co/datasets/PaintBench/PaintBench" target="_blank" class="btn btn-outline">🤗 Dataset</a>
@@ -60,16 +78,12 @@
         <div class="stat-label">Primitive editing tasks</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-val" style="color:var(--str)">1,920</div>
-        <div class="stat-label">Benchmark problems</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-val" style="color:var(--col)">11</div>
-        <div class="stat-label">Pixel tolerance levels</div>
+        <div class="stat-val" style="color:var(--str)">∞</div>
+        <div class="stat-label">Seed-generated problem varity</div>
       </div>
       <div class="stat-cell">
         <div class="stat-val" style="color:var(--sym)">17.1%</div>
-        <div class="stat-label">Best model mIoU</div>
+        <div class="stat-label">Highest-performing model score (mIoU)</div>
       </div>
     </div>
   </div>
@@ -79,12 +93,12 @@
 <section id="example">
   <div class="wrap">
     <div class="sec-num">01 / How a Problem Works</div>
-    <h2 class="sec-title">One correct answer.<br>Evaluated at the pixel.</h2>
+    <h2 class="sec-title">One correct answer per problem.<br>Evaluated at the pixel.</h2>
     <p class="sec-body">
       Every PaintBench problem gives a model an input image and a precise instruction.
-      There is exactly one ground-truth output, generated programmatically from a random seed.
-      Evaluation compares each output pixel to the ground truth using
-      CIE&Delta;E<sub>76</sub> perceptual color distance — no human opinion, no language model judge.
+      There is exactly one ground-truth answer.
+      Evaluation compares each pixel of the model output to the ground-truth answer and input image using
+      CIE&Delta;E<sub>76</sub> perceptual color distance — no human opinion, no judge model.
     </p>
 
     <div class="instruction-block">
@@ -129,14 +143,14 @@
         <span class="sval" id="stat-edit">—</span>
       </div>
       <div class="stat-item">
-        <span class="skey">mIoU &nbsp;</span>
+        <span class="skey">IoU@tolerance &nbsp;</span>
         <span class="sval" id="stat-iou">—</span>
       </div>
     </div>
 
     <p style="margin-top:20px; font-size:.82rem; color:var(--muted); max-width:none;">
-      <strong style="color:var(--ink-2)">Green pixels</strong> were correctly edited or preserved within the tolerance.
-      <strong style="color:var(--ink-2)">Red pixels</strong> failed. mIoU averages the IoU score across all 11 tolerance levels.
+      <strong style="color:var(--ink-2)">Green and blue pixels</strong> were correctly edited or preserved within the tolerance.
+      <strong style="color:var(--ink-2)">Red and orange pixels</strong> were incorrectly edited or preserved.
     </p>
   </div>
 </section>
@@ -147,27 +161,27 @@
     <div class="sec-num">02 / The Benchmark</div>
     <h2 class="sec-title">20 primitive tasks.<br>4 categories.<br>Infinitely scalable.</h2>
     <p class="sec-body">
-      Every problem is generated from a random seed: a new seed produces a fresh scene,
-      fresh instruction, and a unique correct output — making memorization impossible.
-      Tasks span a gradient from pixel-formula operations to spatial transformations requiring
-      exact geometric reasoning. No web-scraped data. No ambiguous outputs.
+      Every problem is generated from a random seed: a seed produces an input image,
+      instruction, and a unique answer image.
+      Tasks span operations ranging from pixel-formula operations to spatial transformations requiring
+      exact geometric reasoning.
     </p>
 
     <div class="design-pillars">
       <div class="pillar">
         <div class="pillar-icon">⟳</div>
         <div class="pillar-name">Dynamic Generation</div>
-        <div class="pillar-body">Fresh problem sets on demand. Each seed produces a unique (input, instruction, answer) triple — the benchmark cannot be contaminated by training data exposure.</div>
+        <div class="pillar-body">Fresh problems on demand protects against benchmark contamination. Each seed produces a unique (input, instruction, answer) triple.</div>
       </div>
       <div class="pillar">
         <div class="pillar-icon">✓</div>
         <div class="pillar-name">One Correct Answer</div>
-        <div class="pillar-body">Every output is compared pixel-by-pixel to the ground truth via CIE ΔE₇₆ color distance. No human ratings, no LLM judges, no perceptual proxies.</div>
+        <div class="pillar-body">Every output is evaluated pixel-by-pixel via CIE ΔE₇₆ color distance. No human ratings, no bias-prone judge models, no perceptual proxies.</div>
       </div>
       <div class="pillar">
         <div class="pillar-icon">◈</div>
         <div class="pillar-name">Atomic Operations</div>
-        <div class="pillar-body">Tasks target the building blocks of visual editing — recoloring, transformation, removal — the same primitives a raster editor handles trivially in a single command.</div>
+        <div class="pillar-body">Tasks target fundamental building-block operations found in a variety of real-world visual editing tasks.</div>
       </div>
     </div>
 
@@ -226,10 +240,15 @@
 
       <!-- Example panel -->
       <div class="ex-panel-wrap">
-        <div class="ex-labels"><span>Input</span><span>Ground Truth</span></div>
-        <div class="ex-pair">
+        <div class="ex-labels">
+          <span>Input</span>
+          <span>Ground Truth</span>
+          <span>Model Output <span class="ex-model-tag" id="ex-model-name">GPT-I2</span></span>
+        </div>
+        <div class="ex-triple">
           <img id="ex-input"  src="assets/img/ex_translation_input.png"  alt="Input" />
           <img id="ex-answer" src="assets/img/ex_translation_answer.png" alt="Ground truth" />
+          <img id="ex-output" src="assets/img/ex_translation_output.png" alt="Model output" />
         </div>
         <div class="ex-instruction" id="ex-instr"></div>
       </div>
@@ -245,10 +264,8 @@
       <h2 class="sec-title">The benchmark<br>is far from solved.</h2>
       <p class="sec-body">
         mIoU scores (%) across 11 ΔE tolerance levels.
-        The top model scores <strong>17.1% overall</strong>.
-        Geometric and structural tasks expose a hard capability gap —
-        models fail not because they misunderstand the instruction,
-        but because their spatial rendering engine can't execute it precisely.
+        The highest-performing model scores <strong>17.1% overall</strong>.
+        Geometric transformation, most structural manipulation, and formula-based color change tasks are consistently hard.
         Hover any cell for the exact score.
       </p>
     </div>
@@ -288,11 +305,9 @@
 <section id="failures">
   <div class="wrap">
     <div class="sec-num">04 / How Models Fail</div>
-    <h2 class="sec-title">Four canonical<br>failure modes.</h2>
+    <h2 class="sec-title">Four common<br>failure modes.</h2>
     <p class="sec-body">
-      Across all evaluated models, failures cluster into four types —
-      each revealing a different dimension of the precision gap.
-      The error map tells the story that a language model judge would miss.
+      Across evaluated models, common failure modes emerge.
     </p>
 
     <div class="failure-grid">
@@ -383,11 +398,10 @@
     <div class="sec-num">05 / Companion Benchmark</div>
     <h2 class="sec-title">TinyGrafixBench</h2>
     <p class="sec-body">
-      The same deterministic evaluation framework applied to data visualization editing.
-      600 problems across 5 chart types, each with 4 primitive operations (Construction,
-      Transformation, Removal, Recoloring). Model rankings mirror PaintBench —
-      validating the benchmark design as a proxy for real-world editing capability
-      beyond synthetic geometric scenes.
+      The same procederally generated, determinitically evaluated philosophy applied to data visualization editing.
+      5 chart types, each with 4 primitive operations (Construction,
+      Transformation, Removal, Recoloring). Model scores strongly correlate with those on PaintBench,
+      suggesting generalization beyond synthetic geometric scenes to applied precise editing tasks.
     </p>
 
     <!-- TGB auto-scroll marquee -->
@@ -397,7 +411,7 @@
       <div class="tgb-marquee-fade-bot"></div>
     </div>
 
-    <p class="tgb-hm-label">Per-chart-type mIoU — rankings track PaintBench (linear R² = 0.91, p &lt; 0.001)</p>
+    <p class="tgb-hm-label">Per-chart-type mIoU — scores track PaintBench (linear regression R² = 0.91, p &lt; 0.001)</p>
     <div class="heatmap-scroll">
       <table class="heatmap-table tgb-hm">
         <thead>
