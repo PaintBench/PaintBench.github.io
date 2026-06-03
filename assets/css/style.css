@@ -318,6 +318,12 @@ input[type=range]::-webkit-slider-thumb {
 .task-btn.active.sym-task { color: var(--sym); }
 
 /* Example panel */
+.ex-triple { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.ex-triple img {
+  width: 100%; aspect-ratio: 1; object-fit: cover;
+  border-radius: var(--r); border: 1px solid var(--rule);
+  display: block;
+}
 .ex-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
 .ex-pair img {
   width: 100%; aspect-ratio: 1; object-fit: cover;
@@ -327,15 +333,24 @@ input[type=range]::-webkit-slider-thumb {
   font-family: var(--ff-mono); font-size: .78rem; color: var(--ink-2);
   line-height: 1.6; padding: 12px 14px;
   background: var(--bg-dim); border: 1px solid var(--rule);
-  border-radius: var(--r); min-height: 60px;
+  border-radius: var(--r); min-height: 60px; margin-top: 4px;
 }
 .ex-labels {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  margin-bottom: 10px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  margin-bottom: 6px;
 }
 .ex-labels span {
   font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--muted); text-align: center;
+  color: var(--muted); text-align: center; display: flex;
+  align-items: center; justify-content: center; gap: 6px;
+}
+.ex-model-tag {
+  display: inline-block;
+  font-size: .6rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; padding: 2px 7px;
+  border-radius: 99px; background: var(--bg-dim);
+  border: 1px solid var(--rule); color: var(--ink-2);
+  white-space: nowrap;
 }
 
 /* ── §03 Heatmap ─────────────────────────────────────────────── */
