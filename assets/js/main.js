@@ -591,7 +591,6 @@ function initStatCountUp() {
 
   function countUp(stat) {
     const duration = 900, start = performance.now();
-    const initial = stat.el.textContent;
     function frame(now) {
       const p = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - p, 3);
@@ -604,9 +603,24 @@ function initStatCountUp() {
     requestAnimationFrame(frame);
   }
 
+  function countUpInfinity(el) {
+    const duration = 1100, start = performance.now();
+    // Numbers accelerate from small → large → ∞
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      if (p >= 1) { el.textContent = '∞'; return; }
+      // Exponential ramp: starts slow, blows up near end
+      const val = Math.round(Math.pow(p, 2) * 9999 + 1);
+      el.textContent = val.toLocaleString();
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
   const observer = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       targets.forEach(countUp);
+      countUpInfinity(cells[1]);
       observer.disconnect();
     }
   }, { threshold: 0.5 });
