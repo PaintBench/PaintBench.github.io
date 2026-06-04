@@ -107,7 +107,7 @@ nav {
   display: inline-block;
 }
 .hero-tagline {
-  font-family: var(--ff-body); font-size: 1rem; font-weight: 400;
+  font-family: var(--ff-body); font-size: 1.2rem; font-weight: 400;
   color: var(--ink-2); line-height: 1.6; margin-bottom: 28px;
 }
 .hero-sub {
