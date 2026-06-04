@@ -228,11 +228,11 @@ nav {
 }
 @media (max-width: 700px) { .img-strip { grid-template-columns: repeat(2, 1fr); } }
 .img-cell--separated {
-  position: relative; margin-left: 18px;
+  position: relative;
 }
 .img-cell--separated::before {
   content: '';
-  position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
+  position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
   width: 2px; height: 52%; background: var(--ink-2); border-radius: 2px;
 }
 
