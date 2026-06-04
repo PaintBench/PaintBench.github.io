@@ -591,7 +591,7 @@ function buildTgbHeatmap() {
       const td = document.createElement("td");
       td.style.background = scoreToColor(v, "sym");
       td.style.color = textColor(v);
-      td.innerHTML = `<span class="hm-score">${v.toFixed(1)}</span>`;
+      td.innerHTML = `<span class="hm-score">${v.toFixed(0)}</span>`;
       td.title = `${m.name} — ${col.label}: ${v.toFixed(1)}`;
       tr.appendChild(td);
     });
