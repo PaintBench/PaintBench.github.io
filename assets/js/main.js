@@ -372,14 +372,33 @@ function initTaxonomy() {
     showTask(CAT_TASKS[cat][0]);
   }
 
+  const allTaskKeys = Object.keys(TASKS);
+  let autoIdx = 0;
+  let autoTimer = null;
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(() => {
+      autoIdx = (autoIdx + 1) % allTaskKeys.length;
+      const key = allTaskKeys[autoIdx];
+      const cat = Object.entries(CAT_TASKS).find(([, tasks]) => tasks.includes(key))?.[0];
+      if (cat) showCat(cat);
+      else showTask(key);
+    }, 3000);
+  }
+
   catBtns.forEach(btn => {
-    btn.addEventListener("click", () => showCat(btn.dataset.cat));
+    btn.addEventListener("click", () => { stopAuto(); showCat(btn.dataset.cat); });
   });
   taskBtns.forEach(btn => {
     btn.addEventListener("click", () => showTask(btn.dataset.task));
   });
 
   showCat("geo");
+  startAuto();
 }
 
 /* ── Heatmap ─────────────────────────────────────────────────── */
