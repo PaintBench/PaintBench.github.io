@@ -172,15 +172,17 @@ function threshToImg(t) {
 function initSlider() {
   const slider = document.getElementById("de-slider");
   const diffImg = document.getElementById("diff-img");
-  const statT   = document.getElementById("stat-t");
+  const statT    = document.getElementById("stat-t");
   const statEdit = document.getElementById("stat-edit");
+  const statPres = document.getElementById("stat-pres");
   const statIoU  = document.getElementById("stat-iou");
   if (!slider) return;
 
   function update(t) {
     diffImg.src = threshToImg(t);
-    statT.textContent = `ΔE ≤ ${t}`;
+    statT.textContent    = `ΔE ≤ ${t}`;
     statEdit.textContent = EVAL_DATA.edit_acc[t].toFixed(1) + "%";
+    statPres.textContent = EVAL_DATA.pres_acc[t].toFixed(1) + "%";
     statIoU.textContent  = EVAL_DATA.iou[t].toFixed(1) + "%";
   }
 
