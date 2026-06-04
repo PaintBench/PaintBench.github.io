@@ -76,7 +76,7 @@ nav {
 .nav-links a {
   font-size: .82rem; font-weight: 500; color: var(--muted);
   padding: 5px 10px; border-radius: 6px;
-  background: var(--bg-dim);
+  background: #fafaf7;
   transition: color .15s, background .15s;
 }
 .nav-links a:hover { color: var(--ink); background: color-mix(in srgb, var(--bg-dim) 70%, var(--ink) 10%); text-decoration: none; }
