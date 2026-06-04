@@ -71,6 +71,9 @@ nav {
 .nav-logo {
   height: 28px; width: 28px;
   display: block;
+  background: #fafaf7; border-radius: 6px;
+  padding: 5px;
+  box-sizing: content-box;
 }
 .nav-links { display: flex; gap: 6px; align-items: center; }
 .nav-links a {
