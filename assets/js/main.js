@@ -155,12 +155,12 @@ function initNavCanvas() {
 
 /* ── ΔE Slider ───────────────────────────────────────────────── */
 const EVAL_DATA = {
-  instruction: "Translate the circle right by 13.35% of the image width. Place the transformed shape underneath any possible overlapping shapes. Clip any parts that may extend beyond the image boundary.",
+  instruction: "Draw a filled olive-colored (#717A1E) circle centered at (66.1%, 56.7%) with a radius of 21.5% image width. Place it underneath any existing shapes. Clip any parts that may extend beyond the image boundary.",
   model: "Nano Banana 2",
-  task: "Translation",
-  edit_acc:  [70.8, 78.0, 78.4, 78.4, 78.5, 78.5, 78.5, 78.5, 78.5, 78.5, 78.5],
-  pres_acc:  [95.5, 97.6, 98.2, 98.2, 98.2, 98.3, 98.3, 98.3, 98.3, 98.3, 98.4],
-  iou:       [39.3, 54.4, 58.9, 59.4, 59.7, 60.0, 60.2, 60.4, 60.5, 60.6, 60.7],
+  task: "Construction",
+  edit_acc:  [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 19.7, 47.9, 52.6],
+  pres_acc:  [0.0, 0.6, 2.1, 4.2, 7.5, 8.7, 9.2, 9.5, 9.6, 9.6, 9.7],
+  iou:       [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 6.8, 16.5, 18.2],
 };
 
 function threshToImg(t) {
