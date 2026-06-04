@@ -227,8 +227,13 @@ nav {
   gap: 10px; margin-bottom: 28px;
 }
 @media (max-width: 700px) { .img-strip { grid-template-columns: repeat(2, 1fr); } }
-.img-strip .img-cell:last-child {
-  border-left: 1px solid var(--rule); padding-left: 10px;
+.img-cell--separated {
+  position: relative; margin-left: 18px;
+}
+.img-cell--separated::before {
+  content: '';
+  position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 52%; background: var(--ink-2); border-radius: 2px;
 }
 
 .img-cell { }
