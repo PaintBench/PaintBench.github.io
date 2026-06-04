@@ -301,10 +301,10 @@
 <!-- ── §04 Failure modes ───────────────────────────────────────── -->
 <section id="failures">
   <div class="wrap">
-    <div class="sec-num">04 / How Models Fail</div>
-    <h2 class="sec-title">Four common failure modes.</h2>
+    <div class="sec-num">04 / Room for Model Improvement</div>
+    <h2 class="sec-title">Model failure patterns revealed.</h2>
     <p class="sec-body">
-      Across evaluated models, common failure modes emerge.
+      Detailed diagnostics reveal both universal failure patterns and model-specific behaviors. We find brittleness in performance to several scene variations: object count, background complexity, color scheme, and edit-region size.
     </p>
 
     <div class="failure-grid">
@@ -390,13 +390,11 @@
 <!-- ── §05 TinyGrafixBench ────────────────────────────────────── -->
 <section id="tinygrafixbench">
   <div class="wrap">
-    <div class="sec-num">05 / Companion Benchmark</div>
+    <div class="sec-num">05 / Generalization to Applied Tasks</div>
     <h2 class="sec-title">TinyGrafixBench</h2>
     <p class="sec-body">
-      The same procedurally generated, deterministically evaluated philosophy applied to data visualization editing.
-      5 chart types, each with 4 primitive operations (Construction,
-      Transformation, Removal, Recoloring). Model scores strongly correlate with those on PaintBench,
-      suggesting generalization beyond synthetic geometric scenes to applied precise editing tasks.
+      Do PaintBench scores generalize to applied tasks? To find out, we create TinyGrafixBench, a data visualization editing eval adopting the same seed-gen, pixel-eval philosophy. Model scores strongly correlate with those on PaintBench,
+      suggesting generalization to applied precise editing tasks.
     </p>
 
     <!-- TGB auto-scroll marquee -->

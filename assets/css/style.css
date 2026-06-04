@@ -505,7 +505,7 @@ input[type=range]::-webkit-slider-thumb {
 .tgb-marquee-track {
   display: flex; flex-direction: row; gap: 12px;
   padding: 12px; width: max-content;
-  animation: marquee-h 60s linear infinite;
+  animation: marquee-h 80s linear infinite;
 }
 .tgb-marquee-track:hover { animation-play-state: paused; }
 .tgb-marquee-fade-top,
