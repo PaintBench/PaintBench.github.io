@@ -68,18 +68,18 @@ nav {
   max-width: 960px; margin: 0 auto; padding: 0 32px;
   height: 52px; display: flex; align-items: center; justify-content: space-between;
 }
-.nav-wordmark {
-  font-family: var(--ff-disp);
-  font-size: 1.05rem; font-weight: 700;
-  color: var(--ink); letter-spacing: -.01em;
+.nav-logo {
+  height: 28px; width: 28px;
+  display: block;
 }
-.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links { display: flex; gap: 6px; align-items: center; }
 .nav-links a {
   font-size: .82rem; font-weight: 500; color: var(--muted);
-  padding: 5px 10px; border-radius: 5px;
+  padding: 5px 10px; border-radius: 6px;
+  background: var(--bg-dim);
   transition: color .15s, background .15s;
 }
-.nav-links a:hover { color: var(--ink); background: var(--bg-dim); text-decoration: none; }
+.nav-links a:hover { color: var(--ink); background: color-mix(in srgb, var(--bg-dim) 70%, var(--ink) 10%); text-decoration: none; }
 .nav-links .btn-nav {
   background: var(--ink); color: var(--bg) !important;
   padding: 5px 14px; border-radius: 5px;
