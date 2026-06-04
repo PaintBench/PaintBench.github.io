@@ -223,21 +223,13 @@ nav {
 }
 
 .img-strip {
-  display: grid; grid-template-columns: repeat(3, 1fr) 36px 1fr;
-  gap: 10px; margin-bottom: 28px; align-items: start;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-bottom: 28px;
 }
-@media (max-width: 700px) {
-  .img-strip { grid-template-columns: repeat(2, 1fr); }
-  .img-strip-sep { display: none; }
+.img-strip .img-cell--error {
+  grid-column: 1;
 }
-.img-strip-sep {
-  display: flex; align-items: center; justify-content: center;
-  align-self: stretch;
-}
-.img-strip-sep::after {
-  content: ''; display: block;
-  width: 2px; height: 52%; background: var(--ink-2); border-radius: 2px;
-}
+@media (max-width: 700px) { .img-strip { grid-template-columns: repeat(2, 1fr); } }
 
 .img-cell { }
 .img-cell img {
