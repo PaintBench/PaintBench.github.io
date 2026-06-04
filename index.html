@@ -101,10 +101,10 @@
     <div class="sec-num">01 / How a Problem Works</div>
     <h2 class="sec-title">One correct answer per problem.<br>Evaluated at the pixel.</h2>
     <p class="sec-body">
-      Every PaintBench problem gives a model an input image and a precise instruction.
+      Each PaintBench problem gives the model an input image and precise instruction.
       There is exactly one ground-truth answer.
       Evaluation compares each pixel of the model output to the ground-truth answer and input image using
-      CIE&Delta;E<sub>76</sub> perceptual color distance — no human opinion, no judge model.
+      CIE&Delta;E<sub>76</sub> perceptual color distance—no human rating, no judge model.
     </p>
 
     <div class="instruction-block">
@@ -165,19 +165,13 @@
 <section id="benchmark">
   <div class="wrap">
     <div class="sec-num">02 / The Benchmark</div>
-    <h2 class="sec-title">20 primitive tasks.<br>4 categories.<br>Infinitely scalable.</h2>
-    <p class="sec-body">
-      Every problem is generated from a random seed: a seed produces an input image,
-      instruction, and a unique answer image.
-      Tasks span operations ranging from pixel-formula operations to spatial transformations requiring
-      exact geometric reasoning.
-    </p>
+    <h2 class="sec-title">20 tasks across 4 categories.<br>Infinitely scalable.</h2>
 
     <div class="design-pillars">
       <div class="pillar">
         <div class="pillar-icon">⟳</div>
-        <div class="pillar-name">Dynamic Generation</div>
-        <div class="pillar-body">Fresh problems on demand protects against benchmark contamination. Each seed produces a unique (input, instruction, answer) triple.</div>
+        <div class="pillar-name">Procedurally Generated</div>
+        <div class="pillar-body">Each seed produces a problem (input, instruction, answer) triple.</div>
       </div>
       <div class="pillar">
         <div class="pillar-icon">✓</div>
@@ -187,7 +181,7 @@
       <div class="pillar">
         <div class="pillar-icon">◈</div>
         <div class="pillar-name">Atomic Operations</div>
-        <div class="pillar-body">Tasks target fundamental building-block operations found in a variety of real-world visual editing tasks.</div>
+        <div class="pillar-body">Tasks target fundamental building-block operations found in many precise real-world visual editing tasks.</div>
       </div>
     </div>
 
