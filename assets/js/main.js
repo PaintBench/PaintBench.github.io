@@ -363,16 +363,31 @@ function initTaxonomy() {
     });
   }
 
-  function showCat(cat) {
+  function setCatUI(cat) {
     catBtns.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
     ["geo", "str", "col", "sym"].forEach(c => {
       const el = document.getElementById(`tasks-${c}`);
       if (el) el.style.display = c === cat ? "flex" : "none";
     });
+  }
+
+  function showCat(cat) {
+    setCatUI(cat);
     showTask(CAT_TASKS[cat][0]);
   }
 
-  const allTaskKeys = Object.keys(TASKS);
+  // ordered list of all 20 task keys matching TASK_ORDER defined below
+  const orderedKeys = ["translation","rotation","reflection","scaling","shearing",
+    "construction","removal","copying","border","cropping",
+    "recolor","flood_fill","blending","gradient","point_operations",
+    "comparison","ordering","pattern","counting","legend"];
+  const taskCatMap  = {
+    translation:"geo",rotation:"geo",reflection:"geo",scaling:"geo",shearing:"geo",
+    construction:"str",removal:"str",copying:"str",border:"str",cropping:"str",
+    recolor:"col",flood_fill:"col",blending:"col",gradient:"col",point_operations:"col",
+    comparison:"sym",ordering:"sym",pattern:"sym",counting:"sym",legend:"sym",
+  };
+
   let autoIdx = 0;
   let autoTimer = null;
 
@@ -382,11 +397,10 @@ function initTaxonomy() {
 
   function startAuto() {
     autoTimer = setInterval(() => {
-      autoIdx = (autoIdx + 1) % allTaskKeys.length;
-      const key = allTaskKeys[autoIdx];
-      const cat = Object.entries(CAT_TASKS).find(([, tasks]) => tasks.includes(key))?.[0];
-      if (cat) showCat(cat);
-      else showTask(key);
+      autoIdx = (autoIdx + 1) % orderedKeys.length;
+      const key = orderedKeys[autoIdx];
+      setCatUI(taskCatMap[key]);
+      showTask(key);
     }, 3000);
   }
 
