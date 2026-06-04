@@ -125,6 +125,7 @@
         <img src="assets/img/eval_normalized_output.png" alt="Model output (Nano Banana 2)" />
         <div class="cap">Model output <span style="color:var(--muted)">(Nano Banana 2)</span></div>
       </div>
+      <div class="img-strip-divider"></div>
       <div class="img-cell">
         <img id="diff-img" src="assets/img/eval_diff_cie76_0.png" alt="Pixel error map" />
         <div class="cap">Error map <span style="color:var(--muted)">(drag slider)</span></div>
@@ -139,7 +140,7 @@
 
     <div class="slider-stats">
       <div class="stat-item">
-        <span class="skey">Threshold &nbsp;</span>
+        <span class="skey">Tolerance &nbsp;</span>
         <span class="sval" id="stat-t">ΔE ≤ 0</span>
       </div>
       <div class="stat-item">
@@ -157,8 +158,8 @@
     </div>
 
     <p style="margin-top:20px; font-size:.82rem; color:var(--muted); max-width:none;">
-      <strong style="color:var(--ink-2)">Green and blue pixels</strong> were correctly edited or preserved within the tolerance.
-      <strong style="color:var(--ink-2)">Red and orange pixels</strong> were incorrectly edited or preserved.
+      <strong style="color:var(--ink-2)">Green/blue pixels</strong> are correctly edited/preserved within the tolerance.
+      <strong style="color:var(--ink-2)">Red/orange pixels</strong> are incorrectly edited/preserved.
     </p>
   </div>
 </section>
