@@ -351,6 +351,24 @@
           <span>Input</span><span>Ground Truth</span><span>Model Output</span>
         </div>
         <div class="failure-imgs">
+          <img src="assets/img/fm_misalignment_input.png" alt="Input" />
+          <img src="assets/img/fm_misalignment_answer.png" alt="Ground truth" />
+          <img src="assets/img/fm_misalignment_output.png" alt="Model output" />
+        </div>
+        <div class="failure-body">
+          <div class="failure-mode struct-imp">Structural Imprecision</div>
+          <div class="failure-model">FLUX.1-Kontext · Shearing</div>
+          <div class="failure-instr">
+            <mark class="tgb-hl">Shear the hexagon</mark> so its top bounding box edge shifts left by 66% of its bounding box width, keeping the bottom edge fixed.
+          </div>
+        </div>
+      </div>
+
+      <div class="failure-card">
+        <div class="failure-cap-labels">
+          <span>Input</span><span>Ground Truth</span><span>Model Output</span>
+        </div>
+        <div class="failure-imgs">
           <img src="assets/img/fm_catastrophe_input.png" alt="Input" />
           <img src="assets/img/fm_catastrophe_answer.png" alt="Ground truth" />
           <img src="assets/img/fm_catastrophe_output.png" alt="Model output" />
@@ -361,24 +379,6 @@
           <div class="failure-instr">
             <mark class="tgb-hl">Reflect the gray shape</mark> across the top-left to bottom-right diagonal of its bounding box.
             Place the transformed shape underneath any possible overlapping shapes.
-          </div>
-        </div>
-      </div>
-
-      <div class="failure-card">
-        <div class="failure-cap-labels">
-          <span>Input</span><span>Ground Truth</span><span>Model Output</span>
-        </div>
-        <div class="failure-imgs">
-          <img src="assets/img/fm_misalignment_input.png" alt="Input" />
-          <img src="assets/img/fm_misalignment_answer.png" alt="Ground truth" />
-          <img src="assets/img/fm_misalignment_output.png" alt="Model output" />
-        </div>
-        <div class="failure-body">
-          <div class="failure-mode struct-imp">Structural Imprecision</div>
-          <div class="failure-model">FLUX.1-Kontext · Shearing</div>
-          <div class="failure-instr">
-            <mark class="tgb-hl">Shear the hexagon</mark> so its top bounding box edge shifts left by 66% of its bounding box width, keeping the bottom edge fixed.
           </div>
         </div>
       </div>
