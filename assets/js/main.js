@@ -604,13 +604,12 @@ function initStatCountUp() {
   }
 
   function countUpInfinity(el) {
-    const duration = 1100, start = performance.now();
-    // Numbers accelerate from small → large → ∞
+    const duration = 700, start = performance.now();
     function frame(now) {
       const p = Math.min((now - start) / duration, 1);
       if (p >= 1) { el.textContent = '∞'; return; }
-      // Exponential ramp: starts slow, blows up near end
-      const val = Math.round(Math.pow(p, 2) * 9999 + 1);
+      // Steep curve: numbers stay small then explode at the end
+      const val = Math.round(Math.pow(p, 4) * 99999 + 1);
       el.textContent = val.toLocaleString();
       requestAnimationFrame(frame);
     }
