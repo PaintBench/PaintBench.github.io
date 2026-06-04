@@ -314,35 +314,15 @@
           <span>Input</span><span>Ground Truth</span><span>Model Output</span>
         </div>
         <div class="failure-imgs">
-          <img src="assets/img/fm1_input.png" alt="Input" />
-          <img src="assets/img/fm1_answer.png" alt="Ground truth" />
-          <img src="assets/img/fm1_normalized_output.png" alt="Model output" />
-        </div>
-        <div class="failure-body">
-          <div class="failure-mode no-edit">Execution Omission</div>
-          <div class="failure-model">BAGEL-7B-MoT · Construction</div>
-          <div class="failure-instr">
-            <mark class="tgb-hl">Draw a filled pink</mark> (#FFC0CB) circle centered at the leftmost point of the cloud
-            with its edge passing through the bottom-right corner of the image.
-          </div>
-        </div>
-      </div>
-
-      <div class="failure-card">
-        <div class="failure-cap-labels">
-          <span>Input</span><span>Ground Truth</span><span>Model Output</span>
-        </div>
-        <div class="failure-imgs">
-          <img src="assets/img/fm2_input.png" alt="Input" />
-          <img src="assets/img/fm2_answer.png" alt="Ground truth" />
-          <img src="assets/img/fm2_normalized_output.png" alt="Model output" />
+          <img src="assets/img/fm_color_input.png" alt="Input" />
+          <img src="assets/img/fm_color_answer.png" alt="Ground truth" />
+          <img src="assets/img/fm_color_output.png" alt="Model output" />
         </div>
         <div class="failure-body">
           <div class="failure-mode color-imp">Color Imprecision</div>
-          <div class="failure-model">Nano Banana 2 · Gradient</div>
+          <div class="failure-model">LongCat-Edit · Removal</div>
           <div class="failure-instr">
-            <mark class="tgb-hl">Apply a linear RGB gradient</mark> from black (#000000) at the top edge to
-            red (#FF0000) at the bottom edge of the interior of the orange outlined region.
+            <mark class="tgb-hl">Remove all shapes</mark> except those that are a yellow heart.
           </div>
         </div>
       </div>
@@ -352,16 +332,16 @@
           <span>Input</span><span>Ground Truth</span><span>Model Output</span>
         </div>
         <div class="failure-imgs">
-          <img src="assets/img/fm3_input.png" alt="Input" />
-          <img src="assets/img/fm3_answer.png" alt="Ground truth" />
-          <img src="assets/img/fm3_normalized_output.png" alt="Model output" />
+          <img src="assets/img/fm_omission_input.png" alt="Input" />
+          <img src="assets/img/fm_omission_answer.png" alt="Ground truth" />
+          <img src="assets/img/fm_omission_output.png" alt="Model output" />
         </div>
         <div class="failure-body">
-          <div class="failure-mode struct-imp">Structural Imprecision</div>
-          <div class="failure-model">LongCat-Edit · Translation</div>
+          <div class="failure-mode no-edit">Execution Omission</div>
+          <div class="failure-model">Qwen-Image-Edit · Cropping</div>
           <div class="failure-instr">
-            <mark class="tgb-hl">Translate the white hexagon</mark> down by 15.06% of the image height.
-            Place the transformed shape on top of any possible overlapping shapes.
+            <mark class="tgb-hl">Crop to the interior</mark> of the outlined region.
+            Scale to fill the canvas using nearest-neighbor interpolation.
           </div>
         </div>
       </div>
@@ -371,16 +351,34 @@
           <span>Input</span><span>Ground Truth</span><span>Model Output</span>
         </div>
         <div class="failure-imgs">
-          <img src="assets/img/fm4_input.png" alt="Input" />
-          <img src="assets/img/fm4_answer.png" alt="Ground truth" />
-          <img src="assets/img/fm4_normalized_output.png" alt="Model output" />
+          <img src="assets/img/fm_catastrophe_input.png" alt="Input" />
+          <img src="assets/img/fm_catastrophe_answer.png" alt="Ground truth" />
+          <img src="assets/img/fm_catastrophe_output.png" alt="Model output" />
         </div>
         <div class="failure-body">
           <div class="failure-mode catastroph">Structural Catastrophe</div>
-          <div class="failure-model">BAGEL-7B-MoT · Cropping</div>
+          <div class="failure-model">LongCat-Edit · Reflection</div>
           <div class="failure-instr">
-            <mark class="tgb-hl">Crop to the interior</mark> of the square outlined region.
-            Scale to fill the canvas using nearest-neighbor interpolation.
+            <mark class="tgb-hl">Reflect the gray shape</mark> across the top-left to bottom-right diagonal of its bounding box.
+            Place the transformed shape underneath any possible overlapping shapes.
+          </div>
+        </div>
+      </div>
+
+      <div class="failure-card">
+        <div class="failure-cap-labels">
+          <span>Input</span><span>Ground Truth</span><span>Model Output</span>
+        </div>
+        <div class="failure-imgs">
+          <img src="assets/img/fm_misalignment_input.png" alt="Input" />
+          <img src="assets/img/fm_misalignment_answer.png" alt="Ground truth" />
+          <img src="assets/img/fm_misalignment_output.png" alt="Model output" />
+        </div>
+        <div class="failure-body">
+          <div class="failure-mode struct-imp">Structural Imprecision</div>
+          <div class="failure-model">FLUX.1-Kontext · Shearing</div>
+          <div class="failure-instr">
+            <mark class="tgb-hl">Shear the hexagon</mark> so its top bounding box edge shifts left by 66% of its bounding box width, keeping the bottom edge fixed.
           </div>
         </div>
       </div>
